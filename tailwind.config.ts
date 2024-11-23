@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      boxShadow: {
+        'thick-black': '3px 3px 0px 2px rgba(0,0,0,1)',
+      }
     },
   },
   plugins: [],
