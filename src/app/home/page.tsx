@@ -1,5 +1,5 @@
-import { CourseCard } from "./components/coursecard"
-import { Navbar } from "./components/navbar";
+import { CourseCard } from "../components/coursecard"
+import { Navbar } from "../components/navbar";
 const courseData = [
     {
       imageUrl: "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
