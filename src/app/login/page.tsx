@@ -1,53 +1,105 @@
-'use client'
-import * as React from 'react';
-import { Button } from '../components/button';
-import { InputField } from '../components/input_field';
+"use client";
 
-export default function Page() {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [rememberMe, setRememberMe] = React.useState(false);
+import React from "react";
+import Button from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
+export default function LoginPage() {
+  const router = useRouter();
+  const inputStyle =
+    "text-black text-base w-[30vw] px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
+
+  const [error, setError] = React.useState("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    // Basic validation
+    // if (!email || !password) {
+    //   setError("Email and Password are required.");
+    //   return;
+    // }
+
+    // setError(""); // Clear error
+
+    // Simulate login API call
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        router.push("/dashboard");
+      } else {
+        // Handle errors
+      }
+      console.log("Logging in with:", { email, password });
+      // Perform login logic, e.g., send a request to an API
+    } catch (error) {
+      // setError("Invalid login credentials.");
+    }
+  };
   return (
-    <main className="flex flex-col justify-center items-center px-8 py-64 bg-white max-md:px-5 max-md:py-24">
-      <section className="flex flex-col justify-center px-5 py-1.5 max-w-full bg-gray-100 rounded-xl w-[445px]">
-        <h1 className="gap-2.5 self-stretch py-2.5 w-full text-2x1 leading-none text-black font-bold">
+    <div className="flex items-center justify-center h-screen w-screen">
+      <div className="border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-14">
+        <div className="text-black text-3xl font-semibold">
           Are you ready to join?
-        </h1>
-        <form className="flex flex-col w-full">
-          <InputField
-            label="Email"
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <InputField
-            label="Password"
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label className="flex gap-1.5 items-center mt-1.5 text-xs tracking-wide leading-none text-black cursor-pointer">
+        </div>
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="font-semibold text-lg">
+              Email
+            </label>
             <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              className="h-[13px] w-[13px]"
+              id="email"
+              type="email"
+              className={`${inputStyle} rounded-lg`}
+              placeholder="Email"
+              required
             />
-            Remember me
-          </label>
-          <div className="flex flex-col justify-center items-center py-1.5 mt-1.5 w-full">
-            <div className="flex flex-col pb-2.5 max-w-full w-[133px]">
-              <Button>Log in</Button>
-            </div>
-            <p className="mt-1.5 text-xs tracking-wide leading-none text-black">
-              Don't have an account? <a href="/signup" className="underline">Sign up here.</a>
-            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <label htmlFor="pass" className="font-semibold text-lg">
+              Password
+            </label>
+            <input
+              id="pass"
+              type="password"
+              className={inputStyle}
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div className="flex flex-row gap-3 items-center">
+            <input
+              id="remember"
+              type="checkbox"
+              className="w-4 h-4 accent-dodger-blue-500 "
+            />
+            <label htmlFor="remember" className="text-sm">
+              Remember me
+            </label>
+          </div>
+          {error && <div></div>}
+          <Button className="w-[15vw]">Log in</Button>
+
+          <div className="self-center text-stone-500">
+            Don't have an account?{" "}
+            <a
+              href="/registration"
+              className="cursor-pointer text-dodger-blue-600 duration-150 underline hover:text-saffron-400"
+            >
+              Sign Up
+            </a>
           </div>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
   );
-};
+}
