@@ -1,3 +1,4 @@
+
 import { ButtonForm } from "../components/button";
 
 export default function SignupPage() {
@@ -69,7 +70,6 @@ export default function SignupPage() {
               placeholder="Confirm Password"
             />
           </div>
-
           <ButtonForm className="w-[15vw]">Sign Up</ButtonForm>
 
           <div className="self-center text-stone-500">

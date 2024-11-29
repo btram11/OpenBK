@@ -88,7 +88,7 @@ export default function LoginPage() {
           </div>
           {error && <div></div>}
           <ButtonForm className="w-[15vw]">Log in</ButtonForm>
-          
+         
           <div className="self-center text-stone-500">
             Don't have an account?{" "}
             <a
