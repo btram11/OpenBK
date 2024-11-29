@@ -1,12 +1,13 @@
-import Button from "@/components/ui/button";
+
+import { ButtonForm } from "../components/button";
 
 export default function SignupPage() {
   const inputStyle =
     "text-black text-base  px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
   return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <div className="border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-14">
+    <div className="flex bg-gray-100 items-center justify-center h-screen w-screen">
+      <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-6">
         <div className="text-black text-3xl font-semibold">
           Create Your Account
         </div>
@@ -69,8 +70,7 @@ export default function SignupPage() {
               placeholder="Confirm Password"
             />
           </div>
-
-          <Button className="w-[15vw]">Sign Up</Button>
+          <ButtonForm className="w-[15vw]">Sign Up</ButtonForm>
 
           <div className="self-center text-stone-500">
             Already have an account?{" "}

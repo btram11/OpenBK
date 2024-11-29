@@ -1,9 +1,20 @@
 import * as React from "react";
-import Search from "./svg/Search.svg"
+import Search from "./svg/search.svg"
+import Cart from "./svg/cart.svg"
+
+//TODO: FETCH CART
+const CartCount: React.FC = () => {
+  return (
+    <div id="count" className="flex absolute bg-blue-500 text-white border-1 border-black rounded-lg px-1 w-25 
+    items-center justify-center left-4 bottom-3">
+      2
+    </div>
+  )
+}
 
 export const Navbar: React.FC = () => {
   return (
-    <header className="flex flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
+    <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
       <div className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]">
         <img src=""></img>
         <span className="font-bold">OpenBK</span>
@@ -26,15 +37,13 @@ export const Navbar: React.FC = () => {
 
       <div className="flex gap-4 justify-between items-center self-stretch my-auto tracking-wide min-w-[240px] w-[325px]">
         <button className="self-stretch my-auto">Collaborators</button>
-        <img
-          loading="lazy"
-          src=""
-          alt="Notifications"
-          className="object-contain shrink-0 self-stretch my-auto aspect-[1.03] w-[30px]"
-        />
+        <div className="relative">
+            <Cart></Cart>
+            <CartCount></CartCount>
+        </div>
         <button className="self-stretch my-auto">My dashboard</button>
         <div className="flex shrink-0 self-stretch my-auto rounded-full bg-zinc-300 h-[38px] w-[38px]" />
       </div>
-    </header>
+    </div>
   );
 };

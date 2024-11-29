@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Button from "@/components/ui/button";
+import {ButtonForm} from "../components/button";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -46,12 +46,12 @@ export default function LoginPage() {
     }
   };
   return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <div className="border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-14">
+    <main className="flex bg-zinc-100 items-center justify-center h-screen w-screen">
+      <div className="border bg-white border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-14">
         <div className="text-black text-3xl font-semibold">
           Are you ready to join?
         </div>
-        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="font-semibold text-lg">
               Email
@@ -82,13 +82,13 @@ export default function LoginPage() {
               type="checkbox"
               className="w-4 h-4 accent-dodger-blue-500 "
             />
-            <label htmlFor="remember" className="text-sm">
+            <label htmlFor="remember" className="text-sm gap-4">
               Remember me
             </label>
           </div>
           {error && <div></div>}
-          <Button className="w-[15vw]">Log in</Button>
-
+          <ButtonForm className="w-[15vw]">Log in</ButtonForm>
+         
           <div className="self-center text-stone-500">
             Don't have an account?{" "}
             <a
@@ -100,6 +100,6 @@ export default function LoginPage() {
           </div>
         </form>
       </div>
-    </div>
+    </main>
   );
 }
