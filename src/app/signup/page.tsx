@@ -1,8 +1,6 @@
 'use client'
 
 import * as React from 'react';
-import { InputField } from '../components/input_field';
-import { Button } from '../components/button';
 
 export default function Page() {
   const [form, setForm] = React.useState({

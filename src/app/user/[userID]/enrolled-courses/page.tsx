@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import CourseItem from "@/components/ui/CourseItem";
+import {CourseItemDashboard} from "@/app/components/coursecard";
 
 const tabs = [
   { id: "all", label: "All" },
@@ -68,7 +68,7 @@ const EnrolledCoursesPage: React.FC = () => {
               selectedTab === tab.id ? "" : "hidden"
             }`}
           >
-            <CourseItem />
+            <CourseItemDashboard />
           </div>
         ))}
         {/* <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">

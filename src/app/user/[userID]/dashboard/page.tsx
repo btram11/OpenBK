@@ -1,4 +1,4 @@
-import CourseItem from "@/components/ui/CourseItem";
+import { CourseItemDashboard } from "@/app/components/coursecard";
 
 const DashboardPage: React.FC = () => {
   return (
@@ -34,7 +34,7 @@ const DashboardPage: React.FC = () => {
           In progress Courses
         </div>
         <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">
-          <CourseItem />
+          <CourseItemDashboard />
         </div>
       </div>
     </div>

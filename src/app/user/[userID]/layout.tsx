@@ -28,6 +28,7 @@ export default function DashboardLayout({
           </div>
         </div>
       </div>
+      
       <div className="dashboard-bottom flex flex-row w-[80vw] rounded-2xl h-fit relative">
         <div className="w-full h-full absolute left-0 top-0 border-[1.5px] border-[#E3E2E6] rounded-2xl -z-10 bg-[#FAF9FD]"></div>
         <nav className=" flex flex-col basis-1/5 p-8 gap-4 rounded-l-2xl border-[1.5px] border-[#E3E2E6] bg-white w-fit h-fit">

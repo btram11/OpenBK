@@ -2,8 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import CourseItem from "@/components/ui/CourseItem";
-import Button from "@/components/ui/button";
+import CourseItem from "@/app/components/d";
+import Button from "@/app/components/button";
 
 const tabs = [
   { id: "profile", label: "Profile" },
