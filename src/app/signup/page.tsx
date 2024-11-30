@@ -1,89 +1,88 @@
-'use client'
 
-import * as React from 'react';
+import { ButtonForm } from "../components/button";
 
-export default function Page() {
-  const [form, setForm] = React.useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    username: ''
-  })
+export default function SignupPage() {
+  const inputStyle =
+    "text-black text-base  px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
   return (
-    <main className="flex flex-col justify-center items-center px-8 py-60 bg-white max-md:px-5 max-md:py-24">
-      <section className="flex flex-col justify-center px-5 py-1.5 max-w-full bg-gray-100 rounded-xl w-[560px]">
-        <header className="flex-1 shrink gap-2.5 self-stretch py-2.5 max-w-full text-2xl leading-none text-black w-[405px]">
-          <h1 className="font-bold">Sign up</h1>
-        </header>
-        
-        <form className="flex flex-col justify-center py-1.5 mt-1.5 w-full text-sm text-black max-md:max-w-full">
-          <div className="flex justify-center flex-col overflow-hidden w-full max-md:max-w-full">
-            <div id="split" className="flex w-full">
-                <div className="w-1/2 pr-2">
-                  <InputField
-                  label="First name"
-                  type="First name"
-                  placeholder="Enter first name"
-                  value={form.firstName}
-                  onChange={(e) => setForm(prevForm => ({
-                      ...prevForm,
-                      firstName: e.target.value
-                  }))}
-                  />
-                </div>
-                <div className="w-1/2 pl-2">
-                  <InputField
-                  label="Last name"
-                  type="Last name"
-                  placeholder="Enter last name"
-                  value={form.lastName}
-                  onChange={(e) => setForm(prevForm => ({
-                      ...prevForm,
-                      lastName: e.target.value
-                  }))}
-                  />
-                </div>
+    <div className="flex bg-gray-100 items-center justify-center h-screen w-screen">
+      <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-6">
+        <div className="text-black text-3xl font-semibold">
+          Create Your Account
+        </div>
+        <form className="flex flex-col gap-8">
+          <div className="flex flex-row gap-8">
+            <div className="flex-1 flex flex-col gap-2">
+              <label htmlFor="fname" className="font-semibold text-lg">
+                First Name
+              </label>
+              <input
+                id="fname"
+                type="text"
+                className={`${inputStyle} `}
+                placeholder="First Name"
+              />
             </div>
-
-            <InputField
-            label="Email"
-            type="Email"
-            placeholder="Enter email"
-            value={form.email}
-            onChange={(e) => setForm(prevForm => ({
-                ...prevForm,
-                email: e.target.value
-            }))}
-            />
-           <InputField
-            label="Username"
-            type="Username"
-            placeholder="Enter username"
-            value={form.username}
-            onChange={(e) => setForm(prevForm => ({
-                ...prevForm,
-                username: e.target.value
-            }))}
-            />
-            <InputField
-            label="Password"
-            type="Password"
-            placeholder="Enter password"
-            value={form.password}
-            onChange={(e) => setForm(prevForm => ({
-                ...prevForm,
-                password: e.target.value
-            }))}
-            />
+            <div className="flex-1 flex flex-col gap-2">
+              <label htmlFor="lname" className="font-semibold text-lg">
+                Last name
+              </label>
+              <input
+                id="lname"
+                type="text"
+                className={`${inputStyle} `}
+                placeholder="Last name"
+              />
+            </div>
           </div>
 
-          <div className="flex flex-col self-center pb-2.5 mt-4 max-w-full font-semibold w-[133px]">
-            <Button>Sign up</Button>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="font-semibold text-lg">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              className={`${inputStyle}  w-full`}
+              placeholder="Email"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="pass" className="font-semibold text-lg">
+              Password
+            </label>
+            <input
+              id="pass"
+              type="password"
+              className={`${inputStyle} w-full`}
+              placeholder="Password"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="cpass" className="font-semibold text-lg">
+              Confirm Password
+            </label>
+            <input
+              id="cpass"
+              type="password"
+              className={`${inputStyle} w-full`}
+              placeholder="Confirm Password"
+            />
+          </div>
+          <ButtonForm className="w-[15vw]">Sign Up</ButtonForm>
+
+          <div className="self-center text-stone-500">
+            Already have an account?{" "}
+            <a
+              href="/login"
+              className="cursor-pointer text-dodger-blue-600 duration-150 underline hover:text-saffron-400"
+            >
+              Login
+            </a>
           </div>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }

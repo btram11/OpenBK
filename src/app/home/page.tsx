@@ -1,6 +1,4 @@
-import { CourseItemHome } from "../components/coursecard";
-import { Footer } from "../components/footer";
-import { Navbar } from "../components/navbar";
+import { CourseItemHome } from "@/app/components/coursecard";
 
 const courseData = [
     {

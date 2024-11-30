@@ -5,7 +5,8 @@ import { ButtonClick } from '@/app/components/button';
 import * as React from 'react'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { use } from 'react';
+import { Footer } from '@/app/components/footer';
+import { Navbar } from '@/app/components/navbar';
 
 const CourseStats: React.FC<{
     students: number;
@@ -122,6 +123,7 @@ export default function CourseLayout({
         const currentRoute: string = usePathname();
         return (
             <main>
+                <Navbar/>
                 <div role="top" className="flex flex-col relative py-5 pl-24 w-full bg-indigo-50 max-md:pl-5 max-md:max-w-full">
                     {currentRoute} and {courseID}
                     {/* <nav aria-label="breadcrumb" className="text-base font-bold text-sky-600 max-md:max-w-full">
@@ -180,6 +182,7 @@ export default function CourseLayout({
                     ))}
                 </div>
                 {children}
+                <Footer/>
             </main>
         )
     }
