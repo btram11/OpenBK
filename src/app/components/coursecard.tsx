@@ -1,10 +1,20 @@
 import * as React from "react";
-import { CourseCardProps } from "./types";
 import {ButtonClick, ButtonCourse} from "./button";
 import Star from "./svg/star.svg"
 import ArrowRight from "./svg/arrow_right.svg"
+import Link from "next/link";
 
-export const CourseItemHome: React.FC<CourseCardProps> = ({
+export const CourseItemHome: React.FC<{
+  id: number;
+  imageUrl: string;
+  category: string;
+  rating: number;
+  reviews: number;
+  title: string;
+  instructor: string;
+  price: string;
+}> = ({
+  id,
   imageUrl,
   category,
   rating,
@@ -13,8 +23,11 @@ export const CourseItemHome: React.FC<CourseCardProps> = ({
   instructor,
   price
 }) => {
+
   return (
-    <div className="flex overflow-hidden flex-col self-stretch px-5 pt-6 pb-8 my-auto rounded-2xl border border-solid border-zinc-600 min-w-[240px] w-[310px]">
+    <Link href={`/course/${id}/overview`}>
+    <div className="flex overflow-hidden flex-col self-stretch px-5 pt-6 pb-8 my-auto rounded-2xl border border-solid border-zinc-600 
+    min-w-[200px] w-[300px]">
       <img
         loading="lazy"
         src={imageUrl}
@@ -48,13 +61,13 @@ export const CourseItemHome: React.FC<CourseCardProps> = ({
             <ButtonClick>
             Enroll now<ArrowRight/>
             </ButtonClick>
-
           <div className="self-stretch my-auto text-2xl font-bold text-sky-600">
             {price}
           </div>
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

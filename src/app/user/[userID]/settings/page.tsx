@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import CourseItem from "@/components/ui/CourseItem";
@@ -21,21 +20,22 @@ const SettingsPage: React.FC = () => {
     setSelectedTab(tab);
   };
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/your-endpoint");
-        if (!response.ok) throw new Error("Network response was not ok");
-        const result = await response.json();
-      } catch (err) {
-        // setError(err.message);
-      } finally {
-        // setLoading(false);
-      }
-    };
+  //TODO: FETCH
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("/api/your-endpoint");
+  //       if (!response.ok) throw new Error("Network response was not ok");
+  //       const result = await response.json();
+  //     } catch (err) {
+  //       // setError(err.message);
+  //     } finally {
+  //       // setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="w-full p-8 drop-shadow h-fit min-h-full bg-white rounded-2xl flex flex-col gap-6 min-w-full">

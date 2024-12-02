@@ -40,7 +40,6 @@ export const ButtonClick: React.FC<
     shadow_left?: `left-[${number}px] group-hover:-translate-x-[${number}px]`;
     shadow_top?: `top-[${number}px] group-hover:-translate-y-[${number}px]`;
     align?: string;
-    onClick ?: () => void
   } & React.ButtonHTMLAttributes<HTMLButtonElement>
 > = ({
   children,
@@ -48,11 +47,9 @@ export const ButtonClick: React.FC<
   shadow_top = "top-[6px] group-hover:-translate-y-[6px]",
   align = "self-center",
   className = "",
-  onClick
 }) => {
   return (
     <button
-      onClick = {onClick}
       className={`group relative ${align} w-fit flex`}
     >
       <div

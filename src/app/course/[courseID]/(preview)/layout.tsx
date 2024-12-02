@@ -85,15 +85,6 @@ const Tab: React.FC<{
     </Link>    
     )
 );
-
-
-export default function CourseLayout({
-        children,
-        params
-    }: Readonly<{
-        children: React.ReactNode;
-        params: Promise<{ courseID: string }>
-    }>) {
         //TODO: Fetch data
         const sampleData = {
             students: 123456,
@@ -112,7 +103,13 @@ export default function CourseLayout({
             { type: "certificate", text: 'Certificate of completion' }
           ]
 
-        //*Pathname
+export default function CourseLayout({
+        children,
+        params
+    }: Readonly<{
+        children: React.ReactNode;
+        params: Promise<{ courseID: string }>
+    }>) {
         const {courseID} = React.use(params);
         const tabs = [
             { label: 'Overview', href: `/course/${courseID}/overview` },
@@ -153,15 +150,16 @@ export default function CourseLayout({
                         <section className="flex flex-col px-2.5 py-4 w-full text-base">
                             <h2 className="font-bold">This course includes:</h2>
                             <div className="flex flex-col items-start mt-2.5 w-full">
-                                {courseFeatures.map((item) => (
-                                    <BulletItem {...item}/>
+                                {courseFeatures.map((item,index) => (
+                                    <BulletItem key={index} {...item}/>
                                 ))} 
                             </div>
                         </section>
                         <section className="flex flex-col pt-2.5 w-full text-sm font-semibold">
                             <div className="flex justify-center items-center px-2.5 w-full">
-                                <div className="flex pb-6 items-start self-stretch my-auto w-[223px]">
+                                <div className="flex pb-6 justify-between gap-2 items-start self-stretch my-auto w-[223px]">
                                     <ButtonClick className="w-[200px]">Enroll now</ButtonClick>
+                                    <div className="flex text-xl text-bold text-color-blue-200">Hi</div>
                                 </div>
                             </div>
                         </section>
@@ -178,7 +176,6 @@ export default function CourseLayout({
                             ref={tab.href}
                             isActive= {currentRoute === tab.href}
                         />
-
                     ))}
                 </div>
                 {children}
