@@ -9,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      
     }
     
   }
   User.init({
-    id:{
+    userId:{
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
@@ -28,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     role: {
-      type: DataTypes.ENUM('USER'||'COLLAB'||'ADMIN'),
+      type: DataTypes.ENUM('USER', 'COLLAB', 'ADMIN'),
       allowNull: false,
       defaultValue: 'USER'
     },
