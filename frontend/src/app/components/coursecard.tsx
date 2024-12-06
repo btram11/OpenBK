@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ButtonClick, ButtonCourse} from "./button";
+import {ButtonClick} from "./button";
 import Star from "./svg/star.svg"
 import ArrowRight from "./svg/arrow_right.svg"
 import Link from "next/link";
@@ -78,7 +78,6 @@ export const CourseItemDashboard: React.FC = () => {
         <img
           className="rounded-md w-full max-w-full h-48"
           src="./favicon.ico"
-          alt=""
         />
 
         {/* Course Info */}
