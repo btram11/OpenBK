@@ -1,7 +1,21 @@
 {
   "dependencies": {
     "@tanstack/react-query": "^5.62.2",
+<<<<<<< HEAD
     "swr": "^2.2.5",
+=======
+    "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.462.0",
+    "motion": "^11.11.17",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.2",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
+>>>>>>> 4fbf1b97cf90681e8fdca8a0c411128d8e86169e
     "yup": "^1.5.0"
   }
 }

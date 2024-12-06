@@ -9,6 +9,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,9 +22,7 @@ export default function LoginPage() {
         password: data.password,
       });
     },
-    onError: (errors) => {
-      alert(errors);
-    },
+    //Can use this to test the error message from axios https://stackoverflow.com/a/72189645
   });
 
   const formSchema = yup.object().shape({
@@ -105,7 +105,13 @@ export default function LoginPage() {
               </label>
             </div>
           </div>
-          {/* {error && <div></div>} */}
+
+          {mutation.error && mutation.error instanceof AxiosError && (
+            <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
+              <p>{mutation.error?.response?.data.ERROR}</p>
+            </div>
+          )}
+
           <ButtonForm className="w-[15vw]">Log in</ButtonForm>
 
           <div className="self-center text-stone-500 select-none">
