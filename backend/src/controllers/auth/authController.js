@@ -17,13 +17,13 @@ const signUp = async (req, res) => {
 
       // create access, refresh token
       const accessToken = jwt.sign(
-         { "username": newUser.name, "userID": newUser.id, "userRole": newUser.role },
+         { name: newUser.name, id: newUser.userId, role: newUser.role },
          process.env.ACCESS_TOKEN_SECRET,
          { expiresIn: '300s' }
       )
 
       const refreshToken = jwt.sign(
-         { "username": newUser.name, "userID": newUser.id, "userRole": newUser.role },
+         { name: newUser.name, id: newUser.userId, role: newUser.role },
          process.env.REFRESH_TOKEN_SECRET,
          { expiresIn: '1d' }
       )
@@ -51,13 +51,13 @@ const logIn = async (req, res) => {
       if (!isPasswordCorrect) return res.status(404).json({ message: 'Password is incorrect' })
 
       const accessToken = jwt.sign(
-         { "username": existUser.name, "userID": existUser.id, "userRole": existUser.role },
+         { name: existUser.name, id: existUser.userId, role: existUser.role },
          process.env.ACCESS_TOKEN_SECRET,
          { expiresIn: '300s' }
       )
 
       const refreshToken = jwt.sign(
-         { "username": existUser.name, "userID": existUser.id, "userRole": existUser.role },
+         { name: existUser.name, id: existUser.userId, role: existUser.role },
          process.env.REFRESH_TOKEN_SECRET,
          { expiresIn: '1d' }
       )
