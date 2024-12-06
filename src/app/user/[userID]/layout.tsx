@@ -1,18 +1,17 @@
-'use client'
+"use client";
 import Link from "next/link";
 import * as React from "react";
-import { Footer } from "@/app/components/footer";
-import { Navbar } from "@/app/components/navbar";
-  
+
 export default function DashboardLayout({
-  children, params
+  children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ userID: string }>
+  params: Promise<{ userID: string }>;
 }>) {
   const LinkStyle =
     "px-4 py-2 w-full text-left hover:bg-dodger-blue-500 hover:text-white rounded-md bg-stone-200 duration-200";
-  const {userID} = React.use(params);
+  const { userID } = React.use(params);
   const links = [
     { href: `/user/${userID}/dashboard`, label: "Dashboard" },
     { href: `/user/${userID}/profile`, label: "My Profile" },
@@ -23,9 +22,8 @@ export default function DashboardLayout({
 
   return (
     <main>
-      <Navbar />
       <div className="w-full py-4 flex flex-col items-center gap-8 overscroll-y-auto min-h-screen">
-        <div className="dashboard-top w-[80vw] bg-pink-300 h-[15vw] rounded-2xl flex flex-col-reverse px-10 pb-8">
+        <div className="dashboard-top w-[80vw] bg-pink-300 h-[15vw] rounded-2xl flex flex-col-reverse px-10 py-8 min-h-fit">
           <div className="flex flex-row gap-5">
             <img
               className="rounded-full bg-black w-28 aspect-square"
@@ -61,7 +59,6 @@ export default function DashboardLayout({
           <div className="p-8 w-fit h-fit flex-1">{children}</div>
         </div>
       </div>
-      <Footer />
     </main>
   );
 }
