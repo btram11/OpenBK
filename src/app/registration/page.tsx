@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUp } from "@/services/auth";
+import { AxiosError } from "axios";
 
 export default function SignupPage() {
   const mutation = useMutation({
@@ -16,9 +17,6 @@ export default function SignupPage() {
         email: data.email,
         password: data.password,
       });
-    },
-    onError: (errors) => {
-      alert(errors);
     },
   });
   const formSchema = yup.object().shape({
@@ -50,7 +48,7 @@ export default function SignupPage() {
     "text-black text-base  px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
   return (
-    <div className="flex bg-gray-100 items-center justify-center h-screen w-screen">
+    <div className="flex bg-gray-100 items-center justify-center h-screen w-screen min-h-fit py-4">
       <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-10">
         <div className="text-black text-3xl font-semibold">
           Create Your Account
@@ -160,6 +158,12 @@ export default function SignupPage() {
               </span>
             </div>
           </div>
+          {mutation.error && mutation.error instanceof AxiosError && (
+            <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
+              <p>{mutation.error?.response?.data.ERROR}</p>
+            </div>
+          )}
+
           <ButtonForm className="w-[15vw]">Sign Up</ButtonForm>
 
           <div className="self-center text-stone-500">
