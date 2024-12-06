@@ -2,8 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import CourseItem from "@/components/ui/CourseItem";
-import Button from "@/components/ui/button";
+import CourseItem from "@/components/common/cards/courseItem";
+import { ButtonClick } from "@/components/common/buttons/button";
 
 const tabs = [
   { id: "profile", label: "Profile" },
@@ -105,7 +105,7 @@ const SettingsPage: React.FC = () => {
               placeholder="Re-Typed New Password"
             />
           </div>
-          <Button align="self-left mt-8">Update Info</Button>
+          <ButtonClick align="self-left mt-8">Update Info</ButtonClick>
         </form>
         <form
           className={`grid grid-cols-2 max-md:grid-cols-1 gap-x-8 gap-y-4 ${
@@ -179,7 +179,7 @@ const SettingsPage: React.FC = () => {
               minLength={35}
             />
           </div>
-          <Button align="self-left mt-8 col-start-1">Update Info</Button>
+          <ButtonClick align="self-left mt-8 col-start-1">Update Info</ButtonClick>
         </form>
       </div>
     </div>

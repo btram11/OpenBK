@@ -2,8 +2,8 @@ import * as React from "react"
 import Star from "@/app/components/svg/star.svg";
 import StarHalf from "@/app/components/svg/star_half.svg";
 import StarEmpty from "@/app/components/svg/star_empty.svg";
-import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
-import { ButtonClick } from "@/app/components/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ButtonClick } from "@/components/common/buttons/button";
 
 const RatingBar: React.FC<{
     stars: number,

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { CourseCardProps } from "./types";
-import {ButtonClick, ButtonCourse} from "./button";
-import Star from "./svg/star.svg"
-import ArrowRight from "./svg/arrow_right.svg"
+import { CourseCardProps } from "../../types";
+import {ButtonClick} from "../buttons/button";
+import Star from "../../../public/svg/star.svg"
+import ArrowRight from "../../../public/svg/arrow_right.svg";
 
 export const CourseItemHome: React.FC<CourseCardProps> = ({
   imageUrl,

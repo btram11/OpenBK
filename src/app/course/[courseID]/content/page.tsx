@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/app/components/ui/accordion"
-import { BulletItem } from "@/app/components/bulletItem";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { BulletItem } from "@/components/ui/bulletItem";
 
 export default function Page() {
     const courseContentData = [

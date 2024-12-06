@@ -1,48 +1,37 @@
 "use client";
-
 import React from "react";
-import {ButtonForm} from "../components/button";
+import {ButtonForm} from "../../components/common/buttons/button";
 import { useRouter } from "next/navigation";
+import { login } from "@/lib/api/auth";
+
 
 export default function LoginPage() {
   const router = useRouter();
   const inputStyle =
     "text-black text-base w-[30vw] px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
-  const [error, setError] = React.useState("");
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const { email, password } = Object.fromEntries(
+      formData.entries()
+    ) as {
+      email: string;
+      password: string;
+    };
 
-    // Basic validation
-    // if (!email || !password) {
-    //   setError("Email and Password are required.");
-    //   return;
-    // }
-
-    // setError(""); // Clear error
-
-    // Simulate login API call
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await login(email, password)
 
-      if (response.ok) {
-        router.push("/dashboard");
-      } else {
-        // Handle errors
-      }
-      console.log("Logging in with:", { email, password });
-      // Perform login logic, e.g., send a request to an API
+      if ("status" in res && res.status === 200) {
+        if (res.data && "accessToken" in res.data && res.data.accessToken) {
+          localStorage.setItem("accessToken", res.data.accessToken);
+        }
+        router.push("/home");
+      } 
     } catch (error) {
-      // setError("Invalid login credentials.");
+      alert("Unknown error");
     }
   };
   return (
@@ -58,6 +47,7 @@ export default function LoginPage() {
             </label>
             <input
               id="email"
+              name="email"
               type="email"
               className={`${inputStyle} rounded-lg`}
               placeholder="Email"
@@ -70,6 +60,7 @@ export default function LoginPage() {
             </label>
             <input
               id="pass"
+              name="password"
               type="password"
               className={inputStyle}
               placeholder="Password"
@@ -79,6 +70,7 @@ export default function LoginPage() {
           <div className="flex flex-row gap-3 items-center">
             <input
               id="remember"
+              name="remember"
               type="checkbox"
               className="w-4 h-4 accent-dodger-blue-500 "
             />
@@ -86,13 +78,12 @@ export default function LoginPage() {
               Remember me
             </label>
           </div>
-          {error && <div></div>}
           <ButtonForm className="w-[15vw]">Log in</ButtonForm>
          
           <div className="self-center text-stone-500">
             Don't have an account?{" "}
             <a
-              href="/registration"
+              href="/signup"
               className="cursor-pointer text-dodger-blue-600 duration-150 underline hover:text-saffron-400"
             >
               Sign Up

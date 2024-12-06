@@ -1,22 +1,35 @@
+'use client';
+import React from 'react';
 import { CourseItemHome } from "@/components/common/cards/coursecard";
-import Slogan from "../../components/layout/slogan";
+import { getAllCourses } from "@/lib/api/course";
 
-const courseData = [
-    {
-      imageUrl: "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-      category: "Development",
-      rating: 4.5,
-      reviews: 123456,
-      title: "Learning Digital Marketing on Facebook",
-      instructor: "Someone",
-      price: "200.000đ"
-    }
-  ];
+// const courseData = [
+//     {
+//       imageUrl: "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
+//       category: "Development",
+//       rating: 4.5,
+//       reviews: 123456,
+//       title: "Learning Digital Marketing on Facebook",
+//       instructor: "Someone",
+//       price: "200.000đ"
+//     }
+//   ];
+
 
 export default function Page() {
+  const [courseData, setCourseData] = React.useState<any[]>([]);
+  React.useEffect(() => {
+    const getCourseData = async () => {
+      const data = await getAllCourses();
+      setCourseData(data);
+    };
+
+    getCourseData();
+  }, []);
+
   return (
     <main>
-        <Slogan />
+        
 
         <section className="flex flex-col justify-center px-20 w-full bg-white min-h-[595px] max-md:px-5 max-md:max-w-full">
             <h2 className="text-3xl leading-none text-black">What's new</h2>

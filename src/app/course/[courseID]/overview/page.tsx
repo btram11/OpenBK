@@ -1,4 +1,4 @@
-import { BulletItem } from "@/app/components/bulletItem";
+import { BulletItem } from "@/components/ui/bulletItem";
 
 export default function Page() {
   const sampleData = {

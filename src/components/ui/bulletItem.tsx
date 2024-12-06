@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Check from "@/app/components/svg/check.svg";
-import Download from "@/app/components/svg/download.svg";
-import Certificate from "@/app/components/svg/certificate.svg";
-import Infinity from "@/app/components/svg/infinity.svg";
-import Video from "@/app/components/svg/video.svg";
-import Test from "@/app/components/svg/test.svg"
+import Check from "../../public/svg/check.svg";
+import Download from "../../public/svg/download.svg";
+import Certificate from "../../public/svg/certificate.svg";
+import Infinity from "../../public/svg/infinity.svg";
+import Video from "../../public/svg/video.svg";
+import Test from "../../public/svg/test.svg"
 
 export const BulletItem: React.FC<{
     text: string,
@@ -36,9 +36,9 @@ export const BulletItem: React.FC<{
   }
 
   return (
-  <div className="flex gap-2.5 items-center mt-1.5">
+    <div className="flex gap-2.5 items-center mt-1.5">
       <Icon />
-    <div className="self-stretch my-auto">{text}</div>
-  </div>
-)
+      <div className="self-stretch my-auto">{text}</div>
+    </div>
+  )
 }

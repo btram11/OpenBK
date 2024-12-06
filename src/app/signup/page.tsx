@@ -1,40 +1,64 @@
-
-import { ButtonForm } from "../components/button";
+'use client';
+import { ButtonForm } from "../../components/common/buttons/button"; 
+import { signup } from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
   const inputStyle =
     "text-black text-base  px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const { name, email, password, cpassword } = Object.fromEntries(
+      formData.entries()
+    ) as {
+      name: string;
+      email: string;
+      password: string;
+      cpassword: string;
+    };
+
+    if (password !== cpassword) {
+      alert("Password and Confirm Password do not match");
+      return;
+    }
+
+    try {
+      const res = await signup(name, email, password);
+
+      if ("status" in res && res.status === 200) {
+        if (res.data && "accessToken" in res.data && res.data.accessToken) {
+          localStorage.setItem("accessToken", res.data.accessToken);
+        }
+        router.push("/home");
+      } 
+    } catch (error) {
+      alert("Unknown error");
+    }
+  };
+
   return (
     <div className="flex bg-gray-100 items-center justify-center h-screen w-screen">
-      <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-6">
+      <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-4/12 h-fit px-12 py-7 rounded-2xl flex flex-col gap-6">
         <div className="text-black text-3xl font-semibold">
           Create Your Account
         </div>
-        <form className="flex flex-col gap-8">
-          <div className="flex flex-row gap-8">
-            <div className="flex-1 flex flex-col gap-2">
-              <label htmlFor="fname" className="font-semibold text-lg">
-                First Name
-              </label>
-              <input
-                id="fname"
-                type="text"
-                className={`${inputStyle} `}
-                placeholder="First Name"
-              />
-            </div>
-            <div className="flex-1 flex flex-col gap-2">
-              <label htmlFor="lname" className="font-semibold text-lg">
-                Last name
-              </label>
-              <input
-                id="lname"
-                type="text"
-                className={`${inputStyle} `}
-                placeholder="Last name"
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="font-semibold text-lg">
+              Full Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              className={`${inputStyle} w-full`}
+              placeholder="Full Name"
+              required
+            />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -43,9 +67,11 @@ export default function SignupPage() {
             </label>
             <input
               id="email"
+              name="email"
               type="email"
               className={`${inputStyle}  w-full`}
               placeholder="Email"
+              required
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -53,10 +79,12 @@ export default function SignupPage() {
               Password
             </label>
             <input
-              id="pass"
+              id="password"
+              name="password"
               type="password"
               className={`${inputStyle} w-full`}
               placeholder="Password"
+              required
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -64,13 +92,15 @@ export default function SignupPage() {
               Confirm Password
             </label>
             <input
-              id="cpass"
+              id="cpassword"
+              name="cpassword"
               type="password"
               className={`${inputStyle} w-full`}
               placeholder="Confirm Password"
+              required
             />
           </div>
-          <ButtonForm className="w-[15vw]">Sign Up</ButtonForm>
+          <ButtonForm type="submit" className="w-[15vw]">Sign Up</ButtonForm>
 
           <div className="self-center text-stone-500">
             Already have an account?{" "}
