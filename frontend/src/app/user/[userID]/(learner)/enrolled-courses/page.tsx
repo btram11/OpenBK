@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import CourseItem from "@/components/ui/CourseItem";
+import CourseItem from "@/components/common/cards/courseItem";
 
 const tabs = [
   { id: "all", label: "All" },

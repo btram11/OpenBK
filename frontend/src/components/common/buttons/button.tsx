@@ -1,5 +1,4 @@
 "use-client";
-import { ButtonProps } from "./types"
 
 export const ButtonForm: React.FC<
   {
@@ -49,9 +48,7 @@ export const ButtonClick: React.FC<
   className = "",
 }) => {
   return (
-    <button
-      className={`group relative ${align} w-fit flex`}
-    >
+    <button className={`group relative ${align} w-fit flex`}>
       <div
         className={`flex justify-center items-center gap-2 p-2 bg-saffron-400 font-semibold text-lg rounded-3xl border-2 z-20 border-black ${className}`}
       >
@@ -64,12 +61,14 @@ export const ButtonClick: React.FC<
   );
 };
 
+export interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+}
 
-
-
-export const ButtonCourse: React.FC<ButtonProps> = ({children, onClick }) => {
+export const ButtonCourse: React.FC<ButtonProps> = ({ children, onClick }) => {
   return (
-    <button 
+    <button
       onClick={onClick}
       className={`flex justify-center items-center overflow-hidden gap-1 self-stretch px-1.5 py-1.5 rounded-[50px] text-sm 
         font-semibold bg-amber-400 border border-black border-solid

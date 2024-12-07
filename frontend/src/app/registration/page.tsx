@@ -1,6 +1,6 @@
 "use client";
 
-import { ButtonForm } from "../components/button";
+import { ButtonForm } from "@/components/common/buttons/button";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -158,13 +158,13 @@ export default function SignupPage() {
               </span>
             </div>
           </div>
-          
+
           {mutation.error && mutation.error instanceof AxiosError && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
               <p>{mutation.error?.response?.data.ERROR}</p>
             </div>
           )}
-          
+
           <ButtonForm className="w-[15vw]">Sign Up</ButtonForm>
 
           <div className="self-center text-stone-500">

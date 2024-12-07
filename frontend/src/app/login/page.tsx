@@ -1,16 +1,14 @@
 "use client";
 
 import React from "react";
-import { ButtonForm } from "../components/button";
+import { ButtonForm } from "@/components/common/buttons/button";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-
 
 export default function LoginPage() {
   const router = useRouter();

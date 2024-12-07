@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import CourseItem from "@/components/ui/CourseItem";
-import Button from "@/components/ui/button";
+import { ButtonForm } from "@/components/common/buttons/button";
 
 const tabs = [
   { id: "profile", label: "Profile" },
@@ -19,23 +18,6 @@ const SettingsPage: React.FC = () => {
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
   };
-
-  //TODO: FETCH
-  // React.useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch("/api/your-endpoint");
-  //       if (!response.ok) throw new Error("Network response was not ok");
-  //       const result = await response.json();
-  //     } catch (err) {
-  //       // setError(err.message);
-  //     } finally {
-  //       // setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   return (
     <div className="w-full p-8 drop-shadow h-fit min-h-full bg-white rounded-2xl flex flex-col gap-6 min-w-full">
@@ -105,7 +87,7 @@ const SettingsPage: React.FC = () => {
               placeholder="Re-Typed New Password"
             />
           </div>
-          <Button align="self-left mt-8">Update Info</Button>
+          <ButtonForm align="self-left mt-8">Update Info</ButtonForm>
         </form>
         <form
           className={`grid grid-cols-2 max-md:grid-cols-1 gap-x-8 gap-y-4 ${
@@ -179,7 +161,9 @@ const SettingsPage: React.FC = () => {
               minLength={35}
             />
           </div>
-          <Button align="self-left mt-8 col-start-1">Update Info</Button>
+          <ButtonForm align="self-left mt-8 col-start-1">
+            Update Info
+          </ButtonForm>
         </form>
       </div>
     </div>

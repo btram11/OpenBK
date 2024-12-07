@@ -1,4 +1,3 @@
-const BaseURL = process.env.NEXT_PUBLIC_API;
 import { apiClient } from "./apiClient";
 
 export const signUp = async (data: any) => {

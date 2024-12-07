@@ -1,6 +1,6 @@
 import * as React from "react";
-import { BulletItem } from "@/app/components/bulletItem";
-import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
+import { BulletItem } from "@/components/ui/bulletItem";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Page() {
     const collaboratorData = {

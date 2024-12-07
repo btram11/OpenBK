@@ -1,13 +1,10 @@
 "use client";
 
-import { BulletItem } from "@/app/components/bulletItem";
-import { ButtonClick } from "@/app/components/button";
+import { BulletItem } from "@/components/ui/bulletItem";
+import { ButtonClick } from "@/components/common/buttons/button";
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Footer } from "@/app/components/footer";
-import { Navbar } from "@/app/components/navbar";
-
 const CourseStats: React.FC<{
   students: number;
   rating: number;
@@ -149,8 +146,8 @@ export default function CourseLayout({
           <section className="flex flex-col px-2.5 py-4 w-full text-base">
             <h2 className="font-bold">This course includes:</h2>
             <div className="flex flex-col items-start mt-2.5 w-full">
-              {courseFeatures.map((item) => (
-                <BulletItem {...item} />
+              {courseFeatures.map((item, index) => (
+                <BulletItem key={index} {...item} />
               ))}
             </div>
           </section>

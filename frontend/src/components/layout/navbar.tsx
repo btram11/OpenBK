@@ -1,14 +1,19 @@
 import * as React from "react";
-import Search from "@/app/components/svg/search.svg";
-import Cart from "@/app/components/svg/cart.svg";
-import BkIcon from "@/app/components/images/BkIcon.png";
+import Search from "@/public/svg/search.svg";
+import Cart from "@/public/svg/cart.svg";
+import BkIcon from "@/public/images/BkIcon.png";
+// import Search from "@/app/components/svg/search.svg";
+// import Cart from "@/app/components/svg/cart.svg";
+// import BkIcon from "@/app/components/images/BkIcon.png";
 import Link from "next/link";
+import SigninButton from "../common/buttons/SigninButton";
+import SignupButton from "../common/buttons/SignupButton";
 
 // const CartCount: React.FC = () => {
 //   return (
 //     <div
 //       id="count"
-//       className="flex absolute bg-blue-500 text-white border-1 border-black rounded-lg px-1 w-25 
+//       className="flex absolute bg-blue-500 text-white border-1 border-black rounded-lg px-1 w-25
 //     items-center justify-center left-4 bottom-3"
 //     >
 //       2
@@ -19,12 +24,13 @@ import Link from "next/link";
 export const Navbar: React.FC = () => {
   return (
     <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
-      <div className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]">
-        <img src={BkIcon.src}></img>
-        <Link href="/" className="font-bold">
-          OpenBK
-        </Link>
-      </div>
+      <Link
+        href="/"
+        className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]"
+      >
+        <img src={BkIcon.src} className=""></img>
+        <span className="font-bold">OpenBK</span>
+      </Link>
 
       <Link href="/course" className="self-stretch my-auto tracking-wide">
         Courses
@@ -52,8 +58,7 @@ export const Navbar: React.FC = () => {
         >
           <button className="self-stretch my-auto">Collaborators</button>
         </Link>
-        <div className="relative">
-        </div>
+        <div className="relative"></div>
 
         <Link
           href="/user/1/dashboard"
@@ -61,7 +66,9 @@ export const Navbar: React.FC = () => {
         >
           <button className="self-stretch my-auto">My dashboard</button>
         </Link>
-        <div className="flex shrink-0 self-stretch my-auto rounded-full bg-zinc-300 h-[38px] w-[38px]" />
+        {/* <div className="flex shrink-0 self-stretch my-auto rounded-full bg-zinc-300 h-[38px] w-[38px]" /> */}
+        <SigninButton />
+        <SignupButton />
       </div>
     </div>
   );

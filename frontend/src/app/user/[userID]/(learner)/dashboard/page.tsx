@@ -1,4 +1,4 @@
-import CourseItem from "@/components/ui/CourseItem";
+import CourseItem from "@/components/common/cards/courseItem";
 
 const DashboardPage: React.FC = () => {
   return (
