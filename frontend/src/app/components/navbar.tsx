@@ -21,7 +21,7 @@ export const Navbar: React.FC = () => {
     <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
       <div className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]">
         <img src={BkIcon.src}></img>
-        <Link href="/" className="font-bold">
+        <Link href="/home" className="font-bold">
           OpenBK
         </Link>
       </div>

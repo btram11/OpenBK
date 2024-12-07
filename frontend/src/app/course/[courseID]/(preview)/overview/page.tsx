@@ -1,19 +1,10 @@
 import { BulletItem } from "@/app/components/bulletItem";
-
+import { objectiveDatas } from "@/app/data/data";
 export default function Page() {
-  const sampleData = {
-    objectives: [
-      { text: "Objective 1", type: "objective" },
-      { text: "Objective 2", type: "objective" },
-      { text: "Objective 3", type: "objective" },
-      { text: "Objective 4", type: "objective" }
-    ],
-    description: "Loren ipsum"
-  }
   
-  const halfLength = Math.ceil(sampleData.objectives.length / 2);
-  const firstColumn = sampleData.objectives.slice(0, halfLength);
-  const secondColumn =  sampleData.objectives.slice(halfLength);
+  const halfLength = Math.ceil(objectiveDatas .objectives.length / 2);
+  const firstColumn = objectiveDatas .objectives.slice(0, halfLength);
+  const secondColumn =  objectiveDatas .objectives.slice(halfLength);
 
   return (
     <section className="flex flex-col justify-center items-start pt-4 pb-[200px] pr-11 pl-24 w-full text-2xl text-black max-md:px-5 max-md:max-w-full">
@@ -34,7 +25,7 @@ export default function Page() {
         </div>
         <h2 className="mt-2.5 leading-none font-bold">Description</h2>
         <p className="mt-2.5 text-sm tracking-wide leading-5 text-justify max-md:max-w-full">
-          {sampleData.description}
+          {objectiveDatas .description}
         </p>
       </div>
     </section>

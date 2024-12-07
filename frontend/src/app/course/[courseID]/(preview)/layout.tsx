@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Footer } from "@/app/components/footer";
 import { Navbar } from "@/app/components/navbar";
+import { courseDatas, courseFeatures, courses } from "@/app/data/data";
 
 const CourseStats: React.FC<{
   students: number;
@@ -16,6 +17,7 @@ const CourseStats: React.FC<{
   language: string;
 }> = ({ students, rating, reviews, lastUpdated, language }) => (
   <div id="courseInfo">
+    
     <div className="flex relative flex-wrap gap-2.5 items-center mt-2.5 w-full max-md:max-w-full">
       <div className="flex absolute left-0 bottom-px z-0 gap-2.5 items-center self-start min-h-[18px]" />
       <div className="z-0 self-stretch my-auto text-sm tracking-wide leading-none text-black">
@@ -90,23 +92,6 @@ export default function CourseLayout({
   children: React.ReactNode;
   params: Promise<{ courseID: string }>;
 }>) {
-  const sampleData = {
-    students: 123456,
-    rating: 4.5,
-    reviews: 123456,
-    lastUpdated: "23 Dec",
-    language: "English",
-  };
-  const courseFeatures = [
-    { type: "video", text: "95 hours on-demand video" },
-    { type: "article", text: "35 articles" },
-    { type: "test", text: "2 practice tests" },
-    { type: "test", text: "Assignments" },
-    { type: "download", text: "100 downloadble resources" },
-    { type: "infinity", text: "Full lifetime access" },
-    { type: "certificate", text: "Certificate of completion" },
-  ];
-
   //*Pathname
   const { courseID } = React.use(params);
   const tabs = [
@@ -118,23 +103,23 @@ export default function CourseLayout({
   const currentRoute: string = usePathname();
   return (
     <main>
+      <Navbar />
+
       <div
         role="top"
         className="flex flex-col relative py-5 pl-24 w-full bg-indigo-50 max-md:pl-5 max-md:max-w-full"
       >
-        {currentRoute} and {courseID}
         <article className="flex flex-col justify-center mt-2.5 max-w-full w-[781px]">
           <h1 className="text-4xl font-bold text-black max-md:max-w-full">
             Learning digital marketing on Facebook
           </h1>
           <p className="mt-2.5 text-base tracking-wide leading-6 text-black max-md:max-w-full">
-            Lorem ipsum dolor sit amet consectetur. Iaculis fermentum eget at
-            non ipsum velit amet mattis aliquam.
+
           </p>
           <div className="mt-2.5 text-base tracking-wide text-black">
             Collaborator A
           </div>
-          <CourseStats {...sampleData} />
+          <CourseStats {...courseDatas} />
         </article>
         <div
           id="side"
@@ -149,15 +134,17 @@ export default function CourseLayout({
           <section className="flex flex-col px-2.5 py-4 w-full text-base">
             <h2 className="font-bold">This course includes:</h2>
             <div className="flex flex-col items-start mt-2.5 w-full">
-              {courseFeatures.map((item) => (
-                <BulletItem {...item} />
+              {courseFeatures.map((item, index) => (
+                <BulletItem key={index} {...item} />
               ))}
             </div>
           </section>
           <section className="flex flex-col pt-2.5 w-full text-sm font-semibold">
             <div className="flex justify-center items-center px-2.5 w-full">
               <div className="flex pb-6 items-start self-stretch my-auto w-[223px]">
-                <ButtonClick className="w-[200px]">Enroll now</ButtonClick>
+                <Link href={`/course/${courseID}/unit/1`}>
+                  <ButtonClick className="w-[200px]">Enroll now</ButtonClick>
+                </Link>
               </div>
             </div>
           </section>
@@ -178,6 +165,7 @@ export default function CourseLayout({
         ))}
       </div>
       {children}
+      <Footer />
     </main>
   );
 }

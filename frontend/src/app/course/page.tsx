@@ -4,6 +4,7 @@ import { Navbar } from '@/app/components/navbar';
 import { Footer } from '@/app/components/footer';
 import { CourseItemHome } from '@/app/components/coursecard';
 import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group"
+import { courses } from '../data/data';
 
 interface CategoryItem {
     id: number;
@@ -30,50 +31,7 @@ const categories: CategoryItem[] = [
     { id: 6, name: 'Finance'},
   ];
   
-const languages: LanguageItem[] = [
-    { id: 1, name: 'All Language'},
-    { id: 2, name: 'English'},
-    { id: 3, name: 'Vietnamese'},
-  ];
-  
-   const prices: PriceItem[] = [
-    { id: 1, name: 'All Price'},
-    { id: 2, name: 'Free'},
-    { id: 3, name: 'Paid'},
-   ]
-   const courses = [
-    {
-      id: 1,
-      imageUrl: "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-      category: "Development",
-      rating: 4.5,
-      reviews: 123456,
-      title: "Learning Digital Marketing on Facebook",
-      instructor: "Someone",
-      price: "200.000đ"
-    },
-    {
-        id: 2,
-        imageUrl: "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-        category: "Development",
-        rating: 4.5,
-        reviews: 123456,
-        title: "Learning Digital Marketing on Facebook",
-        instructor: "Someone",
-        price: "200.000đ"
-    },
-    {
-        id: 3,
-        imageUrl: "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-        category: "Development",
-        rating: 4.5,
-        reviews: 123456,
-        title: "Learning Digital Marketing on Facebook",
-        instructor: "Someone",
-        price: "200.000đ"
-      }
 
-  ];
 const FilterSection: React.FC<{
     title: string;
     items: (CategoryItem | LanguageItem | PriceItem)[];
@@ -134,20 +92,19 @@ export default function Page() {
                 <div className="flex overflow-hidden flex-wrap gap-8 px-5 py-6 w-full max-md:max-w-full">
                     <aside className="flex overflow-hidden flex-col items-end px-8 py-2.5 text-center min-w-[240px] w-[348px] max-md:px-5">
                         <FilterSection title="Categories" items={categories} />
-                        <div className="mt-8">
+                        {/* <div className="mt-8">
                             <FilterSection title="Languages" items={languages} />
                         </div>
                         <div className="mt-8">
                             <FilterSection title="Price" items={prices} showMore={false} />
-                        </div>
+                        </div> */}
                     </aside>
                     
                     <section className="flex overflow-hidden flex-col flex-1 shrink self-start px-2.5 pt-2.5 basis-10 min-h-[812px] min-w-[240px] max-md:max-w-full">
                         <h1 className="self-start text-2xl font-bold text-center text-black">
-                            Courses in Development
+                            Courses
                         </h1>
                         <div className="flex overflow-hidden self-stretch pt-2 mt-2 w-full text-base text-center text-black min-h-[40px] max-md:max-w-full">
-                            Showing 1-6 of 48 Results
                         </div>
 
                         <div id="Course lists" className="grid grid-cols-3 px-2 gap-8 w-full max-md:max-w-full">

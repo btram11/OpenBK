@@ -91,7 +91,8 @@ export default function UnitPage(
   return (
     <div className="flex flex-wrap pb-20 justify-between w-[1420px] max-md:max-w-full">
       <article className="flex flex-col gap-4 min-w-[240px] w-[992px] max-md:max-w-full">
-        <YouTube videoId="ZVuHLPl69mM"
+
+      <YouTube videoId="ZVuHLPl69mM"
           opts={{
             height: "500",
             width: "988",

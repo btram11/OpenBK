@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import * as React from "react";
+import { Navbar } from "@/app/components/navbar";
+import { Footer } from "@/app/components/footer";
 
 export default function DashboardLayout({
   children,
@@ -22,6 +24,7 @@ export default function DashboardLayout({
 
   return (
     <main>
+      <Navbar/>
       <div className="w-full py-4 flex flex-col items-center gap-8 overscroll-y-auto min-h-screen">
         <div className="dashboard-top w-[80vw] bg-pink-300 h-[15vw] rounded-2xl flex flex-col-reverse px-10 py-8 min-h-fit">
           <div className="flex flex-row gap-5">
@@ -31,16 +34,12 @@ export default function DashboardLayout({
             />
             <div className="flex flex-col gap-1 self-center">
               <span className="font-semibold text-xl">Name & Lastname</span>
-              <span> n Courses Enrolled</span>
             </div>
           </div>
         </div>
         <div className="dashboard-bottom flex flex-row w-[80vw] rounded-2xl h-fit relative">
           <div className="w-full h-full absolute left-0 top-0 border-[1.5px] border-[#E3E2E6] rounded-2xl -z-10 bg-[#FAF9FD]"></div>
           <nav className=" flex flex-col basis-1/5 p-8 gap-4 rounded-l-2xl border-[1.5px] border-[#E3E2E6] bg-white w-fit h-fit">
-            <span className="text-black font-medium h-7 flex items-center">
-              Welcome User
-            </span>
 
             <div className="flex flex-col gap-1 items-center mb-3">
               {links.slice(0, 4).map((link, index) => (
@@ -59,6 +58,7 @@ export default function DashboardLayout({
           <div className="p-8 w-fit h-fit flex-1">{children}</div>
         </div>
       </div>
+      <Footer/>
     </main>
   );
 }

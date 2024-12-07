@@ -25,7 +25,7 @@ export const BulletItem: React.FC<{
     case "certificate":
       Icon = Certificate;
       break;
-    case "video":
+    case "unit":
       Icon = Video;
       break;
     case "test":

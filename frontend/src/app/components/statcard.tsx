@@ -1,8 +1,7 @@
 
-export function StatCard({ count, label, icon }: {
+export function StatCard({ count, label}: {
     count: number;
     label: string;
-    icon: string | null;
   }) {
     return (
       <div className="bg-white drop-shadow-md duration-300 p-6 rounded-2xl hover:-translate-y-2 w-full flex flex-row gap-4 min-w-fit">
