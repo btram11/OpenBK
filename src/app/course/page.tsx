@@ -2,6 +2,7 @@
 import * as React from "react";
 import { CourseItemHome } from "@/components/common/cards/coursecard";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { getAllCourses } from "@/services/course";
 interface CategoryItem {
   id: number;
   name: string;
@@ -37,41 +38,6 @@ const prices: PriceItem[] = [
   { id: 1, name: "All Price" },
   { id: 2, name: "Free" },
   { id: 3, name: "Paid" },
-];
-const courses = [
-  {
-    id: 1,
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-    category: "Development",
-    rating: 4.5,
-    reviews: 123456,
-    title: "Learning Digital Marketing on Facebook",
-    instructor: "Someone",
-    price: "200.000đ",
-  },
-  {
-    id: 2,
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-    category: "Development",
-    rating: 4.5,
-    reviews: 123456,
-    title: "Learning Digital Marketing on Facebook",
-    instructor: "Someone",
-    price: "200.000đ",
-  },
-  {
-    id: 3,
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/4d2e3c9ca02843ada293db57d2cfd6d0/03807c569bf6de01d291f892863aa137360b0c91fee9d286d0aa8a6feb2e0250?apiKey=4d2e3c9ca02843ada293db57d2cfd6d0&",
-    category: "Development",
-    rating: 4.5,
-    reviews: 123456,
-    title: "Learning Digital Marketing on Facebook",
-    instructor: "Someone",
-    price: "200.000đ",
-  },
 ];
 const FilterSection: React.FC<{
   title: string;
@@ -131,6 +97,16 @@ const Pagination: React.FC<{
 export default function Page() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
+  const [courseData, setCourseData] = React.useState<any[]>([]);
+  React.useEffect(() => {
+    const getCourseData = async () => {
+      const data = await getAllCourses();
+      setCourseData(data);
+    };
+
+    getCourseData();
+  }, []);
+
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -162,8 +138,8 @@ export default function Page() {
             id="Course lists"
             className="grid grid-cols-3 px-2 gap-8 w-full max-md:max-w-full"
           >
-            {courses.map((course, index) => (
-              <CourseItemHome key={index} {...course} />
+            {[...Array(3)].map((_, index) => (
+                <CourseItemHome key={index} {...courseData[0]} />
             ))}
           </div>
 

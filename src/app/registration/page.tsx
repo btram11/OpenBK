@@ -1,14 +1,15 @@
 "use client";
-
 import { ButtonForm } from "@/components/common/buttons/button";
+import { useRouter } from "next/navigation";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUp } from "@/services/auth";
+import { signUp } from "@/services/auth/auth";
 import { AxiosError } from "axios";
 
 export default function SignupPage() {
+  const router = useRouter();
   const mutation = useMutation({
     mutationFn: (data: any) => {
       console.log(data);
@@ -17,6 +18,9 @@ export default function SignupPage() {
         email: data.email,
         password: data.password,
       });
+    },
+    onSuccess: () => {
+      router.push("/home");
     },
   });
   const formSchema = yup.object().shape({
@@ -47,6 +51,10 @@ export default function SignupPage() {
   const inputStyle =
     "text-black text-base  px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
+  const onSubmit = (data: { firstName: string; lastName: string; email: string; password: string }) => {
+    mutation.mutate(data);
+  }
+
   return (
     <div className="flex bg-gray-100 items-center justify-center h-screen w-screen min-h-fit py-4">
       <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-10">
@@ -55,9 +63,7 @@ export default function SignupPage() {
         </div>
         <form
           className="flex flex-col gap-9"
-          onSubmit={handleSubmit((formData) => {
-            mutation.mutate(formData);
-          })}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-6">
             <div className="flex flex-row gap-8">
@@ -161,7 +167,7 @@ export default function SignupPage() {
 
           {mutation.error && mutation.error instanceof AxiosError && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-              <p>{mutation.error?.response?.data.ERROR}</p>
+              <p>{mutation.error.response?.data.ERROR}</p>
             </div>
           )}
 

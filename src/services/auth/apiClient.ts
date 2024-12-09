@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClientWithAuth = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -35,7 +35,7 @@ apiClientWithAuth.interceptors.response.use(
 );
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

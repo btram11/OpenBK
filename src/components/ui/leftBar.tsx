@@ -4,7 +4,7 @@ import * as React from "react";
 const LeftBar: React.FC = () => {
   const LinkStyle =
     "px-4 py-2 w-full text-left hover:bg-dodger-blue-500 hover:text-white rounded-md bg-stone-200 duration-200";
-  const {userID} = JSON.parse(localStorage.getItem("userID") || "{}");
+  const {userID} = JSON.parse(sessionStorage.getItem("userID") || "{}");
   
   const links = [
     { href: `/user/dashboard`, label: "Dashboard" },

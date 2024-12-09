@@ -9,25 +9,22 @@ import Link from "next/link";
 import SigninButton from "../common/buttons/SigninButton";
 import SignupButton from "../common/buttons/SignupButton";
 
-// const CartCount: React.FC = () => {
-//   return (
-//     <div
-//       id="count"
-//       className="flex absolute bg-blue-500 text-white border-1 border-black rounded-lg px-1 w-25
-//     items-center justify-center left-4 bottom-3"
-//     >
-//       2
-//     </div>
-//   );
-// };
+const CartCount: React.FC = () => {
+  return (
+    <div
+      id="count"
+      className="flex absolute bg-blue-500 text-white border-1 border-black rounded-lg px-1 w-25
+    items-center justify-center left-4 bottom-3"
+    >
+      2
+    </div>
+  );
+};
 
 export const Navbar: React.FC = () => {
   return (
     <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
-      <Link
-        href="/"
-        className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]"
-      >
+       <Link href="/home" className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]">
         <img src={BkIcon.src} className=""></img>
         <span className="font-bold">OpenBK</span>
       </Link>
@@ -52,19 +49,16 @@ export const Navbar: React.FC = () => {
       </form>
 
       <div className="flex gap-4 justify-between items-center self-stretch my-auto tracking-wide min-w-[240px] w-[325px]">
-        <Link
-          href="/collaborator/1/dashboard"
-          className="self-stretch my-auto tracking-wide"
-        >
+        <Link href="/collaborator/1/dashboard" className="self-stretch my-auto tracking-wide">
           <button className="self-stretch my-auto">Collaborators</button>
         </Link>
-        <div className="relative"></div>
+        <div className="relative">
+            <Cart></Cart>
+            <CartCount></CartCount>
+        </div>
 
-        <Link
-          href="/user/1/dashboard"
-          className="self-stretch my-auto tracking-wide"
-        >
-          <button className="self-stretch my-auto">My dashboard</button>
+        <Link href="/user/dashboard" className="self-stretch my-auto tracking-wide">
+            <button className="self-stretch my-auto">My dashboard</button>
         </Link>
         {/* <div className="flex shrink-0 self-stretch my-auto rounded-full bg-zinc-300 h-[38px] w-[38px]" /> */}
         <SigninButton />

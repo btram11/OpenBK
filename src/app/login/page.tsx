@@ -1,38 +1,41 @@
 "use client";
-
 import React from "react";
 import { ButtonForm } from "@/components/common/buttons/button";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { login } from "@/services/auth";
+import { login } from "@/services/auth/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 export default function LoginPage() {
   const router = useRouter();
-  const mutation = useMutation({
-    mutationFn: (data: any) => {
-      console.log(data);
-      return login({
-        email: data.email,
-        password: data.password,
-      });
-    },
-    //Can use this to test the error message from axios https://stackoverflow.com/a/72189645
-  });
 
   const formSchema = yup.object().shape({
     email: yup.string().email().required("Email is required"),
     password: yup.string().required("Password is required"),
   });
 
+  const mutation = useMutation({
+    mutationFn: (data: { email: string; password: string }) => {
+      return login({
+        email: data.email,
+        password: data.password,
+      });
+    },
+    onSuccess: () => {
+      router.push("/home");
+    },
+    onError: (error: any) => {
+      alert(error.message || "Unknown error");
+    },
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(formSchema),
     mode: "onSubmit",
@@ -40,6 +43,10 @@ export default function LoginPage() {
   });
   const inputStyle =
     "text-black text-base w-[30vw] px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
+
+    const onSubmit = (data: { email: string; password: string }) => {
+      mutation.mutate(data);
+    };
 
   return (
     <main className="flex bg-zinc-100 items-center justify-center h-screen w-full">
@@ -49,9 +56,7 @@ export default function LoginPage() {
         </div>
         <form
           className="flex flex-col gap-12"
-          onSubmit={handleSubmit((formData) => {
-            mutation.mutate(formData);
-          })}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-7">
             <div className="flex flex-col gap-2 relative">
@@ -115,7 +120,7 @@ export default function LoginPage() {
           <div className="self-center text-stone-500 select-none">
             Don't have an account?{" "}
             <a
-              href="/registration"
+              href="/register"
               className="cursor-pointer text-dodger-blue-600 duration-150 underline hover:text-saffron-400"
             >
               Sign Up
