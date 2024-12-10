@@ -1,18 +1,21 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ButtonForm } from "@/components/common/buttons/button";
+import { ProfileFrom } from "./ProfileForm";
+import { PasswordForm } from "./PasswordForm";
 
-const tabs = [
-  { id: "profile", label: "Profile" },
-  { id: "password", label: "Password" },
+const tabs: Array<{
+  id: string;
+  label: string;
+  component: React.FC;
+}> = [
+  { id: "profile", label: "Profile", component: ProfileFrom },
+  { id: "password", label: "Password", component: PasswordForm },
   //   { id: "completedCourses", label: "Completed Courses" },
 ];
 
 const SettingsPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = React.useState(tabs[0].id);
-  const inputStyle =
-    "text-black text-base w-full px-5 py-2 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
   // Hàm xử lý sự kiện khi nhấn vào tab
   const handleTabClick = (tab: string) => {
@@ -46,125 +49,13 @@ const SettingsPage: React.FC = () => {
         </div>
       </div>
       <div className="tab_content w-full h-fit flex flex-col">
-        <form
-          className={`flex flex-col gap-4 ${
-            selectedTab === tabs[1].id ? "" : "hidden"
-          }`}
-        >
-          <div className="flex flex-col gap-2">
-            <label htmlFor="old-pass" className="font-semibold text-base">
-              Current Password
-            </label>
-            <input
-              id="old-pass"
-              type="password"
-              className={inputStyle}
-              required
-              placeholder="Current Password"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="new-pass" className="font-semibold text-base">
-              New Password
-            </label>
-            <input
-              id="pass"
-              type="password"
-              className={inputStyle}
-              required
-              placeholder="New Password"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="retype" className="font-semibold text-base">
-              Re-Typed New Password
-            </label>
-            <input
-              id="pass"
-              type="password"
-              className={inputStyle}
-              required
-              placeholder="Re-Typed New Password"
-            />
-          </div>
-          <ButtonForm align="self-left mt-8">Update Info</ButtonForm>
-        </form>
-        <form
-          className={`grid grid-cols-2 max-md:grid-cols-1 gap-x-8 gap-y-4 ${
-            selectedTab === tabs[0].id ? "" : "hidden"
-          }`}
-        >
-          <div className="flex flex-col gap-2">
-            <label htmlFor="fname" className="font-semibold text-base">
-              First Name
-            </label>
-            <input
-              id="fname"
-              type="text"
-              className={inputStyle}
-              placeholder="First Name"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="lname" className="font-semibold text-base">
-              Last Name
-            </label>
-            <input
-              id="lname"
-              type="text"
-              className={inputStyle}
-              placeholder="Last Name"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="username" className="font-semibold text-base">
-              Username
-            </label>
-            <input
-              id="username"
-              type="text"
-              className={inputStyle}
-              placeholder="Username"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="phone" className="font-semibold text-base">
-              Phone Number
-            </label>
-            <input
-              id="phone"
-              type="text"
-              pattern="^(0|\+84)(3[2-9]|5[6|8|9]|7[0-9]|8[1-9]|9[0-9])\d{7}$"
-              className={`${inputStyle} appearance-none`}
-              placeholder="Phone Number"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="skill" className="font-semibold text-base">
-              Skill/Occupation
-            </label>
-            <input id="skill" type="text" className={inputStyle} />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="skill" className="font-semibold text-base">
-              Skill/Occupation
-            </label>
-            <input id="skill" type="text" className={inputStyle} />
-          </div>
-          <div className="flex flex-col gap-2 col-span-2">
-            <label htmlFor="bio" className="font-semibold text-base">
-              Biography
-            </label>
-            <textarea
-              id="bio"
-              className={`${inputStyle} min-h-12`}
-              minLength={35}
-            />
-          </div>
-          <ButtonForm align="self-left mt-8 col-start-1">
-            Update Info
-          </ButtonForm>
-        </form>
+        {tabs.map(({ id, component: Component }) =>
+          selectedTab === id ? (
+            <React.Fragment key={id}>
+              <Component />
+            </React.Fragment>
+          ) : null
+        )}
       </div>
     </div>
   );

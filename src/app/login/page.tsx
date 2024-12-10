@@ -9,6 +9,9 @@ import { login } from "@/services/auth/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
+const inputStyle =
+  "text-black text-base w-[30vw] px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
+
 export default function LoginPage() {
   const router = useRouter();
 
@@ -41,12 +44,10 @@ export default function LoginPage() {
     mode: "onSubmit",
     reValidateMode: "onChange",
   });
-  const inputStyle =
-    "text-black text-base w-[30vw] px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
 
-    const onSubmit = (data: { email: string; password: string }) => {
-      mutation.mutate(data);
-    };
+  const onSubmit = (data: { email: string; password: string }) => {
+    mutation.mutate(data);
+  };
 
   return (
     <main className="flex bg-zinc-100 items-center justify-center h-screen w-full">
@@ -111,7 +112,10 @@ export default function LoginPage() {
 
           {mutation.error && mutation.error instanceof AxiosError && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-              <p>{mutation.error?.response?.data.ERROR}</p>
+              <p>
+                {mutation.error?.response?.data.ERROR ||
+                  mutation.error.response?.data.message}
+              </p>
             </div>
           )}
 

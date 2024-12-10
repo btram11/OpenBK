@@ -21,13 +21,37 @@ export const ButtonForm: React.FC<
       className={`group relative ${align} w-fit flex`}
       {...props}
     >
-      <div
+      {/* <div
         className={`flex items-center justify-center px-5 py-2 bg-saffron-400 font-semibold text-lg rounded-3xl z-20 border-2 border-black ${className}`}
       >
         {children}
       </div>
       <div
         className={`absolute border-2 border-black ${shadow_left} ${shadow_top} w-full h-full rounded-3xl z-10 bg-black/90 transition-transform duration-300 ease-in-out`}
+      ></div> */}
+      <div
+        className={`flex items-center justify-center px-5 py-2 ${
+          props.disabled === true && props.disabled !== undefined
+            ? "bg-gray-400 text-gray-700"
+            : "bg-saffron-400 text-black"
+        } font-semibold text-lg rounded-3xl z-20 border-2 ${
+          props.disabled === true && props.disabled !== undefined
+            ? "border-gray-600"
+            : "border-black"
+        } ${className}`}
+      >
+        {children}
+      </div>
+      <div
+        className={`absolute border-2 ${
+          props.disabled === true && props.disabled !== undefined
+            ? "border-gray-600 bg-gray-500"
+            : "border-black bg-black/90"
+        } ${shadow_left} ${shadow_top} w-full h-full rounded-3xl z-10 transition-transform duration-300 ease-in-out ${
+          props.disabled === true && props.disabled !== undefined
+            ? "group-hover:translate-none"
+            : ""
+        }`}
       ></div>
     </button>
   );
