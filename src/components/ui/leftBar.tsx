@@ -1,11 +1,15 @@
-'use client'
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 const LeftBar: React.FC = () => {
   const LinkStyle =
-    "px-4 py-2 w-full text-left hover:bg-dodger-blue-500 hover:text-white rounded-md bg-stone-200 duration-200";
-  const {userID} = JSON.parse(sessionStorage.getItem("userID") || "{}");
-  
+    "px-4 py-2 w-full text-left hover:bg-dodger-blue-500 hover:text-white rounded-md  duration-200";
+  const ActiveLinkStyle = "bg-dodger-blue-500 text-white";
+  // const { userID } = JSON.parse(sessionStorage.getItem("userID") || "{}");
+
+  const pathname = usePathname();
+
   const links = [
     { href: `/user/dashboard`, label: "Dashboard" },
     { href: `/user/profile`, label: "My Profile" },
@@ -21,18 +25,30 @@ const LeftBar: React.FC = () => {
 
       <div className="flex flex-col gap-1 items-center mb-3">
         {links.slice(0, 4).map((link, index) => (
-          <Link key={index} href={link.href} className={`${LinkStyle}`}>
+          <Link
+            key={index}
+            href={link.href}
+            className={`${LinkStyle} ${
+              pathname === link.href ? ActiveLinkStyle : "bg-stone-200"
+            }`}
+          >
             {link.label}
           </Link>
         ))}
       </div>
       <div className="text-black font-medium text">User</div>
       {links.slice(4).map((link, index) => (
-        <Link key={index} href={link.href} className={`${LinkStyle}`}>
+        <Link
+          key={index}
+          href={link.href}
+          className={`${LinkStyle} ${
+            pathname === link.href ? ActiveLinkStyle : "bg-stone-200"
+          }`}
+        >
           {link.label}
         </Link>
       ))}
     </nav>
   );
-}
+};
 export default LeftBar;
