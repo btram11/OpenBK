@@ -1,4 +1,4 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from "@/services/apiClient";
 
 export const signUp = async (data: any) => {
   const result = await apiClient.post("/auth/signup", data);
