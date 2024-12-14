@@ -1,31 +1,43 @@
-const CourseItem: React.FC = () => {
+import { Course } from "@/domain/course.entity";
+
+const CourseItem: React.FC<{ course: Course }> = (props) => {
+  const { course } = props;
   return (
     <div className="border border-[#909094] w-full rounded-xl min-w-fit ">
       <div className="flex flex-col p-5 w-full max-w-full h-fit gap-5">
         <img
           className="rounded-md w-full max-w-full h-48"
-          src="./favicon.ico"
+          src={
+            course?.imageUrl ??
+            "https://www.w3schools.com/images/w3schools_green.jpg"
+          }
           alt=""
         />
 
         {/* Course Info */}
         <div className="flex flex-col w-full gap-3">
           <span className="flex w-fit px-3 py-1 bg-[#E3E2E6] rounded-full text-xs items-center justify-center hover:bg-dodger-blue-600 hover:text-white duration-300">
-            Development
+            {course?.category}
           </span>
 
-          <h5 className="text-lg font-semibold text-start hover:underline hover:underline-offset-4 duration-100">
-            Learning Digital Marketing on Facebook
-          </h5>
+          <a
+            href="https://www.example.com"
+            className="text-lg font-semibold text-start hover:underline hover:underline-offset-4 duration-100"
+          >
+            {course?.courseName}
+          </a>
 
           <div className="flex flex-row justify-between">
-            <div className="author flex flex-row items-center gap-1">
+            <a
+              href="https://www.example.com"
+              className="author flex flex-row items-center gap-2"
+            >
               <img
                 className="aspect-square w-7 rounded-full"
-                src={`./favicon.ico`}
+                src={course?.author?.profileUrl}
               />
-              <span className="text-sm">Author name</span>
-            </div>
+              <span className="text-sm">{course?.author?.name}</span>
+            </a>
             <div className="ratings flex flex-row items-center">
               <svg
                 width="16"
@@ -54,9 +66,9 @@ const CourseItem: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row border-t border-[#909094] px-5 py-2">
+      {/* <div className="flex flex-row border-t border-[#909094] px-5 py-2">
         hkhkhkhk
-      </div>
+      </div> */}
     </div>
   );
 };

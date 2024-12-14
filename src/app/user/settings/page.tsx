@@ -3,6 +3,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ProfileFrom } from "./ProfileForm";
 import { PasswordForm } from "./PasswordForm";
+import { FaCamera } from "react-icons/fa";
+import { useModal } from "@/context/ModalContext";
 
 const tabs: Array<{
   id: string;
@@ -16,6 +18,7 @@ const tabs: Array<{
 
 const SettingsPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = React.useState(tabs[0].id);
+  const { openModal } = useModal();
 
   // Hàm xử lý sự kiện khi nhấn vào tab
   const handleTabClick = (tab: string) => {
@@ -25,7 +28,21 @@ const SettingsPage: React.FC = () => {
   return (
     <div className="w-full p-8 drop-shadow h-fit min-h-full bg-white rounded-2xl flex flex-col gap-6 min-w-full">
       <h3 className="font-semibold text-lg">Settings</h3>
-      <div className="flex flex-col h-fit w-full">
+      <div className="flex flex-col h-fit w-full gap-6">
+        <div className="dashboard-top w-full bg-pink-300 h-[15vw] rounded-2xl flex flex-col-reverse px-10 py-8 min-h-fit">
+          <div className="flex flex-row gap-5 relative w-fit h-fit rounded-full">
+            <img
+              className="rounded-full bg-white w-28 aspect-square object-cover border-[6px] border-white"
+              src={`http://localhost:3001/uploads/profile/default.png`}
+            />
+            <button
+              className="rounded-full border-1 aspect-square border-white w-7 absolute right-[2px] bottom-2 bg-white flex items-center justify-center text-stone-600 duration-200 hover:bg-dodger-blue-500 hover:text-white"
+              onClick={() => openModal("UploadProfileModal")}
+            >
+              <FaCamera />
+            </button>
+          </div>
+        </div>
         <div className="flex flex-row w-full flex-wrap relative gap-3">
           {tabs.map((tab) => (
             <div
