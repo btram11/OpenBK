@@ -7,6 +7,7 @@ export class UserEntity {
   phoneNumber: string;
   biography: string;
   createdAt: string;
+  profileURL: string;
 
   constructor(data: Partial<UserEntity>) {
     this.id = data.id || "";
@@ -16,6 +17,11 @@ export class UserEntity {
     this.email = data.email || "";
     this.phoneNumber = data.phoneNumber || "";
     this.biography = data.biography || "";
-    this.createdAt = data.createdAt || "-";
+    this.createdAt = data.createdAt
+      ? new Date(data.createdAt).toLocaleString("de-DE") // Format thành string
+      : "-";
+    this.profileURL =
+      data.profileURL || "https://www.w3schools.com/images/w3schools_green.jpg";
+    console.log(this.email);
   }
 }

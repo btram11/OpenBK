@@ -1,15 +1,19 @@
 "use client";
-import * as React from "react";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
 import InfoBar from "@/components/ui/infoBar";
 import LeftBar from "@/components/ui/leftBar";
+import { getQueryClient } from "../providers";
+import { getUserInfo } from "@/services/user";
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const queryClient = getQueryClient();
+  queryClient.prefetchQuery({
+    queryKey: ["getProfile"],
+    queryFn: getUserInfo,
+  });
   return (
     <main>
       <div className="w-full py-4 flex flex-col items-center gap-8 overscroll-y-auto min-h-screen">

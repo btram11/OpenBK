@@ -5,6 +5,10 @@ export const signUp = async (data: any) => {
   if (result.data.accessToken) {
     sessionStorage.setItem("accessToken", result.data.accessToken);
   }
+
+  if (result.data.userID) {
+    localStorage.setItem("userID", result.data.userID);
+  }
 };
 
 export const login = async (data: any) => {
@@ -12,5 +16,8 @@ export const login = async (data: any) => {
 
   if (result.data.accessToken) {
     sessionStorage.setItem("accessToken", result.data.accessToken);
+  }
+  if (result.data.userID) {
+    localStorage.setItem("userID", result.data.userID);
   }
 };
