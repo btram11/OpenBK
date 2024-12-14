@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { getUserInfo, updateProfile } from "@/services/user";
 import { changeProfileSchema } from "@/lib/validation/settingsSchema";
 import { AxiosError } from "axios";
+import { useEffect } from "react";
 
 const inputStyle =
   "text-black text-base w-full px-5 py-2 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
@@ -27,17 +28,20 @@ export const ProfileFrom: React.FC = () => {
     handleSubmit,
     formState: { dirtyFields, errors },
   } = useForm({
-    defaultValues: { ...data, firstName: "dsffsdf" },
+    defaultValues: { ...data },
     resolver: yupResolver(changeProfileSchema),
     mode: "all",
     reValidateMode: "onBlur",
   });
-  console.log(
-    Object.keys(dirtyFields).length > 0,
-    "isDirty",
-    data,
-    Object.keys(errors).length
-  );
+  useEffect(() => {
+    if (data) {
+      setValue("firstName", data.firstName);
+      setValue("lastName", data.lastName);
+      setValue("email", data.email);
+      setValue("phoneNumber", data.phoneNumber);
+      setValue("biography", data.biography);
+    }
+  }, [data, setValue]);
   return (
     <form
       className={`grid grid-cols-2 max-md:grid-cols-1 gap-x-8 gap-y-6`}
