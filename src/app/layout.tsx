@@ -2,6 +2,8 @@ import "./globals.css";
 import Providers from "./providers";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ModalProvider } from "@/context/ModalContext";
+import ModalManager from "@/components/modals/modalManager";
 
 export default function RootLayout({
   children,
@@ -11,9 +13,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <Providers>{children}</Providers>
-        <Footer />
+        <Providers>
+          <ModalProvider>
+            <ModalManager />
+            <Navbar />
+            {children}
+            <Footer />
+          </ModalProvider>
+        </Providers>
       </body>
     </html>
   );
