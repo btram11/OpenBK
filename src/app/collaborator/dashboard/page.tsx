@@ -6,3 +6,4 @@ const DashboardUser: React.FC = () => {
 };
 
 export default DashboardUser;
+

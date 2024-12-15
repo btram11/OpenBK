@@ -1,15 +1,23 @@
+"use client";
 import { Course } from "@/domain/course.entity";
 import { UserEntity } from "@/domain/user.entity";
 import { apiClientWithAuth } from "@/services/apiClient";
 
-export const getUserInfo = async (): Promise<UserEntity> => {
-  const userID =
-    /*localStorage.getItem("OpenBK-userID") ??*/ "adnsfjknasfjansf";
-  const response = await apiClientWithAuth.get(`/user/${userID}`);
-  return new UserEntity(response.data);
+export const getUserInfo = async (): Promise<UserEntity | null> => {
+  try {
+    const userID = sessionStorage.getItem("userID");
+    if (!userID) {
+      return null;
+    }
+    const { data } = await apiClientWithAuth.get<UserEntity>(`/user/${userID}`);
+    return data ? new UserEntity(data) : null;
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+    throw error;
+  }
 };
 
-export const updateProfile = async (data: any) => {
+export const updateProfile = async (data: UserEntity) => {
   const response = await apiClientWithAuth.patch("/user/info", data);
   return response.data;
 };

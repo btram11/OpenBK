@@ -3,12 +3,13 @@ import * as React from "react";
 import Search from "@/public/svg/search.svg";
 import Cart from "@/public/svg/cart.svg";
 import BkIcon from "@/public/images/BkIcon.png";
-// import Search from "@/app/components/svg/search.svg";
-// import Cart from "@/app/components/svg/cart.svg";
-// import BkIcon from "@/app/components/images/BkIcon.png";
 import Link from "next/link";
 import SigninButton from "../common/buttons/SigninButton";
 import SignupButton from "../common/buttons/SignupButton";
+import { getUserInfo } from "@/services/user";
+import { UserEntity } from "@/domain/user.entity";
+import { useQuery } from "@tanstack/react-query";
+import { roleString } from "@/lib/roleUtils";
 
 const CartCount: React.FC = () => {
   return (
@@ -23,10 +24,16 @@ const CartCount: React.FC = () => {
 };
 
 export const Navbar: React.FC = () => {
+  const { data: user } = useQuery<UserEntity | null>({
+    queryKey: ["getProfile"],
+    queryFn: getUserInfo,
+    staleTime: Infinity,
+  });
+
   return (
     <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
       <Link
-        href="/home"
+        href="/"
         className="flex gap-2.5 justify-center items-center self-stretch pl-5 my-auto text-2xl leading-none text-sky-600 h-[39px] w-[188px]"
       >
         <img src={BkIcon.src} className=""></img>
@@ -53,26 +60,28 @@ export const Navbar: React.FC = () => {
       </form>
 
       <div className="flex gap-4 justify-between items-center self-stretch my-auto tracking-wide min-w-[240px] w-[325px]">
-        <Link
-          href="/collaborator/1/dashboard"
-          className="self-stretch my-auto tracking-wide"
-        >
-          <button className="self-stretch my-auto">Collaborators</button>
-        </Link>
         <div className="relative">
-          <Cart></Cart>
-          <CartCount></CartCount>
+          <Cart />
+          <CartCount />
         </div>
 
-        <Link
-          href="/user/dashboard"
-          className="self-stretch my-auto tracking-wide"
-        >
-          <button className="self-stretch my-auto">My dashboard</button>
-        </Link>
-        {/* <div className="flex shrink-0 self-stretch my-auto rounded-full bg-zinc-300 h-[38px] w-[38px]" /> */}
-        <SigninButton />
-        <SignupButton />
+        {user ? (
+          <Link
+            href={`/${roleString(user?.role)?.toLowerCase()}/dashboard`}
+            className="self-stretch my-auto tracking-wide"
+          >
+            <img
+              className="rounded-full bg-black w-10 aspect-square object-cover border-[6px] border-white"
+              src={`http://localhost:3001/uploads/profile/default.png`}
+            />
+            <button className="self-stretch my-auto">{user?.name ?? "Your name"}</button>
+          </Link>
+        ) : (
+          <>
+            <SigninButton />
+            <SignupButton />
+          </>
+        )}
       </div>
     </div>
   );

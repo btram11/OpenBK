@@ -1,5 +1,5 @@
 export interface Course {
-  courseID: string;
+  courseID?: string;
   authorID: string;
   courseName: string;
   imageUrl: string;
@@ -12,8 +12,4 @@ export interface Course {
     name: string;
     profileUrl: string;
   };
-}
-
-export interface CourseList {
-  Courses: Course[];
 }

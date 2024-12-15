@@ -6,33 +6,24 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/services/auth/auth";
+import { getUserInfo } from "@/services/user";
 import { useMutation } from "@tanstack/react-query";
+<<<<<<< Updated upstream
 import { AxiosError } from "axios";
-
-const inputStyle =
-  "text-black text-base w-[30vw] px-5 p-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500";
+=======
+import InputField from "@/components/common/InputField";
+>>>>>>> Stashed changes
 
 export default function LoginPage() {
   const router = useRouter();
 
-  const formSchema = yup.object().shape({
-    email: yup.string().email().required("Email is required"),
-    password: yup.string().required("Password is required"),
-  });
-
-  const mutation = useMutation({
-    mutationFn: (data: { email: string; password: string }) => {
-      return login({
-        email: data.email,
-        password: data.password,
-      });
-    },
+  const { mutate, error } = useMutation({
+    mutationFn: (data: any) => login(data),
     onSuccess: () => {
-      router.push("/home");
+      window.location.reload();
+      router.push("/");
     },
-    onError: (error: any) => {
-      alert(error.message || "Unknown error");
-    },
+    onError: (error: any) => alert(error.message || "Unknown error"),
   });
 
   const {
@@ -40,14 +31,23 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(
+      yup.object().shape({
+        email: yup.string().email().required("Email is required"),
+        password: yup.string().required("Password is required"),
+      })
+    ),
     mode: "onSubmit",
     reValidateMode: "onChange",
   });
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    mutation.mutate(data);
-  };
+<<<<<<< Updated upstream
+    const onSubmit = (data: { email: string; password: string }) => {
+      mutation.mutate(data);
+    };
+=======
+  const onSubmit = (data: any) => mutate(data);
+>>>>>>> Stashed changes
 
   return (
     <main className="flex bg-zinc-100 items-center justify-center h-screen w-full">
@@ -60,62 +60,30 @@ export default function LoginPage() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-7">
-            <div className="flex flex-col gap-2 relative">
-              <label htmlFor="email" className="font-semibold text-lg">
-                Email
-              </label>
-              <input
-                {...register("email")}
-                id="email"
-                type="email"
-                className={`${inputStyle} rounded-lg ${
-                  errors.email
-                    ? " border-2 border-red-500 focus:outline-red-500"
-                    : ""
-                }`}
-                placeholder="Email"
-              />
-              <span className="text-red-500 text-sm absolute -bottom-5">
-                {errors.email?.message}
-              </span>
-            </div>
-            <div className="flex flex-col gap-2 relative">
-              <label htmlFor="pass" className="font-semibold text-lg">
-                Password
-              </label>
-              <input
-                {...register("password")}
-                id="pass"
-                type="password"
-                className={`${inputStyle} ${
-                  errors.password
-                    ? " border-2 border-red-500 focus:outline-red-500"
-                    : ""
-                }`}
-                placeholder="Password"
-              />
-              <span className="text-red-500 text-sm absolute -bottom-5">
-                {errors.password?.message}
-              </span>
-            </div>
-            <div className="flex flex-row gap-3 items-center">
-              <input
-                id="remember"
-                type="checkbox"
-                className="w-4 h-4 accent-dodger-blue-500 "
-              />
-              <label htmlFor="remember" className="text-sm gap-4 select-none">
-                Remember me
-              </label>
-            </div>
+            <InputField
+              label="Email"
+              id="email"
+              register={register}
+              error={errors.email}
+              placeholder="Email"
+            />
+            <InputField
+              label="Password"
+              id="password"
+              type="password"
+              register={register}
+              error={errors.password}
+              placeholder="Password"
+            />
           </div>
 
-          {mutation.error && mutation.error instanceof AxiosError && (
+          {error && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-              <p>
-                {mutation.error?.response?.data.ERROR ||
-                  mutation.error.response?.data.message}
-              </p>
+<<<<<<< Updated upstream
+              <p>{mutation.error?.response?.data.ERROR}</p>
+=======
+              <p>{error?.message}</p>
+>>>>>>> Stashed changes
             </div>
           )}
 
@@ -135,3 +103,5 @@ export default function LoginPage() {
     </main>
   );
 }
+
+

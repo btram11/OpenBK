@@ -1,10 +1,9 @@
 "use client";
 import InfoBar from "@/components/ui/infoBar";
-import LeftBar from "@/components/ui/leftBar";
+import LeftBar from "@/components/layout/leftBar";
 import { getQueryClient } from "../providers";
 import { getUserInfo } from "@/services/user";
-
-import LeftBar from "@/components/layout/leftBar";
+import { getAllCourses } from "@/services/course";
 
 export default function DashboardLayout({
   children,
@@ -15,6 +14,12 @@ export default function DashboardLayout({
   queryClient.prefetchQuery({
     queryKey: ["getProfile"],
     queryFn: getUserInfo,
+    staleTime: Infinity,
+  });
+  queryClient.prefetchQuery({
+    queryKey: ["getAllCourses"],
+    queryFn: getAllCourses,
+    staleTime: Infinity,
   });
   return (
     <main>
