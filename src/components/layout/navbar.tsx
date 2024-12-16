@@ -6,10 +6,8 @@ import BkIcon from "@/public/images/BkIcon.png";
 import Link from "next/link";
 import SigninButton from "../common/buttons/SigninButton";
 import SignupButton from "../common/buttons/SignupButton";
-import { getUserInfo } from "@/services/user";
-import { UserEntity } from "@/domain/user.entity";
-import { useQuery } from "@tanstack/react-query";
 import { roleString } from "@/lib/roleUtils";
+import { useUser } from "@/hooks/useUser";
 
 const CartCount: React.FC = () => {
   return (
@@ -24,11 +22,7 @@ const CartCount: React.FC = () => {
 };
 
 export const Navbar: React.FC = () => {
-  const { data: user } = useQuery<UserEntity | null>({
-    queryKey: ["getProfile"],
-    queryFn: getUserInfo,
-    staleTime: Infinity,
-  });
+  const { data: user } = useUser();
 
   return (
     <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
@@ -72,7 +66,7 @@ export const Navbar: React.FC = () => {
           >
             <img
               className="rounded-full bg-black w-10 aspect-square object-cover border-[6px] border-white"
-              src={`http://localhost:3001/uploads/profile/default.png`}
+              src={user?.imageUrl}
             />
             <button className="self-stretch my-auto">{user?.name ?? "Your name"}</button>
           </Link>

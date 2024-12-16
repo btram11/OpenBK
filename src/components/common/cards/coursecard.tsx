@@ -3,9 +3,9 @@ import { ButtonClick } from "../buttons/button";
 import Star from "@/public/svg/star.svg";
 import ArrowRight from "@/public/svg/arrow_right.svg";
 import Link from "next/link";
-import { Course } from "@/domain/course.entity";
+import { CourseEntity } from "@/domain/course.entity";
 
-export const CourseItemHome: React.FC<{ course: Course | null }> = ({ course }) => {
+export const CourseItemHome: React.FC<{ course: CourseEntity | null }> = ({ course }) => {
   if (!course) {
     console.log(course)
   }
@@ -54,7 +54,7 @@ export const CourseItemHome: React.FC<{ course: Course | null }> = ({ course }) 
               <ArrowRight />
             </ButtonClick>
             <div className="self-stretch my-auto text-2xl font-bold text-sky-600">
-              {course?.price}
+              {course?.price}$
             </div>
           </div>
         </div>

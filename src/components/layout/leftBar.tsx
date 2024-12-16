@@ -1,16 +1,11 @@
 "use client";
 import * as React from "react";
 import { LeftBarButton } from "../common/buttons/leftBarButton";
-import { useQuery } from "@tanstack/react-query";
-import { getUserInfo } from "@/services/user";
-import { UserEntity } from "@/domain/user.entity";
 import { roleString } from "@/lib/roleUtils";
+import { useUser } from "@/hooks/useUser";
 
 const LeftBar: React.FC = () => {
-  const { data: user, isLoading, isError } = useQuery<UserEntity>({
-    queryKey: ["getProfile"],
-    queryFn: () => getUserInfo(),
-  });
+  const { data: user } = useUser();
 
   const baseLinks = [
     { href: `/${roleString(user?.role)?.toLowerCase()}/dashboard`, label: "Dashboard" },

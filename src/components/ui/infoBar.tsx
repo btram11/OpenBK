@@ -1,31 +1,29 @@
 "use client";
-import { getUserInfo } from "@/services/user";
-import { useQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
-import { UserEntity } from "@/domain/user.entity";
 import { roleString } from "@/lib/roleUtils";
+import { useUser } from "@/hooks/useUser";
 
 const InfoBar = () => {
-  const { data } = useQuery<UserEntity | null>({
-    queryKey: ["getProfile"],
-    queryFn: getUserInfo,
-    staleTime: Infinity,
-  });
+  const { data: user } = useUser();
 
+  const backgroundColor =
+    user?.role === "USER" ? "bg-pink-300" : user?.role === "ADMIN" ? "bg-gray-300" :  "bg-yellow-200";
 
   return (
-    <div className="dashboard-top w-[80vw] bg-pink-300 h-[15vw] rounded-2xl flex flex-col-reverse px-10 pb-8 min-h-fit">
+    <div
+      className={`dashboard-top w-[80vw] ${backgroundColor} h-[15vw] rounded-2xl flex flex-col-reverse px-10 pb-8 min-h-fit`}
+    >
       <div className="flex flex-row gap-5">
         <img
           className="rounded-full bg-black w-28 aspect-square object-cover border-[6px] border-white"
-          src={`http://localhost:3001/uploads/profile/default.png`}
+          src={user?.imageUrl}
         />
         <Suspense fallback={<p>Loading...</p>}>
           <div className="flex flex-col gap-1 self-center">
             <span className="font-semibold text-xl">
-              {data?.name ?? "Name"}
+              {user?.name ?? "Name"}
             </span>
-            <span>{roleString(data?.role)}</span>
+            <span>{roleString(user?.role)}</span>
           </div>
         </Suspense>
       </div>

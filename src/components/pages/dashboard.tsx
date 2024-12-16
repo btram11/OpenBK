@@ -1,24 +1,40 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Pagination from "@/components/common/pagination";
 import CourseItem from "@/components/common/cards/courseItem";
-import { getUserParticipateCourses } from "@/services/user";
+import { useUCourses } from "@/hooks/useUCourse";
 
 const ITEMS_PER_PAGE = 21;
 const DashboardPage: React.FC = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["userCourses"],
-    queryFn: () => getUserParticipateCourses(),
-  });
+  const { data : userCourses } = useUCourses();
+
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const coursesToShow = data?.Courses.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(data?.Courses.length ?? 0 / ITEMS_PER_PAGE);
+  const coursesToShow = userCourses?.Courses.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(userCourses?.Courses.length ?? 0 / ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const dashboardCounts = (role: string) => {
+    switch (role) {
+      case "USER":
+        return [
+          { label: "Enrolled Courses" },
+          { label: "Active Courses" },
+          { label: "Completed Courses" },
+        ];
+      case "COLLAB":
+        return [
+          { label: "Enrolled Student" },
+          { label: "Overall rating" },
+          { label: "Course Created" },
+        ];
+      default:
+        return [];
+    }
   };
 
   return (

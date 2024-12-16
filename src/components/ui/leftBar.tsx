@@ -6,7 +6,6 @@ const LeftBar: React.FC = () => {
   const LinkStyle =
     "px-4 py-2 w-full text-left hover:bg-dodger-blue-500 hover:text-white rounded-md duration-200 font-medium";
   const ActiveLinkStyle = "bg-dodger-blue-500 text-white";
-  // const { userID } = JSON.parse(sessionStorage.getItem("userID") || "{}");
 
   const pathname = usePathname();
 

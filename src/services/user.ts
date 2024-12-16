@@ -1,5 +1,5 @@
 "use client";
-import { Course } from "@/domain/course.entity";
+import { CourseEntity } from "@/domain/course.entity";
 import { UserEntity } from "@/domain/user.entity";
 import { apiClientWithAuth } from "@/services/apiClient";
 
@@ -31,7 +31,7 @@ export const updatePassword = async (password: string, newPassword: string) => {
 };
 
 export const getUserParticipateCourses = async (): Promise<{
-  Courses: Course[];
+  Courses: CourseEntity[];
 }> => {
   const response = await apiClientWithAuth.get("/user/course");
   return response.data;

@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ProfileFrom } from "./ProfileForm";
-import { PasswordForm } from "./PasswordForm";
+import { ProfileFrom } from "./settingTabs/ProfileForm";
+import { PasswordForm } from "./settingTabs/PasswordForm";
 import { FaCamera } from "react-icons/fa";
 import { useModal } from "@/context/ModalContext";
+import { useUser } from "@/hooks/useUser";
 
 const tabs: Array<{
   id: string;
@@ -19,6 +20,7 @@ const tabs: Array<{
 const SettingsPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = React.useState(tabs[0].id);
   const { openModal } = useModal();
+  const { data: user } = useUser();
 
   // Hàm xử lý sự kiện khi nhấn vào tab
   const handleTabClick = (tab: string) => {
@@ -33,7 +35,7 @@ const SettingsPage: React.FC = () => {
           <div className="flex flex-row gap-5 relative w-fit h-fit rounded-full">
             <img
               className="rounded-full bg-white w-28 aspect-square object-cover border-[6px] border-white"
-              src={`http://localhost:3001/uploads/profile/default.png`}
+              src={user?.imageUrl}
             />
             <button
               className="rounded-full border-1 aspect-square border-white w-7 absolute right-[2px] bottom-2 bg-white flex items-center justify-center text-stone-600 duration-200 hover:bg-dodger-blue-500 hover:text-white"
@@ -43,6 +45,8 @@ const SettingsPage: React.FC = () => {
             </button>
           </div>
         </div>
+
+
         <div className="flex flex-row w-full flex-wrap relative gap-3">
           {tabs.map((tab) => (
             <div
@@ -65,6 +69,7 @@ const SettingsPage: React.FC = () => {
           <div className="w-full h-full border-b-[3px] border-[#C7C6CA] absolute left-0 top-0 -z-10"></div>
         </div>
       </div>
+      
       <div className="tab_content w-full h-fit flex flex-col">
         {tabs.map(({ id, component: Component }) =>
           selectedTab === id ? (

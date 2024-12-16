@@ -8,11 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/services/auth/auth";
 import { getUserInfo } from "@/services/user";
 import { useMutation } from "@tanstack/react-query";
-<<<<<<< Updated upstream
-import { AxiosError } from "axios";
-=======
 import InputField from "@/components/common/InputField";
->>>>>>> Stashed changes
 
 export default function LoginPage() {
   const router = useRouter();
@@ -41,13 +37,7 @@ export default function LoginPage() {
     reValidateMode: "onChange",
   });
 
-<<<<<<< Updated upstream
-    const onSubmit = (data: { email: string; password: string }) => {
-      mutation.mutate(data);
-    };
-=======
   const onSubmit = (data: any) => mutate(data);
->>>>>>> Stashed changes
 
   return (
     <main className="flex bg-zinc-100 items-center justify-center h-screen w-full">
@@ -79,11 +69,7 @@ export default function LoginPage() {
 
           {error && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-<<<<<<< Updated upstream
-              <p>{mutation.error?.response?.data.ERROR}</p>
-=======
               <p>{error?.message}</p>
->>>>>>> Stashed changes
             </div>
           )}
 

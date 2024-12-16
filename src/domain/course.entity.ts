@@ -1,4 +1,4 @@
-export interface Course {
+export interface CourseEntity {
   courseID?: string;
   authorID: string;
   courseName: string;

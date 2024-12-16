@@ -1,6 +1,7 @@
 'use client';
 import { getUserInfo } from "@/services/user";
 import { useQuery } from "@tanstack/react-query";
+import { useUser } from "@/hooks/useUser";
 import {
   dehydrate,
   HydrationBoundary,
@@ -36,14 +37,7 @@ const Profile: React.FC<{ data?: UserEntity }> = ({ data }) => {
 
 const ProfilePage: React.FC = async () => {
   const queryClient = new QueryClient();
-
-  const { data: user } = useQuery<UserEntity | null>({
-    queryKey: ["getProfile"],
-    queryFn: getUserInfo,
-    staleTime: Infinity,
-  });
-
-  // const data = queryClient.getQueryData<UserEntity>(["profile"]);
+  const { data: user } = useUser();
 
 
   return (

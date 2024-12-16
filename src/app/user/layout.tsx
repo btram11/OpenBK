@@ -1,21 +1,16 @@
 "use client";
 import InfoBar from "@/components/ui/infoBar";
-import LeftBar from "@/components/ui/leftBar";
-import { getQueryClient } from "../providers";
-import { getUserInfo } from "@/services/user";
-
 import LeftBar from "@/components/layout/leftBar";
+import { prefetchUser } from "@/hooks/useUser";
+import { prefetchCourses } from "@/hooks/useCourses";
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = getQueryClient();
-  queryClient.prefetchQuery({
-    queryKey: ["getProfile"],
-    queryFn: getUserInfo,
-  });
+  prefetchUser();
+  prefetchCourses(); 
   return (
     <main>
       <div className="w-full py-4 flex flex-col items-center gap-8 overscroll-y-auto min-h-screen">
@@ -30,3 +25,4 @@ export default function DashboardLayout({
     </main>
   );
 }
+

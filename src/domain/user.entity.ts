@@ -4,7 +4,9 @@ export class UserEntity {
   email: string;
   role?: string;
   createdAt: string;
-  profileURL: string;
+  imageUrl: string;
+  phoneNumber: string;
+  biography: string;
 
   constructor(data: Partial<UserEntity>) {
     this.id = data.id || "";
@@ -14,7 +16,8 @@ export class UserEntity {
     this.createdAt = data.createdAt
       ? new Date(data.createdAt).toLocaleString("de-DE") // Format thành string
       : "-";
-    this.profileURL =
-      data.profileURL || "https://www.w3schools.com/images/w3schools_green.jpg";
+    this.imageUrl = data.imageUrl || "";
+    this.phoneNumber = data.phoneNumber || "";
+    this.biography = data.biography || "";
   }
 }

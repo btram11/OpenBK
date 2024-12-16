@@ -1,6 +1,6 @@
-import { Course } from "@/domain/course.entity";
+import { CourseEntity } from "@/domain/course.entity";
 
-const CourseItem: React.FC<{ course: Course }> = (props) => {
+const CourseItem: React.FC<{ course: CourseEntity }> = (props) => {
   const { course } = props;
   return (
     <div className="border border-[#909094] w-full rounded-xl min-w-fit ">
