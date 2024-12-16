@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import InfoBar from "@/components/ui/infoBar";
 import LeftBar from "@/components/layout/leftBar";
 import { prefetchUser } from "@/hooks/useUser";
@@ -10,7 +10,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   prefetchUser();
-  prefetchCourses(); 
+  prefetchCourses();
   return (
     <main>
       <div className="w-full py-4 flex flex-col items-center gap-8 overscroll-y-auto min-h-screen">

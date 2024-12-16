@@ -6,9 +6,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/services/auth/auth";
-import { getUserInfo } from "@/services/user";
 import { useMutation } from "@tanstack/react-query";
 import InputField from "@/components/common/InputField";
+import { AxiosError } from "axios";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function LoginPage() {
       window.location.reload();
       router.push("/");
     },
-    onError: (error: any) => alert(error.message || "Unknown error"),
+    // onError: (error: any) => alert(error.message || "Unknown error"),
   });
 
   const {
@@ -69,7 +69,12 @@ export default function LoginPage() {
 
           {error && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-              <p>{error?.message}</p>
+              <p>
+                {(error instanceof AxiosError &&
+                  (error?.response?.data.ERROR ||
+                    error?.response?.data.message)) ||
+                  error?.message}
+              </p>
             </div>
           )}
 
@@ -89,5 +94,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
-

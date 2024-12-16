@@ -7,7 +7,11 @@ const InfoBar = () => {
   const { data: user } = useUser();
 
   const backgroundColor =
-    user?.role === "USER" ? "bg-pink-300" : user?.role === "ADMIN" ? "bg-gray-300" :  "bg-yellow-200";
+    user?.role === "USER"
+      ? "bg-pink-300"
+      : user?.role === "ADMIN"
+      ? "bg-gray-300"
+      : "bg-yellow-200";
 
   return (
     <div
@@ -23,7 +27,7 @@ const InfoBar = () => {
             <span className="font-semibold text-xl">
               {user?.name ?? "Name"}
             </span>
-            <span>{roleString(user?.role)}</span>
+            <span>{roleString(user?.role ?? "")}</span>
           </div>
         </Suspense>
       </div>

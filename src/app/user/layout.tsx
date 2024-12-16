@@ -10,7 +10,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   prefetchUser();
-  prefetchCourses(); 
+  prefetchCourses();
   return (
     <main>
       <div className="w-full py-4 flex flex-col items-center gap-8 overscroll-y-auto min-h-screen">
@@ -25,4 +25,3 @@ export default function DashboardLayout({
     </main>
   );
 }
-

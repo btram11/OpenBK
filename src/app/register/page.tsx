@@ -6,14 +6,15 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUp } from "@/services/auth/auth";
-import { getUserInfo } from "@/services/user";
 import { registrationSchema } from "@/lib/validation/registrationSchema";
 import InputField from "@/components/common/InputField";
+import { AxiosError } from "axios";
 
 export default function SignupPage() {
   const router = useRouter();
   const { mutate, error } = useMutation({
-    mutationFn: (data: any) => signUp({
+    mutationFn: (data: any) =>
+      signUp({
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
         password: data.password,
@@ -33,7 +34,7 @@ export default function SignupPage() {
   });
 
   return (
-    <div className="flex bg-gray-100 items-center justify-center h-screen w-screen min-h-fit py-4">
+    <div className="flex bg-gray-100 items-center justify-center h-screen w-full min-h-fit py-4">
       <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-10">
         <h2 className="text-black text-3xl font-semibold">
           Create Your Account
@@ -43,22 +44,23 @@ export default function SignupPage() {
           onSubmit={handleSubmit((data) => mutate(data))}
         >
           <div className="flex flex-col gap-6">
-            <div className="flex flex-row gap-8">
+            <div className="flex flex-row gap-8 justify-between items-stretch">
               <InputField
                 label="First Name"
                 id="firstName"
                 register={register}
                 error={errors.firstName}
                 placeholder="First Name"
+                className="self-stretch w-[14vw]"
               />
-                <InputField
-                  label="Last Name"
-                  id="lastName"
-                  register={register}
-                  error={errors.lastName}
-                  placeholder="Last Name"
-                />
-              
+              <InputField
+                label="Last Name"
+                id="lastName"
+                register={register}
+                error={errors.lastName}
+                placeholder="Last Name"
+                className="self-stretch w-[14vw]"
+              />
             </div>
             <InputField
               label="Email"
@@ -88,7 +90,12 @@ export default function SignupPage() {
 
           {error && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-              <p>{error?.message}</p>
+              <p>
+                {(error instanceof AxiosError &&
+                  (error?.response?.data.ERROR ||
+                    error?.response?.data.message)) ||
+                  error?.message}
+              </p>
             </div>
           )}
 

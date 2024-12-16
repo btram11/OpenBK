@@ -17,7 +17,7 @@ export const getUserInfo = async (): Promise<UserEntity | null> => {
   }
 };
 
-export const updateProfile = async (data: UserEntity) => {
+export const updateProfile = async (data: Partial<UserEntity>) => {
   const response = await apiClientWithAuth.patch("/user/info", data);
   return response.data;
 };
