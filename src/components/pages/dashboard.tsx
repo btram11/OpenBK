@@ -20,7 +20,7 @@ const DashboardPage: React.FC = () => {
 
   const dashboardCounts = (role: string) => {
     switch (role) {
-      case "USER":
+      case "LEARNER":
         return [
           { label: "Enrolled Courses" },
           { label: "Active Courses" },

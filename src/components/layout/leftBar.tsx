@@ -13,7 +13,7 @@ const LeftBar: React.FC = () => {
     { href: `/${roleString(user?.role)?.toLowerCase()}/setting`, label: "Settings" },
   ];
 
-  const roleSpecificLinks = user?.role === "USER"
+  const roleSpecificLinks = user?.role === "LEARNER"
     ? [
         { href: `/${roleString(user?.role)?.toLowerCase()}/enrolled-courses`, label: "Enrolled Courses" },
         { href: `/${roleString(user?.role)?.toLowerCase()}/quiz-attempts`, label: "My Quiz Attemps" },

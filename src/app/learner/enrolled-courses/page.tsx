@@ -3,8 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import CourseItem from "@/components/common/cards/courseItem";
 import Pagination from "@/components/common/pagination";
-import { useQuery } from "@tanstack/react-query";
-import { getUserParticipateCourses } from "@/services/user";
+import { useUCourses } from "@/hooks/useUCourse";
 
 const tabs = [
   { id: "all", label: "All" },
@@ -15,10 +14,8 @@ const tabs = [
 const ITEMS_PER_PAGE = 21;
 
 const EnrolledCoursesPage: React.FC = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["userCourses"],
-    queryFn: () => getUserParticipateCourses(),
-  });
+  const { data, isLoading, isError } = useUCourses();
+
 
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
   const [currentPage, setCurrentPage] = useState(1);

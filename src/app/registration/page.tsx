@@ -6,7 +6,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUp } from "@/services/auth/auth";
-import { getUserInfo } from "@/services/user";
 import { registrationSchema } from "@/lib/validation/registrationSchema";
 import InputField from "@/components/common/InputField";
 

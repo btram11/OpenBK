@@ -4,8 +4,8 @@ export const roleString = ((role: UserEntity["role"]) => {
   switch (role) {
     case "COLLAB":
       return "Collaborator";
-    case "USER":
-      return "User";
+    case "LEARNER":
+      return "Learner";
     case "ADMIN":
       return "Admin";
     default:

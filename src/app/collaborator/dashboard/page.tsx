@@ -1,9 +1,9 @@
 import DashboardPage from "@/components/pages/dashboard";
-const DashboardUser: React.FC = () => {
+const DashboardLearner: React.FC = () => {
   return (
     <DashboardPage />
   );
 };
 
-export default DashboardUser;
+export default DashboardLearner;
 
