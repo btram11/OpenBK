@@ -18,7 +18,6 @@ export default function LoginPage() {
       window.location.reload();
       router.push("/");
     },
-    onError: (error: any) => alert(error.message || "Unknown error"),
   });
 
   const {

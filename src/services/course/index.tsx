@@ -1,9 +1,9 @@
-import axios from 'axios';
+import { apiClient } from "@/services/apiClient";
 
 const url = `${process.env.NEXT_PUBLIC_API_URL}/course/public`;
 const createCourse = async (courseName: string, description: string) => {
   try {
-    const res = await axios.post(`${url}`, {
+    const res = await apiClient.post(`${url}`, {
       courseName,
       description,
     });
@@ -23,7 +23,7 @@ const createCourse = async (courseName: string, description: string) => {
 
 const getAllCourses = async () => {
   try {
-    const res = await axios.get(`${url}`);
+    const res = await apiClient.get(`${url}`);
 
     if (res.status === 200) {
       return res.data;
@@ -39,7 +39,7 @@ const getAllCourses = async () => {
 
 const getCourseById = async (id: number) => {
   try {
-    const res = await axios.get(
+    const res = await apiClient.get(
       `${url}/${id}`
     );
 
@@ -61,7 +61,7 @@ const updateCourse = async (
   description: string
 ) => {
   try {
-    const res = await axios.put(
+    const res = await apiClient.put(
       `${url}/${id}`,
       {
         courseName,
@@ -84,7 +84,7 @@ const updateCourse = async (
 
 const deleteCourse = async (id: number) => {
   try {
-    const res = await axios.delete(
+    const res = await apiClient.delete(
       `${url}/${id}`
     );
 

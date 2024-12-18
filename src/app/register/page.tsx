@@ -18,7 +18,6 @@ export default function SignupPage() {
         password: data.password,
       }),
     onSuccess: () => router.push("/"),
-    onError: (error: any) => alert(error.message || "Unknown error"),
   });
 
   const {

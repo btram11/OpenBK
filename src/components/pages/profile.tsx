@@ -1,6 +1,4 @@
 'use client';
-import { getUserInfo } from "@/services/user";
-import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@/hooks/useUser";
 import {
   dehydrate,

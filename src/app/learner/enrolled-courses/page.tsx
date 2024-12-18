@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import CourseItem from "@/components/common/cards/courseItem";
 import Pagination from "@/components/common/pagination";
-import { useUCourses } from "@/hooks/useUCourse";
+import { useEnrolledCourses } from "@/hooks/useEnrollCourse";
+import { EnrolledCourseEntity } from "@/domain/enrolledCourse.entity";
 
 const tabs = [
   { id: "all", label: "All" },
@@ -14,40 +15,44 @@ const tabs = [
 const ITEMS_PER_PAGE = 21;
 
 const EnrolledCoursesPage: React.FC = () => {
-  const { data, isLoading, isError } = useUCourses();
+  const { data, isLoading, isError } = useEnrolledCourses();
 
+  const [selectedTabId, setSelectedTabId] = useState<string>(tabs[0].id);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [selectedTab, setSelectedTab] = useState(tabs[0].id);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [courses, setCourses] = useState<EnrolledCourseEntity[]>([]);
+
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      setCourses(data);
+    }
+    else {
+      setCourses([]);
+    }
+    console.log(courses);
+  }, [data]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (isError || !data) {
+  if (isError) {
     return <div>Error loading courses</div>;
   }
 
-  // Extract courses from API response
-  const allCourses = {
-    all: data.Courses,
-    activeCourses: data.Courses.filter(
-      (course: any) => course.status === "active"
-    ),
-    completedCourses: data.Courses.filter(
-      (course: any) => course.status === "completed"
-    ),
+  const allCourses: Record<string, EnrolledCourseEntity[]> = {
+    all: courses,
+    activeCourses: courses.filter((course) => course.status === "ACTIVE"),
+    completedCourses: courses.filter((course) => course.status === "COMPLETED"),
   };
-  console.log(data.Courses);
-  const coursesForSelectedTab =
-    allCourses[selectedTab as keyof typeof allCourses] || [];
+  const coursesForSelectedTab = allCourses[selectedTabId] || [];
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const coursesToShow = coursesForSelectedTab.slice(startIndex, endIndex);
   const totalPages = Math.ceil(coursesForSelectedTab.length / ITEMS_PER_PAGE);
 
-  const handleTabClick = (tab: string) => {
-    setSelectedTab(tab);
+  const handleTabClick = (tabId: string) => {
+    setSelectedTabId(tabId);
     setCurrentPage(1);
   };
 
@@ -64,12 +69,12 @@ const EnrolledCoursesPage: React.FC = () => {
             <div
               key={tab.id}
               className={`flex flex-row w-fit flex-wrap px-7 py-2 text-base cursor-pointer hover:bg-gray-500/10 rounded-t-md duration-300 ease-in-out transition-all transform relative ${
-                selectedTab === tab.id ? "font-semibold" : "font-medium"
+                selectedTabId === tab.id ? "font-semibold" : "font-medium"
               }`}
               onClick={() => handleTabClick(tab.id)}
             >
               {tab.label}
-              {selectedTab === tab.id && (
+              {selectedTabId === tab.id && (
                 <motion.div
                   layoutId="active"
                   className="absolute bottom-0 left-0 bg-dodger-blue-500 h-[3px] w-full"
@@ -83,7 +88,7 @@ const EnrolledCoursesPage: React.FC = () => {
       </div>
       <div className="tab_content w-full h-fit flex flex-col">
         <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">
-          {coursesToShow.map((course: any) => (
+          {coursesToShow.map((course) => (
             <CourseItem key={course.courseID} course={course} />
           ))}
         </div>
