@@ -16,7 +16,7 @@ export default function Page() {
   const secondColumn = sampleData.objectives.slice(halfLength);
 
   return (
-    <section className="flex flex-col justify-center items-start pt-4 pb-[200px] pr-11 pl-24 w-full text-2xl text-black max-md:px-5 max-md:max-w-full">
+    <section className="flex flex-col justify-center items-start pt-4 pb-[200px]  w-full text-2xl text-black max-md:px-5 max-md:max-w-full">
       <div
         className="flex flex-col justify-center p-4 max-w-full rounded-xl border border-solid border-black border-opacity-30 w-[775px]"
         role="region"

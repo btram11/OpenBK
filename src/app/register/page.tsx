@@ -51,7 +51,7 @@ export default function SignupPage() {
                 register={register}
                 error={errors.firstName}
                 placeholder="First Name"
-                className="self-stretch w-[14vw]"
+                className="w-[13vw]"
               />
               <InputField
                 label="Last Name"
@@ -59,7 +59,7 @@ export default function SignupPage() {
                 register={register}
                 error={errors.lastName}
                 placeholder="Last Name"
-                className="self-stretch w-[14vw]"
+                className="w-[13vw]"
               />
             </div>
             <InputField

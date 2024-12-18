@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from "axios";
+import { apiClient } from "../apiClient/apiClient";
 
 const createCourse = async (courseName: string, description: string) => {
   try {
@@ -22,17 +23,17 @@ const createCourse = async (courseName: string, description: string) => {
 
 const getAllCourses = async () => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`);
+    const res = await apiClient.get("/course");
 
     if (res.status === 200) {
       return res.data;
     } else {
       console.error("Failed to fetch courses", res.data);
-      return res.data;
+      return [];
     }
   } catch (error) {
     console.error("Get all courses error", error);
-    return { message: "Network error" };
+    return [];
   }
 };
 

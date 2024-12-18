@@ -10,11 +10,9 @@ import { courseNav } from "@/data/data";
 
 export default function Page() {
   return (
-    <div className="flex flex-col justify-center pt-4 pb-[200px] pr-11 pl-24 w-full text-black max-md:px-5 max-md:max-w-full">
-      <div className="flex flex-col justify-center p-4 w-[775px] rounded-xl border border-solid border-black border-opacity-30">
-        <h2 className="mt-2.5 leading-none text-2xl font-bold">
-          Course content
-        </h2>
+    <div className="flex flex-col justify-center pt-4 pb-[200px] w-full text-black ">
+      <div className="flex flex-col justify-center p-4 w-full rounded-xl border border-solid border-black border-opacity-30 gap-4-">
+        <h2 className="leading-none text-2xl font-bold">Course content</h2>
         {courseNav.map((bullet, index) => (
           <BulletItem key={index} {...bullet}></BulletItem>
         ))}
