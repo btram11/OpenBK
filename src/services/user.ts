@@ -1,9 +1,11 @@
 import { UserEntity } from "@/domain/user.entity";
 import { apiClientWithAuth } from "@/services/apiClient";
+import { getFromSessionStorage } from '../hooks/getStorage';
 
 export const getUserInfo = async (): Promise<UserEntity | null> => {
   try {
-    const userID = sessionStorage.getItem("userID"); 
+    const userID = getFromSessionStorage("userID");
+
     if (!userID) {
       return null;
     }
@@ -11,7 +13,6 @@ export const getUserInfo = async (): Promise<UserEntity | null> => {
     return data ? new UserEntity(data) : null;
   } catch (error) {
     console.error("Error fetching user info:", error);
-    // throw error;
     return null;
   }
 };
@@ -30,7 +31,7 @@ export const updatePassword = async (password: string, newPassword: string) => {
 };
 
 // export const getEnrolledCourses = async (): Promise<{
-//   Courses: CourseEntity[];
+//   Courses: PublicCourseEntity[];
 // }> => {
 //   const response = await apiClientWithAuth.get("/user/course");
 //   return response.data;

@@ -25,10 +25,6 @@ apiClientWithAuth.interceptors.response.use(
     if (error.response) {
       const statusCode = error.response.status;
 
-      if (statusCode === 401) {
-          window.location.href = '/login'; 
-      }
-
       if (statusCode === 500) {
         alert('Đã xảy ra lỗi trên máy chủ. Vui lòng thử lại sau.');
       }

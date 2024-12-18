@@ -1,12 +1,31 @@
 'use client';
 import DashboardPage from "@/components/pages/dashboard";
 import { useEnrolledCourses } from "@/hooks/useEnrollCourse";
-const DashboardLearner: React.FC = () => {
+import { useState, useEffect } from "react";
+import { EnrolledCourseEntity } from "@/domain/course.entity";
+const DashboardCollaborator: React.FC = () => {
   const { data, isLoading, isError } = useEnrolledCourses();
+  const [state, setState] = useState<{
+    data: EnrolledCourseEntity | null;
+    isLoading: boolean;
+    isError: boolean;
+  }>({
+    data: null,
+    isLoading: false,
+    isError: false,
+  });
+
+  useEffect(() => {
+    setState({ data: data ?? null, isLoading, isError });
+  }, [data, isLoading, isError]);
+
+  if (!state.data) {
+    return null;
+  }
   return (
-    <DashboardPage data={data} isLoading={isLoading} isError={isError} />
+    <DashboardPage data={state.data} isLoading={state.isLoading} isError={state.isError} />
   );
 };
 
-export default DashboardLearner;
+export default DashboardCollaborator;
 

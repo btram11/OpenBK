@@ -15,7 +15,6 @@ const UploadProfileModal: React.FC<{
     mutationFn: async (file: File) => {
       const formData = new FormData();
       formData.append("image", file);
-      console.log(formData);
       return uploadProfilePic(formData);
     },
     onSuccess: () => {

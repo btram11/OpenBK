@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { CourseItemHome } from "@/components/common/cards/coursecard";
+import { CourseCard } from "@/components/common/cards/courseCard";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { getAllCourses } from "@/services/course";
 interface CategoryItem {
@@ -139,7 +139,7 @@ export default function Page() {
             className="grid grid-cols-3 px-2 gap-8 w-full max-md:max-w-full"
           >
             {[...Array(3)].map((_, index) => (
-                <CourseItemHome key={index} {...courseData[0]} />
+                <CourseCard key={index} {...courseData[0]} type="PREVIEW-COURSE" />
             ))}
           </div>
 

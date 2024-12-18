@@ -14,7 +14,7 @@ export class UserEntity {
     this.email = data.email || "";
     this.role = data.role || "";
     this.createdAt = data.createdAt
-      ? new Date(data.createdAt).toLocaleString("de-DE") // Format thành string
+      ? new Date(data.createdAt).toLocaleString("de-DE")
       : "-";
     this.imageUrl = data.imageUrl || "";
     this.phoneNumber = data.phoneNumber || "";

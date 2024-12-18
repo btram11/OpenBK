@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import Pagination from "@/components/common/pagination";
-import CourseItem from "@/components/common/cards/courseItem";
-import { EnrolledCourseEntity } from "@/domain/enrolledCourse.entity";
+import { CourseCard }from "@/components/common/cards/courseCard";
+import { EnrolledCourseEntity } from "@/domain/course.entity";
+import { Course } from "@/domain/course.entity";
+import { transformToCourse } from "@/lib/utils";
 
 const ITEMS_PER_PAGE = 21;
 const DashboardPage: React.FC<{
@@ -11,9 +13,10 @@ const DashboardPage: React.FC<{
   isError: boolean;
 }> = ({ data, isLoading, isError }) => {
   
-  const [currentPage, setCurrentPage] = useState(1);
 
+  const [currentPage, setCurrentPage] = useState(1);
   const [courses, setCourses] = useState<EnrolledCourseEntity[]>([]);
+  const [courseCards, setCourseCards] = useState<Course[]>([]);
 
   useEffect(() => {
     if (data && Array.isArray(data)) {
@@ -23,6 +26,14 @@ const DashboardPage: React.FC<{
       setCourses([]);
     }
   }, [data]);
+  useEffect(() => {
+    if (courses && Array.isArray(courses)) {
+      setCourseCards(courses.map((course) => transformToCourse(course)));
+    }
+    else {
+      setCourseCards([]);
+    }
+  }, [courses]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -34,7 +45,7 @@ const DashboardPage: React.FC<{
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const coursesToShow = courses.slice(startIndex, endIndex);
+  const coursesToShow = courseCards.slice(startIndex, endIndex);
   const totalPages = Math.ceil(courses.length / ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
@@ -89,7 +100,7 @@ const DashboardPage: React.FC<{
         </h3>
         <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">
           {coursesToShow?.map((course: any) => (
-            <CourseItem key={course.courseID} course={course} />
+            <CourseCard key={course.courseID} course={course} type = "ENROLLED-COURSE" />
           ))}
         </div>
         <Pagination

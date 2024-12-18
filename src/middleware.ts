@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   const accessToken = request.cookies.get('accessToken');
-  console.log(accessToken);
   
   if (
     pathname === '/' ||
@@ -17,7 +16,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (!accessToken) {
+  if (!accessToken && pathname !== '/login') {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 

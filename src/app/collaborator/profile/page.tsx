@@ -1,10 +1,10 @@
 import ProfilePage from "@/components/pages/profile";
-const ProfileLearner: React.FC = () => {
+const ProfileCollaborator: React.FC = () => {
   return (
     <ProfilePage />
   );
 };
 
-export default ProfileLearner;
+export default ProfileCollaborator;
 
 

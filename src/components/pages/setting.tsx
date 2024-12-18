@@ -5,7 +5,7 @@ import { ProfileFrom } from "./settingTabs/ProfileForm";
 import { PasswordForm } from "./settingTabs/PasswordForm";
 import { FaCamera } from "react-icons/fa";
 import { useModal } from "@/context/ModalContext";
-import { useUser } from "@/hooks/useUser";
+import { UserEntity } from "@/domain/user.entity";
 
 const tabs: Array<{
   id: string;
@@ -17,11 +17,31 @@ const tabs: Array<{
   //   { id: "completedCourses", label: "Completed Courses" },
 ];
 
-const SettingsPage: React.FC = () => {
+const SettingsPage: React.FC<{
+  data: any;
+  isLoading: boolean;
+  isError: boolean;
+}> = ({ data, isLoading, isError }) => {
   const [selectedTab, setSelectedTab] = React.useState(tabs[0].id);
   const { openModal } = useModal();
-  const { data: user } = useUser();
 
+  const [user, setUser] = React.useState<UserEntity>();
+  // const { data: user, isLoading, isError } = useUser();
+
+  React.useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [user]);
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (isError) {
+    return <div>Error loading user</div>;
+  }
+  
   // Hàm xử lý sự kiện khi nhấn vào tab
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);

@@ -1,19 +1,19 @@
 'use client';
 import * as React from "react";
-import { CourseItemHome } from "@/components/common/cards/coursecard";
+import { CourseCard } from "@/components/common/cards/courseCard";
 import Slogan from "@/components/layout/slogan";
-import { CourseEntity } from "@/domain/course.entity";
+import { PublicCourseEntity } from "@/domain/course.entity";
 import { useCourses } from "@/hooks/useCourses";
 
 
 export default function Page() {
   const { data: courses } = useCourses();
 
-  const renderCourses = (courses: CourseEntity[] | undefined, start: number, end: number) => (
+  const renderCourses = (courses: PublicCourseEntity[] | undefined, start: number, end: number) => (
     <>
       {courses && courses.length > 0 ? (
         courses.slice(start, end).map((course) => (
-          <CourseItemHome key={course.courseID} course={course} />
+          <CourseCard key={course.courseID} course={course} type="PREVIEW-COURSE" />
         ))
       ) : (
         <div className="w-full flex justify-center">

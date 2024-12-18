@@ -10,10 +10,8 @@ const enrollCourse = async (learnerID: string, courseID: string) => {
     });
 
     if (res.status === 201) {
-      console.log("Course enrolled successfully", res.data);
       return res.data;
     } else {
-      console.error("Failed to enroll course", res.data);
       return res.data;
     }
   } catch (error) {
@@ -86,14 +84,11 @@ const deleteEnrolledCourse = async (learnerID: string, courseID: string) => {
     );
 
     if (res.status === 200) {
-      console.log("Enrolled Course deleted successfully", res.data);
       return res.data;
     } else {
-      console.error("Failed to delete enrolled course", res.data);
       return res.data;
     }
   } catch (error) {
-    console.error("Delete course error", error);
     return { message: "Network error" };
   }
 };

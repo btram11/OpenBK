@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getQueryClient } from "@/app/providers";
-import { CourseEntity } from "@/domain/course.entity";
+import { PublicCourseEntity } from "@/domain/course.entity";
 import { getAllCourses } from "@/services/course";
 
 export const useCourses = () => {
-  return useQuery<CourseEntity[] | undefined>({
+  return useQuery<PublicCourseEntity[] | undefined>({
     queryKey: ["getAllCourses"],
     queryFn: getAllCourses,
     staleTime: Infinity,

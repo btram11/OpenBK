@@ -8,6 +8,7 @@ import SigninButton from "../common/buttons/SigninButton";
 import SignupButton from "../common/buttons/SignupButton";
 import { roleString } from "@/lib/roleUtils";
 import { useUser } from "@/hooks/useUser";
+import { UserEntity } from "@/domain/user.entity";
 
 const CartCount: React.FC = () => {
   return (
@@ -22,7 +23,23 @@ const CartCount: React.FC = () => {
 };
 
 export const Navbar: React.FC = () => {
-  const { data: user } = useUser();
+  const { data, isLoading, isError } = useUser();
+  const [user, setUser] = React.useState<UserEntity>();
+
+  React.useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [data]);
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (isError) {
+    return <div>Error loading user</div>;
+  }
+  
 
   return (
     <div className="flex overflow-hidden flex-wrap gap-10 items-center py-4 pl-16 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
