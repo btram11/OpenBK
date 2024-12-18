@@ -1,7 +1,7 @@
 "use client";
 import { CourseEntity } from "@/domain/course.entity";
 import { UserEntity } from "@/domain/user.entity";
-import { apiClientWithAuth } from "@/services/apiClient";
+import { apiClientWithAuth } from "@/services/apiClient/apiClientWithAuth";
 
 export const getUserInfo = async (): Promise<UserEntity | null> => {
   try {

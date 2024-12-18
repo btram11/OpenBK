@@ -5,13 +5,17 @@ import ArrowRight from "@/public/svg/arrow_right.svg";
 import Link from "next/link";
 import { CourseEntity } from "@/domain/course.entity";
 
-export const CourseItemHome: React.FC<{ course: CourseEntity | null }> = ({ course }) => {
+export const CourseItemHome: React.FC<
+  {
+    course: CourseEntity | null;
+  } & React.AnchorHTMLAttributes<HTMLAnchorElement>
+> = ({ course, ...props }) => {
   if (!course) {
-    console.log(course)
+    console.log(course);
   }
 
   return (
-    <Link href={`/course/${course?.courseID}/overview`}>
+    <Link href={`/course/${course?.courseID}/overview`} {...props}>
       <div
         className="flex overflow-hidden flex-col self-stretch px-5 pt-6 pb-8 my-auto rounded-2xl border border-solid border-zinc-600 
     min-w-[200px] w-[300px]"

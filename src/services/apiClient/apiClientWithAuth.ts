@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import axios from "axios";
 
 const apiClientWithAuth = axios.create({
@@ -35,11 +35,4 @@ apiClientWithAuth.interceptors.response.use(
   (error) => Promise.reject(error)
 );
 
-const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-export { apiClientWithAuth, apiClient };
+export { apiClientWithAuth };

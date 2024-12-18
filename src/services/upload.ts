@@ -1,4 +1,4 @@
-import { apiClientWithAuth } from "./apiClient";
+import { apiClientWithAuth } from "./apiClient/apiClientWithAuth";
 
 export const uploadCourseThumbnail = async (data: any) => {
   const response = await apiClientWithAuth.patch("/upload/course", data, {

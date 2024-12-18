@@ -1,9 +1,15 @@
 import { CourseEntity } from "@/domain/course.entity";
 
-const CourseItem: React.FC<{ course: CourseEntity }> = (props) => {
-  const { course } = props;
+const CourseItem: React.FC<
+  {
+    course: CourseEntity;
+  } & React.HTMLAttributes<HTMLDivElement>
+> = ({ course, ...props }) => {
   return (
-    <div className="border border-[#909094] w-full rounded-xl min-w-fit ">
+    <div
+      {...props}
+      className="border border-[#909094] w-full rounded-xl min-w-fit "
+    >
       <div className="flex flex-col p-5 w-full max-w-full h-fit gap-5">
         <img
           className="rounded-md w-full max-w-full h-48"
