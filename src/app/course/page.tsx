@@ -117,7 +117,6 @@ export default async function Page({
   // };
   const { category, language, price, searchQuery } = await searchParams;
   const courses = await getAllCourses();
-
   const filteredCourses = courses?.filter((course: any) => {
     const matchCategory = category ? course.category === category : true;
     const matchLanguage = language ? course.language === language : true;
@@ -128,14 +127,10 @@ export default async function Page({
   return (
     <main className="flex flex-col bg-white">
       <div className="flex overflow-hidden flex-wrap gap-20 px-5 py-6 w-full max-md:max-w-full">
-        <aside className="flex overflow-hidden flex-col items-center py-2.5 text-center min-w-[200px] w-fit">
+        <aside className="flex overflow-hidden flex-col items-center py-2.5 text-center min-w-[200px] w-fit gap-8">
           <FilterSection title="Categories" items={categories} />
-          <div className="mt-8">
-            <FilterSection title="Languages" items={languages} />
-          </div>
-          <div className="mt-8">
-            <FilterSection title="Price" items={prices} showMore={false} />
-          </div>
+          <FilterSection title="Languages" items={languages} />
+          <FilterSection title="Price" items={prices} showMore={false} />
         </aside>
 
         <section className="flex overflow-hidden flex-col flex-1 shrink self-start px-2.5 pt-2.5 basis-10 min-h-[812px] min-w-[240px] max-md:max-w-full w-[60vw]">
@@ -151,7 +146,7 @@ export default async function Page({
             className="grid grid-cols-3 px-2 gap-8 w-full max-lg:grid-cols-1 max-xl:grid-cols-2"
           >
             {filteredCourses.map((courseData: any, index: number) => (
-              <CourseItemHome key={index} {...courseData} />
+              <CourseItemHome key={index} course={courseData} />
             ))}
           </div>
 

@@ -1,7 +1,7 @@
 import { apiClient } from "../apiClient/apiClient";
 import { apiClientWithAuth } from "../apiClient/apiClientWithAuth";
 
-const url = `${process.env.NEXT_PUBLIC_API_URL}/course/public`;
+const url = `/course/public`;
 const createCourse = async (course: any) => {
   try {
     const authorID = sessionStorage.getItem("userID");

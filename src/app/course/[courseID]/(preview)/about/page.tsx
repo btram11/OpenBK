@@ -44,8 +44,12 @@ export default function Page() {
         </h2>
         <div className="flex flex-wrap gap-2.5 justify-between items-end mt-5 w-full text-sm tracking-wide leading-none max-md:max-w-full">
           <div className="flex overflow-hidden flex-wrap gap-5 items-center min-w-[240px]">
-            <Avatar className="h-[100px] w-[100px]">
+            <Avatar className="aspect-square w-36 h-26">
               <AvatarImage src={data?.authorInfo?.imageUrl}></AvatarImage>
+              {/* <img
+                src={data?.authorInfo?.imageUrl}
+                className="aspect-square w-40 h- rounded-full border-2"
+              ></img> */}
               <AvatarFallback>{data?.authorInfo?.name}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col justify-center items-start self-stretch my-auto">

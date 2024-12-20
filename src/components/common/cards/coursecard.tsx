@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ButtonClick } from "../buttons/button";
 import Star from "@/public/svg/star.svg";
-import ArrowRight from "@/public/svg/arrow_right.svg";
+import { FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
 import { CourseEntity } from "@/domain/course.entity";
 
@@ -10,60 +10,70 @@ export const CourseItemHome: React.FC<
     course: CourseEntity | null;
   } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 > = ({ course, ...props }) => {
-  if (!course) {
-    console.log(course);
-  }
-
   return (
     <Link
+      className="border border-[#909094] w-[250px] rounded-xl min-w-fit max-w-[300px]"
       href={`/course/${course?.courseID}/overview`}
       as={`/course/${course?.courseID}/overview`}
       {...props}
     >
-      <div
-        className="flex overflow-hidden flex-col self-stretch px-5 pt-6 pb-8 my-auto rounded-2xl border border-solid border-zinc-600 
-    min-w-[200px] w-[300px]"
-      >
+      <div className="flex flex-col p-5 max-w-[350px] min-w-[200px] w-full h-fit gap-3">
         <img
           loading="lazy"
+          className="rounded-md w-full max-w-full h-48 border-1 border-black bg-gray-300"
           src={course?.imageUrl}
           alt={course?.courseName}
-          className="object-contain w-full aspect-[1.42]"
         />
-        <div className="flex flex-col self-center mt-5 w-full max-w-[270px]">
-          <div className="flex overflow-hidden gap-10 justify-between items-start w-full text-center whitespace-nowrap">
-            <div className="overflow-hidden gap-2 self-stretch px-3.5 py-2 text-sm text-black bg-zinc-200 rounded-[50px]">
-              {course?.category}
-            </div>
-            <div className="flex overflow-hidden gap-2.5 justify-center items-center py-2 rounded-[50px] text-zinc-600">
-              <div
-                id="star"
-                className="flex overflow-hidden gap-1.5 items-center self-stretch my-auto"
-              >
-                <Star />
-                {/* <div className="self-stretch my-auto text-base">{course.rating}</div> */}
-                {/* <div className="self-stretch my-auto text-sm">({course.reviews})</div> */}
-              </div>
-            </div>
-          </div>
-          <h3 className="mt-4 text-lg font-semibold tracking-wider text-black">
-            {course?.courseName}
-          </h3>
-          <div className="flex gap-1 items-center mt-4 w-full text-base text-black whitespace-nowrap">
-            <div className="flex gap-1.5 items-center self-stretch my-auto">
-              <div className="flex shrink-0 self-stretch my-auto rounded-full bg-zinc-300 h-[27px] w-[27px]" />
-              <div className="self-stretch my-auto">{course?.authorID}</div>
-            </div>
-          </div>
 
-          <div className="flex gap-5 justify-between items-center pt-4 mt-4 w-full">
-            <ButtonClick>
-              Enroll now
-              <ArrowRight />
-            </ButtonClick>
-            <div className="self-stretch my-auto text-2xl font-bold text-sky-600">
-              {course?.price}$
+        {/* Course Info */}
+        <div className="flex flex-col w-full gap-3">
+          <span className="flex w-fit px-3 py-1 bg-[#E3E2E6] rounded-full text-xs items-center justify-center hover:bg-dodger-blue-600 hover:text-white duration-300">
+            {course?.category}
+          </span>
+
+          <a
+            href={`/course/${course?.courseID}/overview`}
+            className="text-lg font-semibold text-start hover:underline hover:underline-offset-4 duration-200"
+          >
+            {course?.courseName}
+          </a>
+
+          <div className="flex flex-row justify-between">
+            <a
+              href="https://www.example.com"
+              className="author flex flex-row items-center gap-2"
+            >
+              <img
+                className="aspect-square w-10 rounded-full"
+                src={course?.authorInfo?.imageUrl}
+              />
+              <span className="text-sm font-medium hover:text-dodger-blue-500 duration-200">
+                {course?.authorInfo?.name}
+              </span>
+            </a>
+            <div className="ratings flex flex-row items-center">
+              <svg
+                width="16"
+                height="15"
+                viewBox="0 0 16 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 0L10.2665 4.88043L15.6085 5.52786L11.6673 9.19157L12.7023 14.4721L8 11.856L3.29772 14.4721L4.33273 9.19157L0.391548 5.52786L5.7335 4.88043L8 0Z"
+                  fill="#F4BF2A"
+                />
+              </svg>
             </div>
+          </div>
+        </div>
+        <div className="flex gap-5 justify-between items-center w-full">
+          <ButtonClick className="flex items-end">
+            Enroll now
+            <FaArrowRight size={16} className="self-end mb-1" />
+          </ButtonClick>
+          <div className="self-stretch my-auto text-2xl font-bold text-sky-600">
+            {course?.price}$
           </div>
         </div>
       </div>

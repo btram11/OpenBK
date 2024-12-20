@@ -21,14 +21,6 @@ export const ButtonForm: React.FC<
       className={`group relative ${align} w-fit flex`}
       {...props}
     >
-      {/* <div
-        className={`flex items-center justify-center px-5 py-2 bg-saffron-400 font-semibold text-lg rounded-3xl z-20 border-2 border-black ${className}`}
-      >
-        {children}
-      </div>
-      <div
-        className={`absolute border-2 border-black ${shadow_left} ${shadow_top} w-full h-full rounded-3xl z-10 bg-black/90 transition-transform duration-300 ease-in-out`}
-      ></div> */}
       <div
         className={`flex items-center justify-center px-5 py-2 ${
           props.disabled === true && props.disabled !== undefined
@@ -74,7 +66,7 @@ export const ButtonClick: React.FC<
   return (
     <button className={`group relative ${align} w-fit flex`}>
       <div
-        className={`flex justify-center items-center gap-2 p-2 bg-saffron-400 font-semibold text-lg rounded-3xl border-2 z-20 border-black ${className}`}
+        className={`flex justify-center items-center gap-2 py-2 px-3 bg-saffron-400 font-semibold text-lg rounded-3xl border-2 z-20 border-black ${className}`}
       >
         {children}
       </div>

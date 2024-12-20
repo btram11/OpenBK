@@ -1,8 +1,9 @@
 "use client";
 import { useCourseByID } from "@/hooks/useCourses";
-import { useQuery } from "@tanstack/react-query";
+import { BulletItem } from "@/components/ui/bulletItem";
+import { ButtonClick } from "@/components/common/buttons/button";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export const Tab: React.FC<{
   label: string;
@@ -88,7 +89,7 @@ export function CourseDetail({ courseID }: { courseID: any }) {
   return (
     <article
       id="content"
-      className="flex flex-grow flex-col h-[260px] justify-center max-w-full w-[781px] gap-2"
+      className="flex flex-grow flex-col h-[260px] justify-center max-w-full gap-2"
     >
       <h1 className="text-4xl font-bold text-black w-full">
         {data?.courseName}
@@ -101,5 +102,46 @@ export function CourseDetail({ courseID }: { courseID: any }) {
       </div>
       {/* <CourseStats {...data} /> */}
     </article>
+  );
+}
+
+export function CourseInfoCard({ courseID }: { courseID: any }) {
+  const { data } = useCourseByID(courseID);
+
+  const courseFeatures = [
+    { type: "video", text: "95 hours on-demand video" },
+    { type: "article", text: "35 articles" },
+    { type: "test", text: "2 practice tests" },
+    { type: "test", text: "Assignments" },
+    { type: "download", text: "100 downloadble resources" },
+    { type: "infinity", text: "Full lifetime access" },
+    { type: "certificate", text: "Certificate of completion" },
+  ];
+
+  return (
+    <div className="w-[30vw] min-w-[360px] flex justify-end">
+      <div className="flex shadow-lg bg-white flex-col w-full h-fit text-black max-w-[360px] pb-4">
+        <img
+          loading="lazy"
+          src={data?.imageUrl}
+          className="object-contain w-full aspect-[1.38]"
+        />
+        <section className="flex flex-col px-4 py-4 w-full text-base">
+          <h2 className="font-bold">This course includes:</h2>
+          <div className="flex flex-col items-start mt-2.5 w-full">
+            {courseFeatures.map((item, index) => (
+              <BulletItem {...item} key={index} />
+            ))}
+          </div>
+        </section>
+        <section className="flex flex-col pt-2.5 w-full text-sm font-semibold">
+          <div className="flex justify-center items-center w-full">
+            <div className="flex pb-6 items-start self-stretch my-auto w-[223px] max-w-full">
+              <ButtonClick className="w-[200px]">Enroll now</ButtonClick>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   );
 }
