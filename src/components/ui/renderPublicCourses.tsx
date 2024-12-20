@@ -14,12 +14,12 @@ export const RenderPublicCourses: React.FC<{
           <CourseCard key={course.courseID} course={course} type="PREVIEW-COURSE" />
         ))
       ) : (
-        <div className="w-full flex justify-center">
-          <img
-            className="w-full"
-            src="https://nihotour.gov.ng/wp-content/plugins/tutor/assets/images/emptystate.svg"
-            alt="no course data"
-          />
+        <div className="w-full">
+            <img
+              className="w-full"
+              src="https://nihotour.gov.ng/wp-content/plugins/tutor/assets/images/emptystate.svg"
+              alt="no course data"
+            />
         </div>
       )}
     </>

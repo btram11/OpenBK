@@ -49,41 +49,50 @@ export default function SignupPage() {
                 label="First Name"
                 id="firstName"
                 register={register}
+                value={""}
                 error={errors.firstName}
                 placeholder="First Name"
+                disabled={false}
               />
-                <InputField
-                  label="Last Name"
-                  id="lastName"
-                  register={register}
-                  error={errors.lastName}
-                  placeholder="Last Name"
-                />
-              
+              <InputField
+                label="Last Name"
+                id="lastName"
+                register={register}
+                value={""}
+                error={errors.lastName}
+                placeholder="Last Name"
+                disabled={false}
+              />              
             </div>
             <InputField
               label="Email"
               id="email"
               type="email"
               register={register}
+              value={""}
               error={errors.email}
               placeholder="Email"
+              disabled={false}
             />
             <InputField
               label="Password"
               id="password"
               type="password"
               register={register}
+              value={""}
               error={errors.password}
               placeholder="Password"
+              disabled={false}
             />
             <InputField
               label="Confirm Password"
               id="confirmPassword"
               type="password"
               register={register}
+              value={""}
               error={errors.confirmPassword}
               placeholder="Confirm Password"
+              disabled={false}
             />
           </div>
 

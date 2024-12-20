@@ -2,16 +2,20 @@ const InputField = ({
   label,
   id,
   register,
+  value,
   error,
   placeholder,
   type = "text",
+  disabled,
 }: {
   label: string;
   id: string;
   register: any;
+  value?: any;
   error: any;
   placeholder: string;
   type?: string;
+  disabled: boolean;
 }) => {
   return (
     <div className="flex flex-col gap-2 relative">
@@ -24,6 +28,8 @@ const InputField = ({
         type={type}
         className={getInputClass(error)}
         placeholder={placeholder}
+        disabled={disabled}
+        {...(value ? { value } : {})}
       />
       <span className="text-red-500 text-sm absolute -bottom-5">
         {error?.message}

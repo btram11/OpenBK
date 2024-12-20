@@ -52,16 +52,20 @@ export default function LoginPage() {
               label="Email"
               id="email"
               register={register}
+              value={""}
               error={errors.email}
               placeholder="Email"
+              disabled={false}
             />
             <InputField
               label="Password"
               id="password"
               type="password"
               register={register}
+              value={""}
               error={errors.password}
               placeholder="Password"
+              disabled={false}
             />
           </div>
 

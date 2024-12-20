@@ -1,22 +1,6 @@
 import { apiClient } from "@/services/apiClient";
 
 const url = `${process.env.NEXT_PUBLIC_API_URL}/course/public`;
-const createCourse = async (courseName: string, description: string) => {
-  try {
-    const res = await apiClient.post(`${url}`, {
-      courseName,
-      description,
-    });
-
-    if (res.status === 201) {
-      return res.data;
-    } else {
-      return res.data;
-    }
-  } catch (error) {
-    return { message: "Network error" };
-  }
-};
 
 const getAllCourses = async () => {
   try {
@@ -91,7 +75,6 @@ const deleteCourse = async (id: number) => {
 };
 
 export {
-  createCourse,
   getAllCourses,
   getCourseById,
   updateCourse,

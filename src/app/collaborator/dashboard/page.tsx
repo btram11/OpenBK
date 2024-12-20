@@ -1,12 +1,13 @@
 'use client';
 import DashboardPage from "@/components/pages/dashboard";
-import { useEnrolledCourses } from "@/hooks/useEnrollCourse";
 import { useState, useEffect } from "react";
-import { EnrolledCourseEntity } from "@/domain/course.entity";
+import { PublicCourseEntity } from "@/domain/course.entity";
+import { useCollabCourses } from "@/hooks/useCollabCourse";
 const DashboardCollaborator: React.FC = () => {
-  const { data, isLoading, isError } = useEnrolledCourses();
+  const { data, isLoading, isError } = (useCollabCourses());
+
   const [state, setState] = useState<{
-    data: EnrolledCourseEntity | null;
+    data: PublicCourseEntity | null;
     isLoading: boolean;
     isError: boolean;
   }>({

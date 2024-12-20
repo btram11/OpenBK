@@ -1,12 +1,12 @@
 'use client';
 import CollabCoursesPage from "@/components/pages/collab-course";
-import { useEnrolledCourses } from "@/hooks/useEnrollCourse";
 import { useState, useEffect } from "react";
-import { EnrolledCourseEntity } from "@/domain/course.entity";
+import { PublicCourseEntity } from "@/domain/course.entity";
+import { useCollabCourses } from "@/hooks/useCollabCourse";
 const CoursesCollaborator: React.FC = () => {
-  const { data, isLoading, isError } = useEnrolledCourses();
+  const { data, isLoading, isError } = (useCollabCourses());
   const [state, setState] = useState<{
-    data: EnrolledCourseEntity | null;
+    data: PublicCourseEntity | null;
     isLoading: boolean;
     isError: boolean;
   }>({
@@ -22,10 +22,7 @@ const CoursesCollaborator: React.FC = () => {
     return null;
   }
     return (
-    <CollabCoursesPage data={state.data} isLoading={state.isLoading} isError={state.isError} />
-        // <div className="flex flex-col w-full h-full">
-        //     <h1 className="text-3xl font-bold"></h1>
-        // </div>
+      <CollabCoursesPage data={state.data} isLoading={state.isLoading} isError={state.isError} />
     );
 };
 export default CoursesCollaborator;
