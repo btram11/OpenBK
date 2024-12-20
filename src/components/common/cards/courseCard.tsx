@@ -37,9 +37,7 @@ export const CourseCard: React.FC<{ course: Course | null, type?: string }> = ({
           <div className="flex gap-1 items-center mt-4 w-full text-base text-black whitespace-nowrap">
             <div className="flex gap-1.5 items-center self-stretch my-auto">
 
-              <div
-                className="author flex flex-row items-center gap-2"
-              >
+              <div className="author flex flex-row items-center gap-2">
                 <img
                   className="aspect-square w-7 rounded-full"
                   src={course?.authorInfo?.imageUrl}

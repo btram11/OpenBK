@@ -1,7 +1,7 @@
 import * as React from "react"
-import Star from "@/app/components/svg/star.svg";
-import StarHalf from "@/app/components/svg/star_half.svg";
-import StarEmpty from "@/app/components/svg/star_empty.svg";
+import Star from "@/public/svg/star.svg";
+import StarHalf from "@/public/svg/star_half.svg";
+import StarEmpty from "@/public/svg/star_empty.svg";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ButtonClick } from "@/components/common/buttons/button";
 
@@ -140,7 +140,7 @@ export default function Page() {
             </div>
             <div className="flex flex-col justify-center items-end mt-5 w-full text-sm font-semibold text-black">
               <div className="flex flex-col px-1 max-w-full py-4">
-                <ButtonClick className="w-[180px]">View all comments</ButtonClick>
+                {/* <ButtonClick className="w-[180px]">View all comments</ButtonClick> */}
               </div>
             </div>
           </div>

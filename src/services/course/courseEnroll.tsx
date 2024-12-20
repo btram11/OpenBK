@@ -1,21 +1,18 @@
 import { apiClientWithAuth } from "@/services/apiClient";
+import { EOF } from "dns";
 
 const url = `${process.env.NEXT_PUBLIC_API_URL}/course/enroll`;
 
 const enrollCourse = async (learnerID: string, courseID: string) => {
   try {
-    const res = await apiClientWithAuth.post(`${url}`, {
+    const { data  } = await apiClientWithAuth.post(`${url}`, {
       learnerID,
       courseID,
     });
 
-    if (res.status === 201) {
-      return res.data;
-    } else {
-      return res.data;
-    }
-  } catch (error) {
-    throw error; 
+    return data;
+  } catch (error: any) {
+    return error;
   }
 };
 

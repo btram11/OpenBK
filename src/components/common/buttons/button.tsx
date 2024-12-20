@@ -1,5 +1,5 @@
 "use-client";
-
+import { enrollCourse } from "@/services/course/courseEnroll";
 export const ButtonForm: React.FC<
   {
     children: React.ReactNode;
@@ -63,6 +63,7 @@ export const ButtonClick: React.FC<
     shadow_left?: `left-[${number}px] group-hover:-translate-x-[${number}px]`;
     shadow_top?: `top-[${number}px] group-hover:-translate-y-[${number}px]`;
     align?: string;
+    courseID: string | null;
   } & React.ButtonHTMLAttributes<HTMLButtonElement>
 > = ({
   children,
@@ -70,9 +71,28 @@ export const ButtonClick: React.FC<
   shadow_top = "top-[6px] group-hover:-translate-y-[6px]",
   align = "self-center",
   className = "",
+  courseID,
+  onClick,
 }) => {
+  const handleClick = async () => {
+    if (courseID === null) {
+      return;
+    }
+    const learnerID = sessionStorage.getItem("userID");
+    if (learnerID) {
+      try {
+        const response = await enrollCourse(learnerID, courseID);
+        alert(response.message || response.error);
+      } catch (error: any) {
+        alert(error);
+      }
+    } else {
+      alert("Please log in to enroll in a course!");
+    }
+  };
+
   return (
-    <button className={`group relative ${align} w-fit flex`}>
+    <button className={`group relative ${align} w-fit flex`} onClick={handleClick}>
       <div
         className={`flex justify-center items-center gap-2 p-2 bg-saffron-400 font-semibold text-lg rounded-3xl border-2 z-20 border-black ${className}`}
       >

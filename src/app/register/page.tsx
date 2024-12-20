@@ -17,7 +17,10 @@ export default function SignupPage() {
         email: data.email,
         password: data.password,
       }),
-    onSuccess: () => router.push("/"),
+    onSuccess: () => {
+      window.location.reload();
+      router.push("/");
+    }
   });
 
   const {

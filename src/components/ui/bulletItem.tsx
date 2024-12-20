@@ -7,7 +7,7 @@ import Video from "@/public/svg/video.svg";
 import Test from "@/public/svg/test.svg";
 
 export const BulletItem: React.FC<{
-  text: string;
+  text: string | number;
   type: string;
 }> = ({ text, type }) => {
   //* Pass as a FC

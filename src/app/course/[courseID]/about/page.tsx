@@ -1,8 +1,28 @@
+'use client'
 import * as React from "react";
 import { BulletItem } from "@/components/ui/bulletItem";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useUser } from "@/hooks/useUser";
 
-export default function Page() {
+export default function Page({
+  params
+  }: Readonly<{
+    params: Promise<{ courseID: string }>
+  }>) {
+  // const [courseID, setCourseID] = React.useState<string | null>(null);
+
+  // React.useEffect(() => {
+  //     // Giải nén giá trị từ params (là một Promise)
+  //     const fetchCourseID = async () => {
+  //         const resolvedParams = await params;
+  //         setCourseID(resolvedParams.courseID);
+  //     };
+
+  //     fetchCourseID();
+  // }, [params]);
+
+    // const {data: courseData} = useUser( as string);
+
     const collaboratorData = {
         name: "Someone",
         avatar: "",

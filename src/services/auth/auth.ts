@@ -14,3 +14,10 @@ export const login = async (data: any) => {
   });
   userID && sessionStorage.setItem("userID", userID);
 };
+
+export const logout = async () => {
+  await apiClient.post("/auth/logout", {}, {
+    withCredentials: true,
+  });
+  sessionStorage.removeItem("userID");
+};

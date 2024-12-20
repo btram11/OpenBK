@@ -32,10 +32,12 @@ const getAllCourses = async () => {
   }
 };
 
-const getCourseById = async (id: number) => {
+const getCourseById = async (courseID?: string) => {
+  if (!courseID) return {};
+
   try {
     const res = await apiClient.get(
-      `${url}/${id}`
+      `${url}/${courseID}`
     );
 
     if (res.status === 200) {

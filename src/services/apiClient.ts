@@ -13,18 +13,18 @@ apiClientWithAuth.interceptors.request.use(
   (config) => {
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    // Promise.reject({status: error.status, massage: error.message})
+  }
 );
 
 apiClientWithAuth.interceptors.response.use(
   (response) => {
-    
       return response;
     },
   (error) => {
     if (error.response) {
       const statusCode = error.response.status;
-
       if (statusCode === 500) {
         alert('Đã xảy ra lỗi trên máy chủ. Vui lòng thử lại sau.');
       }
@@ -33,7 +33,8 @@ apiClientWithAuth.interceptors.response.use(
     } else {
       alert('Có lỗi xảy ra: ' + error.message);
     }
-    Promise.reject(error)
+    return error.response;
+    // Promise.reject({status: error.status, massage: error.message})
   }
 );
 
