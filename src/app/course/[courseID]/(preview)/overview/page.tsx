@@ -1,6 +1,11 @@
+"use client";
 import { BulletItem } from "@/components/ui/bulletItem";
+import { useCourseByID } from "@/hooks/useCourses";
+import { useParams } from "next/navigation";
 
 export default function Page() {
+  const { courseID } = useParams();
+  const { data } = useCourseByID(courseID);
   const sampleData = {
     objectives: [
       { text: "Objective 1", type: "objective" },
@@ -43,7 +48,7 @@ export default function Page() {
         </div>
         <h2 className="mt-2.5 leading-none font-bold">Description</h2>
         <p className="mt-2.5 text-sm tracking-wide leading-5 text-justify max-md:max-w-full">
-          {sampleData.description}
+          {data?.description}
         </p>
       </div>
     </section>

@@ -1,3 +1,4 @@
+"use server";
 import { Profile } from "@/components/pages/profile";
 
 const ProfileLearner: React.FC = async () => {

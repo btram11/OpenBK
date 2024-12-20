@@ -1,10 +1,7 @@
-import { CourseEntity } from "@/domain/course.entity";
+import { EnrolledCourseEntity } from "@/domain/enrolledCourse.entity";
 
-const CourseItem: React.FC<
-  {
-    course: CourseEntity;
-  } & React.HTMLAttributes<HTMLDivElement>
-> = ({ course, ...props }) => {
+const CourseItem: React.FC<{ course: EnrolledCourseEntity }> = (props) => {
+  const { course } = props;
   return (
     <div
       {...props}
@@ -14,7 +11,7 @@ const CourseItem: React.FC<
         <img
           className="rounded-md w-full max-w-full h-48"
           src={
-            course?.imageUrl ??
+            course?.courseInfo.imageUrl ||
             "https://www.w3schools.com/images/w3schools_green.jpg"
           }
           alt=""
@@ -23,14 +20,14 @@ const CourseItem: React.FC<
         {/* Course Info */}
         <div className="flex flex-col w-full gap-3">
           <span className="flex w-fit px-3 py-1 bg-[#E3E2E6] rounded-full text-xs items-center justify-center hover:bg-dodger-blue-600 hover:text-white duration-300">
-            {course?.category}
+            {course?.courseInfo.category}
           </span>
 
           <a
             href="https://www.example.com"
             className="text-lg font-semibold text-start hover:underline hover:underline-offset-4 duration-100"
           >
-            {course?.courseName}
+            {course?.courseInfo.courseName}
           </a>
 
           <div className="flex flex-row justify-between">
@@ -40,9 +37,11 @@ const CourseItem: React.FC<
             >
               <img
                 className="aspect-square w-7 rounded-full"
-                src={course?.author?.profileUrl}
+                src={course?.courseInfo?.authorInfo?.imageUrl}
               />
-              <span className="text-sm">{course?.author?.name}</span>
+              <span className="text-sm">
+                {course?.courseInfo?.authorInfo?.name}
+              </span>
             </a>
             <div className="ratings flex flex-row items-center">
               <svg

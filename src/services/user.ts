@@ -1,11 +1,9 @@
-"use client";
-import { CourseEntity } from "@/domain/course.entity";
 import { UserEntity } from "@/domain/user.entity";
 import { apiClientWithAuth } from "@/services/apiClient/apiClientWithAuth";
 
 export const getUserInfo = async (): Promise<UserEntity | null> => {
   try {
-    const userID = sessionStorage.getItem("userID");
+    const userID = sessionStorage.getItem("userID"); 
     if (!userID) {
       return null;
     }
@@ -13,7 +11,8 @@ export const getUserInfo = async (): Promise<UserEntity | null> => {
     return data ? new UserEntity(data) : null;
   } catch (error) {
     console.error("Error fetching user info:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
 
@@ -30,11 +29,11 @@ export const updatePassword = async (password: string, newPassword: string) => {
   return response.data;
 };
 
-export const getUserParticipateCourses = async (): Promise<{
-  Courses: CourseEntity[];
-}> => {
-  const response = await apiClientWithAuth.get("/user/course");
-  return response.data;
-};
+// export const getEnrolledCourses = async (): Promise<{
+//   Courses: CourseEntity[];
+// }> => {
+//   const response = await apiClientWithAuth.get("/user/course");
+//   return response.data;
+// };
 
-export default { getUserInfo, updatePassword, getUserParticipateCourses };
+export default { getUserInfo, updatePassword };

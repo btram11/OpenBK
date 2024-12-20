@@ -1,8 +1,13 @@
+"use client";
 import * as React from "react";
 import { BulletItem } from "@/components/ui/bulletItem";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useParams } from "next/navigation";
+import { useCourseByID } from "@/hooks/useCourses";
 
 export default function Page() {
+  const { courseID } = useParams();
+  const { data } = useCourseByID(courseID);
   const collaboratorData = {
     name: "Someone",
     avatar: "",
@@ -34,14 +39,14 @@ export default function Page() {
       >
         <h2 className="text-2xl leading-none">
           <span className="font-bold">
-            Collaborator: {collaboratorData.name}
+            Collaborator: {data?.authorInfo?.name}
           </span>
         </h2>
         <div className="flex flex-wrap gap-2.5 justify-between items-end mt-5 w-full text-sm tracking-wide leading-none max-md:max-w-full">
           <div className="flex overflow-hidden flex-wrap gap-5 items-center min-w-[240px]">
             <Avatar className="h-[100px] w-[100px]">
-              <AvatarImage src={collaboratorData.avatar}></AvatarImage>
-              <AvatarFallback>{collaboratorData.name}</AvatarFallback>
+              <AvatarImage src={data?.authorInfo?.imageUrl}></AvatarImage>
+              <AvatarFallback>{data?.authorInfo?.name}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col justify-center items-start self-stretch my-auto">
               {collaboratorData.stats.map((stat, index) => (

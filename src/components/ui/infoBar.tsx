@@ -7,7 +7,7 @@ const InfoBar = () => {
   const { data: user } = useUser();
 
   const backgroundColor =
-    user?.role === "USER"
+    user?.role === "LEARNER"
       ? "bg-pink-300"
       : user?.role === "ADMIN"
       ? "bg-gray-300"

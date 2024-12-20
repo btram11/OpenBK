@@ -19,8 +19,7 @@ export default function SignupPage() {
         email: data.email,
         password: data.password,
       }),
-    onSuccess: () => router.push("/"),
-    onError: (error: any) => alert(error.message || "Unknown error"),
+    onSuccess: () => window.location.assign("/"),
   });
 
   const {
@@ -34,7 +33,7 @@ export default function SignupPage() {
   });
 
   return (
-    <div className="flex bg-gray-100 items-center justify-center h-screen w-full min-h-fit py-4">
+    <div className="flex bg-gray-100 items-center justify-center h-screen w-full min-h-fit py-4 min-w-fit">
       <div className="bg-white border border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-10">
         <h2 className="text-black text-3xl font-semibold">
           Create Your Account

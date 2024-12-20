@@ -1,12 +1,11 @@
-import axios from "axios";
 import { apiClient } from "../apiClient/apiClient";
+import { apiClientWithAuth } from "../apiClient/apiClientWithAuth";
 
-const createCourse = async (courseName: string, description: string) => {
+const url = `${process.env.NEXT_PUBLIC_API_URL}/course/public`;
+const createCourse = async (course: any) => {
   try {
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
-      courseName,
-      description,
-    });
+    const authorID = sessionStorage.getItem("userID");
+    const res = await apiClientWithAuth.post(`${url}`, { ...course, authorID });
 
     if (res.status === 201) {
       console.log("Course created successfully", res.data);
@@ -23,7 +22,7 @@ const createCourse = async (courseName: string, description: string) => {
 
 const getAllCourses = async () => {
   try {
-    const res = await apiClient.get("/course");
+    const res = await apiClient.get(`${url}`);
 
     if (res.status === 200) {
       return res.data;
@@ -37,13 +36,12 @@ const getAllCourses = async () => {
   }
 };
 
-const getCourseById = async (id: number) => {
+const getCourseById = async (id: any) => {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/course/${id}`
-    );
+    const res = await apiClient.get(`${url}/${id}`);
 
     if (res.status === 200) {
+      console.log(res.data);
       return res.data;
     } else {
       console.error("Failed to fetch course by ID", res.data);
@@ -61,13 +59,10 @@ const updateCourse = async (
   description: string
 ) => {
   try {
-    const res = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/course/${id}`,
-      {
-        courseName,
-        description,
-      }
-    );
+    const res = await apiClient.put(`${url}/${id}`, {
+      courseName,
+      description,
+    });
 
     if (res.status === 200) {
       console.log("Course updated successfully", res.data);
@@ -84,9 +79,7 @@ const updateCourse = async (
 
 const deleteCourse = async (id: number) => {
   try {
-    const res = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/course/${id}`
-    );
+    const res = await apiClient.delete(`${url}/${id}`);
 
     if (res.status === 200) {
       console.log("Course deleted successfully", res.data);

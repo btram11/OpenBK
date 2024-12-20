@@ -26,7 +26,7 @@ const LeftBar: React.FC = () => {
   ];
 
   const roleSpecificLinks =
-    user?.role === "USER"
+    user?.role === "LEARNER"
       ? [
           {
             href: `/${roleString(user?.role)?.toLowerCase()}/enrolled-courses`,
@@ -41,7 +41,6 @@ const LeftBar: React.FC = () => {
           {
             href: `/${roleString(user?.role)?.toLowerCase()}/courses`,
             label: "Courses",
-            matchParent: true,
           },
         ];
 

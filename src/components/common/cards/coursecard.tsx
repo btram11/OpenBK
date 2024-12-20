@@ -15,7 +15,11 @@ export const CourseItemHome: React.FC<
   }
 
   return (
-    <Link href={`/course/${course?.courseID}/overview`} {...props}>
+    <Link
+      href={`/course/${course?.courseID}/overview`}
+      as={`/course/${course?.courseID}/overview`}
+      {...props}
+    >
       <div
         className="flex overflow-hidden flex-col self-stretch px-5 pt-6 pb-8 my-auto rounded-2xl border border-solid border-zinc-600 
     min-w-[200px] w-[300px]"

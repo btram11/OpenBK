@@ -6,10 +6,12 @@ import Infinity from "@/public/svg/infinity.svg";
 import Video from "@/public/svg/video.svg";
 import Test from "@/public/svg/test.svg";
 
-export const BulletItem: React.FC<{
-  text: string;
-  type: string;
-}> = ({ text, type }) => {
+export const BulletItem: React.FC<
+  {
+    text: string;
+    type: string;
+  } & React.HTMLAttributes<HTMLDivElement>
+> = ({ text, type, ...props }) => {
   //* Pass as a FC
   let Icon: React.FC;
   switch (type) {
@@ -36,7 +38,7 @@ export const BulletItem: React.FC<{
   }
 
   return (
-    <div className="flex gap-2.5 items-center mt-1.5">
+    <div className="flex gap-2.5 items-center mt-1.5" {...props}>
       <Icon />
       <div className="self-stretch my-auto">{text}</div>
     </div>

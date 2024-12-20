@@ -8,8 +8,8 @@ export interface CourseEntity {
   price: string;
   createdAt: string;
   updatedAt: string;
-  author: {
+  authorInfo: {
     name: string;
-    profileUrl: string;
+    imageUrl: string;
   };
 }

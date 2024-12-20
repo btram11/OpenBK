@@ -1,7 +1,5 @@
 "use client";
-import React from "react";
 import { ButtonForm } from "@/components/common/buttons/button";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,15 +9,11 @@ import InputField from "@/components/common/InputField";
 import { AxiosError } from "axios";
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const { mutate, error } = useMutation({
     mutationFn: (data: any) => login(data),
-    onSuccess: () => {
-      window.location.reload();
-      router.push("/");
+    onSuccess: async () => {
+      window.location.assign("/");
     },
-    // onError: (error: any) => alert(error.message || "Unknown error"),
   });
 
   const {
@@ -40,7 +34,7 @@ export default function LoginPage() {
   const onSubmit = (data: any) => mutate(data);
 
   return (
-    <main className="flex bg-zinc-100 items-center justify-center h-screen w-full">
+    <main className="flex bg-zinc-100 items-center justify-center h-screen w-full min-h-fit py-10">
       <div className="border bg-white border-stone-400 min-w-16 min-h-16 w-fit h-fit px-12 py-7 rounded-2xl flex flex-col gap-14">
         <div className="text-black text-3xl font-semibold">
           Are you ready to join?
