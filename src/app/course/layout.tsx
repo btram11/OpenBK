@@ -1,14 +1,11 @@
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <div className="w-full py-4 flex flex-col items-center gap-8 min-h-screen">
+      {children}
+    </div>
   );
 }

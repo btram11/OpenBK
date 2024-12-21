@@ -1,10 +1,10 @@
 import ProfilePage from "@/components/pages/profile";
-const ProfileUser: React.FC = () => {
+const ProfileCollaborator: React.FC = () => {
   return (
     <ProfilePage />
   );
 };
 
-export default ProfileUser;
+export default ProfileCollaborator;
 
 

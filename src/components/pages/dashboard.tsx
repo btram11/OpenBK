@@ -1,24 +1,65 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Pagination from "@/components/common/pagination";
-import CourseItem from "@/components/common/cards/courseItem";
-import { getUserParticipateCourses } from "@/services/user";
+import { CourseCard }from "@/components/common/cards/courseCard";
+import { EnrolledCourseEntity } from "@/domain/course.entity";
+import { Course } from "@/domain/course.entity";
+import { transformToCourse } from "@/lib/utils";
 
 const ITEMS_PER_PAGE = 21;
-const DashboardPage: React.FC = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["userCourses"],
-    queryFn: () => getUserParticipateCourses(),
-  });
+const DashboardPage: React.FC<{
+  data: any;
+  isLoading: boolean;
+  isError: boolean;
+}> = ({ data, isLoading, isError }) => {
+  
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [courses, setCourses] = useState<EnrolledCourseEntity[]>([]);
+
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      setCourses(data);
+    }
+    else {
+      setCourses([]);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading courses</div>;
+  }
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const coursesToShow = data?.Courses.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(data?.Courses.length ?? 0 / ITEMS_PER_PAGE);
+  const coursesToShow = courses.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(courses.length / ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const dashboardCounts = (role: string) => {
+    switch (role) {
+      case "LEARNER":
+        return [
+          { label: "Enrolled Courses" },
+          { label: "Active Courses" },
+          { label: "Completed Courses" },
+        ];
+      case "COLLAB":
+        return [
+          { label: "Enrolled Student" },
+          { label: "Overall rating" },
+          { label: "Course Created" },
+        ];
+      default:
+        return [];
+    }
   };
 
   return (
@@ -49,8 +90,8 @@ const DashboardPage: React.FC = () => {
           In progress Courses
         </h3>
         <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">
-          {coursesToShow?.map((course: any) => (
-            <CourseItem key={course.courseID} course={course} />
+          {coursesToShow.map((course) => (
+            <CourseCard key={course.courseID} course={transformToCourse(course)} type="ENROLLED-COURSES" />
           ))}
         </div>
         <Pagination

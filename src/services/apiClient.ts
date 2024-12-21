@@ -1,4 +1,3 @@
-'use client';
 import axios from "axios";
 
 const apiClientWithAuth = axios.create({
@@ -6,33 +5,36 @@ const apiClientWithAuth = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
-// Thêm interceptor để quản lý token
 apiClientWithAuth.interceptors.request.use(
   (config) => {
-    const accessToken = sessionStorage.getItem("accessToken");
-    config.headers.Authorization = `Bearer ${accessToken}`;
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    // Promise.reject({status: error.status, massage: error.message})
+  }
 );
 
 apiClientWithAuth.interceptors.response.use(
   (response) => {
-    const newAccessToken = response.data.accessToken;
-    if (newAccessToken) {
-      sessionStorage.setItem("accessToken", newAccessToken);
-
-      const originalRequest = response.config;
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-      // Gửi lại request ban đầu với token mới
-      return apiClientWithAuth(originalRequest);
-    }
     return response;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    if (error.response) {
+      const statusCode = error.response.status;
+      if (statusCode === 500) {
+        alert("Đã xảy ra lỗi trên máy chủ. Vui lòng thử lại sau.");
+      }
+    } else if (error.request) {
+      alert("Không thể kết nối với máy chủ. Vui lòng thử lại sau.");
+    } else {
+      alert("Có lỗi xảy ra: " + error.message);
+    }
+    return error.response;
+    // Promise.reject({status: error.status, massage: error.message})
+  }
 );
 
 const apiClient = axios.create({

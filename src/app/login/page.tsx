@@ -6,13 +6,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/services/auth/auth";
-import { getUserInfo } from "@/services/user";
 import { useMutation } from "@tanstack/react-query";
-<<<<<<< Updated upstream
-import { AxiosError } from "axios";
-=======
 import InputField from "@/components/common/InputField";
->>>>>>> Stashed changes
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,7 +18,6 @@ export default function LoginPage() {
       window.location.reload();
       router.push("/");
     },
-    onError: (error: any) => alert(error.message || "Unknown error"),
   });
 
   const {
@@ -41,13 +35,7 @@ export default function LoginPage() {
     reValidateMode: "onChange",
   });
 
-<<<<<<< Updated upstream
-    const onSubmit = (data: { email: string; password: string }) => {
-      mutation.mutate(data);
-    };
-=======
   const onSubmit = (data: any) => mutate(data);
->>>>>>> Stashed changes
 
   return (
     <main className="flex bg-zinc-100 items-center justify-center h-screen w-full">
@@ -61,29 +49,30 @@ export default function LoginPage() {
         >
           <div className="flex flex-col gap-7">
             <InputField
+              {...register("email")}
               label="Email"
               id="email"
-              register={register}
+              // register={register}
+              value={""}
               error={errors.email}
               placeholder="Email"
+              disabled={false}
             />
             <InputField
+              {...register("password")}
               label="Password"
               id="password"
               type="password"
-              register={register}
+              value={""}
               error={errors.password}
               placeholder="Password"
+              disabled={false}
             />
           </div>
 
           {error && (
             <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-<<<<<<< Updated upstream
-              <p>{mutation.error?.response?.data.ERROR}</p>
-=======
               <p>{error?.message}</p>
->>>>>>> Stashed changes
             </div>
           )}
 
@@ -103,5 +92,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
-

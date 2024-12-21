@@ -1,29 +1,31 @@
 const InputField = ({
   label,
   id,
-  register,
+  value,
   error,
   placeholder,
-  type = "text",
+  disabled,
+  ...props
 }: {
   label: string;
   id: string;
-  register: any;
+  value?: any;
   error: any;
   placeholder: string;
-  type?: string;
-}) => {
+  disabled: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <div className="flex flex-col gap-2 relative">
       <label htmlFor={id} className="font-semibold text-lg">
         {label}
       </label>
       <input
-        {...register(id)}
+        {...props}
         id={id}
-        type={type}
-        className={getInputClass(error)}
+        className={`${getInputClass(error)} ${props.className}`}
         placeholder={placeholder}
+        disabled={disabled}
+        {...(value ? { value } : {})}
       />
       <span className="text-red-500 text-sm absolute -bottom-5">
         {error?.message}
@@ -36,5 +38,5 @@ const getInputClass = (error: any) => {
   return `text-black text-base w-[30vw] px-5 py-3 rounded-lg border dark:border-stone-400 caret-dodger-blue-500 focus:outline-dodger-blue-500 ${
     error ? " border-2 border-red-500 focus:outline-red-500" : ""
   }`;
-}
+};
 export default InputField;

@@ -1,20 +1,30 @@
 'use client';
-import { getUserInfo } from "@/services/user";
-import { useQuery } from "@tanstack/react-query";
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
+import { useUser } from "@/hooks/useUser";
+import { useState, useEffect } from "react";
+
 import { UserEntity } from "@/domain/user.entity";
-// import { Profile } from "./profile";
-const Profile: React.FC<{ data?: UserEntity }> = ({ data }) => {
+const Profile: React.FC = () => {
+  const [profile, setProfile] = useState<UserEntity>();
+  const { data: user, isLoading, isError } = useUser();
+  useEffect(() => {
+    if (user) {
+      setProfile(user);
+    }
+  }, [user]);
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (isError) {
+    return <div>Error loading user</div>;
+  }
   
   const profileEntries = [
-    { label: "Registration Date", value: data?.createdAt },
-    { label: "Fullname", value: data?.name },
-    { label: "Email", value: data?.email },
-    { label: "Role", value: data?.role },
+    { label: "Registration Date", value: profile?.createdAt },
+    { label: "Fullname", value: profile?.name },
+    { label: "Email", value: profile?.email },
+    { label: "Role", value: profile?.role },
   ];
 
   return (
@@ -32,26 +42,12 @@ const Profile: React.FC<{ data?: UserEntity }> = ({ data }) => {
   );
 };
 
-
-
-const ProfilePage: React.FC = async () => {
-  const queryClient = new QueryClient();
-
-  const { data: user } = useQuery<UserEntity | null>({
-    queryKey: ["getProfile"],
-    queryFn: getUserInfo,
-    staleTime: Infinity,
-  });
-
-  // const data = queryClient.getQueryData<UserEntity>(["profile"]);
-
+const ProfilePage: React.FC = () => {
 
   return (
     <div className="w-full p-8 drop-shadow h-fit min-h-full bg-white rounded-2xl flex flex-col gap-6">
       <h3 className="font-semibold text-lg">My Profile</h3>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Profile data={user as UserEntity}/>
-      </HydrationBoundary>
+      <Profile />
     </div>
   );
 };

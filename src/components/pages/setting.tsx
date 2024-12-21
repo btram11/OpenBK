@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ProfileFrom } from "./ProfileForm";
-import { PasswordForm } from "./PasswordForm";
+import { ProfileFrom } from "./settingTabs/ProfileForm";
+import { PasswordForm } from "./settingTabs/PasswordForm";
 import { FaCamera } from "react-icons/fa";
 import { useModal } from "@/context/ModalContext";
+import { UserEntity } from "@/domain/user.entity";
 
 const tabs: Array<{
   id: string;
@@ -16,10 +17,31 @@ const tabs: Array<{
   //   { id: "completedCourses", label: "Completed Courses" },
 ];
 
-const SettingsPage: React.FC = () => {
+const SettingsPage: React.FC<{
+  data: any;
+  isLoading: boolean;
+  isError: boolean;
+}> = ({ data, isLoading, isError }) => {
   const [selectedTab, setSelectedTab] = React.useState(tabs[0].id);
   const { openModal } = useModal();
 
+  const [user, setUser] = React.useState<UserEntity>();
+  // const { data: user, isLoading, isError } = useUser();
+
+  React.useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [user]);
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (isError) {
+    return <div>Error loading user</div>;
+  }
+  
   // Hàm xử lý sự kiện khi nhấn vào tab
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
@@ -33,7 +55,7 @@ const SettingsPage: React.FC = () => {
           <div className="flex flex-row gap-5 relative w-fit h-fit rounded-full">
             <img
               className="rounded-full bg-white w-28 aspect-square object-cover border-[6px] border-white"
-              src={`http://localhost:3001/uploads/profile/default.png`}
+              src={user?.imageUrl}
             />
             <button
               className="rounded-full border-1 aspect-square border-white w-7 absolute right-[2px] bottom-2 bg-white flex items-center justify-center text-stone-600 duration-200 hover:bg-dodger-blue-500 hover:text-white"
@@ -43,6 +65,8 @@ const SettingsPage: React.FC = () => {
             </button>
           </div>
         </div>
+
+
         <div className="flex flex-row w-full flex-wrap relative gap-3">
           {tabs.map((tab) => (
             <div
@@ -65,6 +89,7 @@ const SettingsPage: React.FC = () => {
           <div className="w-full h-full border-b-[3px] border-[#C7C6CA] absolute left-0 top-0 -z-10"></div>
         </div>
       </div>
+      
       <div className="tab_content w-full h-fit flex flex-col">
         {tabs.map(({ id, component: Component }) =>
           selectedTab === id ? (

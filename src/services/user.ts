@@ -1,23 +1,22 @@
-"use client";
-import { Course } from "@/domain/course.entity";
 import { UserEntity } from "@/domain/user.entity";
 import { apiClientWithAuth } from "@/services/apiClient";
+import { getFromSessionStorage } from "../hooks/getStorage";
 
 export const getUserInfo = async (): Promise<UserEntity | null> => {
   try {
-    const userID = sessionStorage.getItem("userID");
+    const userID = getFromSessionStorage("userID");
+
     if (!userID) {
       return null;
     }
     const { data } = await apiClientWithAuth.get<UserEntity>(`/user/${userID}`);
     return data ? new UserEntity(data) : null;
   } catch (error) {
-    console.error("Error fetching user info:", error);
-    throw error;
+    return null;
   }
 };
 
-export const updateProfile = async (data: UserEntity) => {
+export const updateProfile = async (data: Partial<UserEntity>) => {
   const response = await apiClientWithAuth.patch("/user/info", data);
   return response.data;
 };
@@ -30,11 +29,11 @@ export const updatePassword = async (password: string, newPassword: string) => {
   return response.data;
 };
 
-export const getUserParticipateCourses = async (): Promise<{
-  Courses: Course[];
-}> => {
-  const response = await apiClientWithAuth.get("/user/course");
-  return response.data;
-};
+// export const getEnrolledCourses = async (): Promise<{
+//   Courses: PublicCourseEntity[];
+// }> => {
+//   const response = await apiClientWithAuth.get("/user/course");
+//   return response.data;
+// };
 
-export default { getUserInfo, updatePassword, getUserParticipateCourses };
+export default { getUserInfo, updatePassword };
