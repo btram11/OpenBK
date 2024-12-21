@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getQueryClient } from "@/app/providers";
+import { getQueryClient } from "@/lib/get-query-client";
 import { PublicCourseEntity } from "@/domain/course.entity";
 import { UnitEntity } from "@/domain/unit.entity";
 import { QuestionEntity } from "@/domain/question.entity";
@@ -21,7 +21,7 @@ export const useUnits = (courseID: string) => {
     queryFn: () => getAllUnits(courseID as string),
     staleTime: Infinity,
   });
-}
+};
 
 export const useQuestions = (unitID: string) => {
   return useQuery<QuestionEntity[] | undefined>({
@@ -29,12 +29,12 @@ export const useQuestions = (unitID: string) => {
     queryFn: () => getAllQuestions(unitID as string),
     staleTime: Infinity,
   });
-}
+};
 
 export const prefetchCourses = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ['getAllCourses'],
+    queryKey: ["getAllCourses"],
     queryFn: getAllCourses,
     staleTime: Infinity,
   });

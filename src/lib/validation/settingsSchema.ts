@@ -13,7 +13,7 @@ export const changePasswordSchema = yup.object().shape({
 });
 
 export const changeProfileSchema = yup.object().shape({
-  ...nameValidation,
+  name: yup.string().required("Name is required"),
   ...emailValidation,
   biography: yup.string(),
   phoneNumber: yup
@@ -24,3 +24,5 @@ export const changeProfileSchema = yup.object().shape({
       "Invalid phone number"
     ),
 });
+
+export type ProfileFormKeys = "name" | "email" | "biography" | "phoneNumber";

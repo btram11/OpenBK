@@ -1,10 +1,11 @@
 import { apiClientWithAuth } from "@/services/apiClient";
 
-const url = `${process.env.NEXT_PUBLIC_API_URL}/course/collab`;
+const url = `/course/collab`;
 
 const createCourse = async (courseData: any) => {
   try {
-    const { authorID, courseName, image, category, description, price } = courseData;
+    const { authorID, courseName, image, category, description, price } =
+      courseData;
 
     const { data } = await apiClientWithAuth.post(`${url}`, {
       authorID,
@@ -25,6 +26,7 @@ const createCourse = async (courseData: any) => {
 const getAllOwnedCourses = async (authorID: string) => {
   try {
     const { data } = await apiClientWithAuth.get(`${url}/courses/${authorID}`);
+    console.log(data);
     return data;
   } catch (error: any) {
     console.error("Get All Owned Courses Error:", error);

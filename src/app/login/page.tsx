@@ -49,19 +49,20 @@ export default function LoginPage() {
         >
           <div className="flex flex-col gap-7">
             <InputField
+              {...register("email")}
               label="Email"
               id="email"
-              register={register}
+              // register={register}
               value={""}
               error={errors.email}
               placeholder="Email"
               disabled={false}
             />
             <InputField
+              {...register("password")}
               label="Password"
               id="password"
               type="password"
-              register={register}
               value={""}
               error={errors.password}
               placeholder="Password"
@@ -91,5 +92,3 @@ export default function LoginPage() {
     </main>
   );
 }
-
-

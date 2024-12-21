@@ -1,5 +1,5 @@
 "use client";
-import useDisableBodyScroll from "@/hooks/useDisableBodyScroll";
+import { useDialog } from "@/hooks/useDialog";
 import { uploadProfilePic } from "@/services/upload";
 import { useMutation } from "@tanstack/react-query";
 import { useState, useRef } from "react";
@@ -27,13 +27,6 @@ const UploadProfileModal: React.FC<{
     },
   });
 
-  const handleOutsideClick = (event: React.MouseEvent) => {
-    // Close modal if clicked outside of the modal content area
-    if (event.target === dialogRef.current) {
-      onClose();
-    }
-  };
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // Lấy ảnh đã chọn và cập nhật state
     if (event.target.files && event.target.files[0]) {
@@ -49,16 +42,13 @@ const UploadProfileModal: React.FC<{
     }
   };
 
-  const dialogRef = useRef<null | HTMLDialogElement>(null);
-
-  useDisableBodyScroll(dialogRef.current?.open ?? true);
+  const { dialogRef, handleOutsideClick } = useDialog(onClose);
 
   return (
-    <dialog
-      open
+    <div
       ref={dialogRef}
       onClick={handleOutsideClick} // Handle clicks outside of modal
-      className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800/50 backdrop:bg-gray-800/50 backdrop-blur-sm w-screen h-screen"
+      className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800/50 backdrop:bg-gray-800/50 backdrop-blur-sm w-screen  min-h-full overscroll-y-contain overscroll-contain overflow-y-auto"
     >
       <div
         className="flex flex-col items-center gap-12 select-none h-[70vh] w-[25vw] bg-white rounded-2xl p-8 min-w-fit shadow-xl"
@@ -112,7 +102,7 @@ const UploadProfileModal: React.FC<{
           </div>
         </div>
       </div>
-    </dialog>
+    </div>
   );
 };
 

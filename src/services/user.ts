@@ -1,6 +1,6 @@
 import { UserEntity } from "@/domain/user.entity";
 import { apiClientWithAuth } from "@/services/apiClient";
-import { getFromSessionStorage } from '../hooks/getStorage';
+import { getFromSessionStorage } from "../hooks/getStorage";
 
 export const getUserInfo = async (): Promise<UserEntity | null> => {
   try {
@@ -16,7 +16,7 @@ export const getUserInfo = async (): Promise<UserEntity | null> => {
   }
 };
 
-export const updateProfile = async (data: UserEntity) => {
+export const updateProfile = async (data: Partial<UserEntity>) => {
   const response = await apiClientWithAuth.patch("/user/info", data);
   return response.data;
 };

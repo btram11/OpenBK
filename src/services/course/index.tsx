@@ -1,6 +1,6 @@
 import { apiClient } from "@/services/apiClient";
 
-const url = `${process.env.NEXT_PUBLIC_API_URL}/course/public`;
+const url = `/course/public`;
 
 const getAllCourses = async () => {
   try {
@@ -20,9 +20,7 @@ const getCourseById = async (courseID?: string) => {
   if (!courseID) return {};
 
   try {
-    const res = await apiClient.get(
-      `${url}/${courseID}`
-    );
+    const res = await apiClient.get(`${url}/${courseID}`);
 
     if (res.status === 200) {
       return res.data;
@@ -30,6 +28,7 @@ const getCourseById = async (courseID?: string) => {
       return res.data;
     }
   } catch (error) {
+    console.log(error);
     return { message: "Network error" };
   }
 };
@@ -40,13 +39,10 @@ const updateCourse = async (
   description: string
 ) => {
   try {
-    const res = await apiClient.put(
-      `${url}/${id}`,
-      {
-        courseName,
-        description,
-      }
-    );
+    const res = await apiClient.put(`${url}/${id}`, {
+      courseName,
+      description,
+    });
 
     if (res.status === 200) {
       return res.data;
@@ -60,9 +56,7 @@ const updateCourse = async (
 
 const deleteCourse = async (id: number) => {
   try {
-    const res = await apiClient.delete(
-      `${url}/${id}`
-    );
+    const res = await apiClient.delete(`${url}/${id}`);
 
     if (res.status === 200) {
       return res.data;
@@ -74,9 +68,4 @@ const deleteCourse = async (id: number) => {
   }
 };
 
-export {
-  getAllCourses,
-  getCourseById,
-  updateCourse,
-  deleteCourse,
-};
+export { getAllCourses, getCourseById, updateCourse, deleteCourse };

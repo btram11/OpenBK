@@ -32,19 +32,18 @@ export const Navbar: React.FC = () => {
       setUser(data);
     }
   }, [data]);
-  
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  
+
   if (isError) {
     return <div>Error loading user</div>;
   }
-  
 
   return (
     <div className="flex overflow-hidden flex-wrap items-center py-4 pl-8 w-full text-base leading-none bg-white text-black shadow-sm max-md:pl-5 max-md:max-w-full">
-      <div className="w-3/12 flex justify-start" >
+      <div className="w-3/12 flex justify-start">
         <Link
           href="/"
           className="flex gap-1.5 justify-center items-center pl-0 text-2xl w-4/6 text-sky-600"
@@ -53,12 +52,15 @@ export const Navbar: React.FC = () => {
           <span className="font-bold">OpenBK</span>
         </Link>
 
-        <Link href="/course" className="self-stretch my-auto w-2/6 tracking-wide">
+        <Link
+          href="/course"
+          className="self-stretch my-auto w-2/6 tracking-wide"
+        >
           Courses
         </Link>
       </div>
 
-      <div className="w-6/12 flex justify-center" >
+      <div className="w-6/12 flex justify-center">
         <form className="flex flex-wrap gap-10 justify-between items-center self-stretch px-4 py-2 my-auto tracking-wide whitespace-nowrap rounded-2xl bg-stone-100 min-w-[240px] text-black text-opacity-70 w-[607px] max-md:px-5 max-md:max-w-full">
           <label htmlFor="search" className="sr-only">
             Search courses
@@ -75,7 +77,7 @@ export const Navbar: React.FC = () => {
         </form>
       </div>
 
-      <div className="w-3/12 flex gap-4 justify-between items-center self-stretch my-auto tracking-wide min-w-[240px] w-[325px]">
+      <div className=" flex gap-4 justify-between items-center self-stretch my-auto tracking-wide min-w-[240px] w-[325px]">
         <div className="w-2/6 relative">
           <Cart />
           <CartCount />
@@ -83,7 +85,7 @@ export const Navbar: React.FC = () => {
         <div className="w-4/6 flex justify-between">
           {user ? (
             <div className="flex items-center gap-10 justify-around ">
-              <div className="w-4/6">                
+              <div className="w-4/6">
                 <Link
                   href={`/${roleString(user?.role)?.toLowerCase()}/dashboard`}
                   className="self-stretch my-auto tracking-wide"
@@ -93,7 +95,9 @@ export const Navbar: React.FC = () => {
                       className="rounded-full bg-black w-10 aspect-square object-cover border-[6px] border-white"
                       src={user?.imageUrl}
                     />
-                    <button className="self-stretch my-auto">{user?.name ?? "Your name"}</button>
+                    <button className="self-stretch my-auto">
+                      {user?.name ?? "Your name"}
+                    </button>
                   </div>
                 </Link>
               </div>
@@ -101,7 +105,6 @@ export const Navbar: React.FC = () => {
                 <LogoutButton />
               </div>
             </div>
-            
           ) : (
             <>
               <div className="flex justify-center gap-10">

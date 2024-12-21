@@ -1,4 +1,3 @@
-'use client';
 import axios from "axios";
 
 const apiClientWithAuth = axios.create({
@@ -6,7 +5,7 @@ const apiClientWithAuth = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,  
+  withCredentials: true,
 });
 
 apiClientWithAuth.interceptors.request.use(
@@ -20,24 +19,23 @@ apiClientWithAuth.interceptors.request.use(
 
 apiClientWithAuth.interceptors.response.use(
   (response) => {
-      return response;
-    },
+    return response;
+  },
   (error) => {
     if (error.response) {
       const statusCode = error.response.status;
       if (statusCode === 500) {
-        alert('Đã xảy ra lỗi trên máy chủ. Vui lòng thử lại sau.');
+        alert("Đã xảy ra lỗi trên máy chủ. Vui lòng thử lại sau.");
       }
     } else if (error.request) {
-      alert('Không thể kết nối với máy chủ. Vui lòng thử lại sau.');
+      alert("Không thể kết nối với máy chủ. Vui lòng thử lại sau.");
     } else {
-      alert('Có lỗi xảy ra: ' + error.message);
+      alert("Có lỗi xảy ra: " + error.message);
     }
     return error.response;
     // Promise.reject({status: error.status, massage: error.message})
   }
 );
-
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,

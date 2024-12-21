@@ -3,10 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateProfile } from "@/services/user";
-import { changeProfileSchema } from "@/lib/validation/settingsSchema";
+import {
+  changeProfileSchema,
+  ProfileFormKeys,
+} from "@/lib/validation/settingsSchema";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
-import { UserEntity } from "@/domain/user.entity";
 import { useUser } from "@/hooks/useUser";
 
 const inputStyle =
@@ -25,7 +27,7 @@ export const ProfileFrom: React.FC = () => {
     setValue,
     handleSubmit,
     formState: { dirtyFields, errors },
-  } = useForm<UserEntity>({
+  } = useForm({
     defaultValues: { ...user },
     resolver: yupResolver(changeProfileSchema),
     mode: "all",
@@ -34,7 +36,7 @@ export const ProfileFrom: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      const { name ,email, phoneNumber, biography } = user;
+      const { name, email, phoneNumber, biography } = user;
       setValue("name", name);
       setValue("email", email);
       setValue("phoneNumber", phoneNumber);
@@ -45,28 +47,39 @@ export const ProfileFrom: React.FC = () => {
   return (
     <form
       className="grid grid-cols-2 max-md:grid-cols-1 gap-x-8 gap-y-6"
-      onSubmit={handleSubmit((formData) => updateProfileMutation.mutate(formData))}
+      onSubmit={handleSubmit((formData) =>
+        updateProfileMutation.mutate(formData)
+      )}
     >
       {[
         { id: "name", label: "Full Name", type: "text" },
         { id: "email", label: "Email", type: "text" },
-        { id: "phoneNumber", label: "Phone Number", type: "text", pattern: "^(0|\\+84)(3[2-9]|5[6|8|9]|7[0-9]|8[1-9]|9[0-9])\\d{7}$" },
+        {
+          id: "phoneNumber",
+          label: "Phone Number",
+          type: "text",
+          pattern: "^(0|\\+84)(3[2-9]|5[6|8|9]|7[0-9]|8[1-9]|9[0-9])\\d{7}$",
+        },
       ].map(({ id, label, type, pattern }) => (
         <div key={id} className="flex flex-col gap-2 relative">
           <label htmlFor={id} className="font-semibold text-base">
             {label}
           </label>
           <input
-            {...register(id)}
+            {...register(id as ProfileFormKeys)}
             id={id}
             type={type}
             pattern={pattern}
-            className={`${inputStyle} ${errors[id] ? "border-2 border-red-500 focus:outline-red-500" : ""}`}
+            className={`${inputStyle} ${
+              errors[id as ProfileFormKeys]
+                ? "border-2 border-red-500 focus:outline-red-500"
+                : ""
+            }`}
             placeholder={label}
           />
-          {errors[id] && (
+          {errors[id as ProfileFormKeys] && (
             <span className="text-red-500 text-sm absolute -bottom-5">
-              {errors[id]?.message}
+              {errors[id as ProfileFormKeys]?.message}
             </span>
           )}
         </div>
@@ -82,14 +95,15 @@ export const ProfileFrom: React.FC = () => {
           minLength={35}
         />
       </div>
-      {updateProfileMutation.error && updateProfileMutation.error instanceof AxiosError && (
-        <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
-          <p>
-            {updateProfileMutation.error?.response?.data.ERROR ||
-              updateProfileMutation.error?.response?.data.message}
-          </p>
-        </div>
-      )}
+      {updateProfileMutation.error &&
+        updateProfileMutation.error instanceof AxiosError && (
+          <div className="px-5 py-3 text-red-500 bg-red-200 border-2 border-red-500 font-medium rounded-lg">
+            <p>
+              {updateProfileMutation.error?.response?.data.ERROR ||
+                updateProfileMutation.error?.response?.data.message}
+            </p>
+          </div>
+        )}
       <ButtonForm
         align="self-left mt-8 col-start-1"
         disabled={
