@@ -3,19 +3,21 @@ import { apiClientWithAuth } from "@/services/apiClient";
 
 const url = `${process.env.NEXT_PUBLIC_API_URL}/course/content/question/`;
 
-const createQuestion = async (
-  unitID: string,
-  numericalOrder: number,
-  content: string,
-  explanation: string,
-  correctAnswer: string,
-  answerA: string,
-  answerB: string,
-  answerC: string,
-  answerD: string
-) => {
+const createQuestion = async (questionData: any) => {
   try {
-    const res = await apiClientWithAuth.post(`${url}all/${unitID}`, {
+    const {
+      unitID,
+      numericalOrder,
+      content,
+      explanation,
+      correctAnswer,
+      answerA,
+      answerB,
+      answerC,
+      answerD,
+    } = questionData;
+
+    const res = await apiClientWithAuth.post(`${url}${unitID}`, {
       numericalOrder,
       content,
       explanation,
@@ -87,7 +89,6 @@ const deleteQuestion = async (questionID: string) => {
     const res = await apiClientWithAuth.delete(`${url}${questionID}`);
     return res.data;
   } catch (error: any) {
-    console.error("Error deleting question:", error.message || error);
     return { message: "Network error" };
   }
 };

@@ -132,7 +132,7 @@ export default function Page(){
             id="Course lists"
             className="grid grid-cols-3 px-2 gap-8 w-full max-md:max-w-full"
           >
-            <RenderPublicCourses courses={courses} start={0} end={3} />
+            <RenderPublicCourses courses={courses} start={0} end={3} viewType="PREVIEW-COURSE" />
 
           </div>
 

@@ -1,10 +1,10 @@
 export class QuestionEntity {
-    questionID?: string;
-    unitID?: string;
-    numericalOrder?: number;
+    questionID: string;
+    unitID: string;
+    numericalOrder: number;
     content?: string;
     explanation?: string;
-    correctAnswer?: string;
+    correctAnswer: string;
     answerA?: string;
     answerB?: string;
     answerC?: string;

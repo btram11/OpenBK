@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { CourseCard } from "../common/cards/courseCard";
 import Pagination from "@/components/common/pagination";
 import { EnrolledCourseEntity } from "@/domain/course.entity";
+import { RenderEnrollCourses } from "../ui/renderEnrollCourses";
 import { transformToCourse } from "@/lib/utils";
 
 const tabs = [
@@ -87,9 +88,7 @@ const EnrolledCoursesPage: React.FC<{
       </div>
       <div className="tab_content w-full h-fit flex flex-col">
         <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">
-          {coursesToShow.map((course) => (
-            <CourseCard key={course.courseID} course={transformToCourse(course)} type="ENROLLED-COURSES" />
-          ))}
+          <RenderEnrollCourses courses={courses} start={startIndex} end={endIndex}/>
         </div>
         <Pagination
           currentPage={currentPage}

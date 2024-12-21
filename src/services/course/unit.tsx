@@ -3,13 +3,9 @@ import { apiClient } from "@/services/apiClient";
 const url = `${process.env.NEXT_PUBLIC_API_URL}/course/content/unit/`;
 
 // Tạo mới một unit
-const createUnit = async (
-  courseID: string,
-  unitName: string,
-  description: string,
-  numericalOrder: number,
-) => {
+const createUnit = async ( unitData: any ) => {
   try {
+    const { courseID, unitName, description, numericalOrder } = unitData;
     const res = await apiClient.post(`${url}${courseID}`, {
       numericalOrder,
       unitName,

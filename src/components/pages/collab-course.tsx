@@ -1,12 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CourseCard } from "../common/cards/courseCard";
 import Pagination from "@/components/common/pagination";
 import { PublicCourseEntity } from "@/domain/course.entity";
-import { transformToCourse } from "@/lib/utils";
 import { RenderPublicCourses } from "../ui/renderPublicCourses";
-import { CreateCourseBtn } from "../common/buttons/createCourseBtn";
+import { CreateCourseBtn } from "../common/buttons/CourseBtn";
 const tabs = [
   { id: "all", label: "All" },
 //   { id: "activeCourses", label: "Active Courses" },
@@ -48,7 +46,7 @@ const CollabCoursesPage: React.FC<{
   const coursesForSelectedTab = allCourses[selectedTabId] || [];
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const coursesToShow = coursesForSelectedTab.slice(startIndex, endIndex);
+  // const coursesToShow = coursesForSelectedTab.slice(startIndex, endIndex);
   const totalPages = Math.ceil(coursesForSelectedTab.length / ITEMS_PER_PAGE);
 
   const handleTabClick = (tabId: string) => {
@@ -95,7 +93,7 @@ const CollabCoursesPage: React.FC<{
       </div>
       <div className="flex justify-center items-center tab_content w-full h-fit flex flex-col">
         <div className="flex justify-center items-center grid grid-cols-3 gap-8 max-md:grid-cols-1 max-xl:grid-cols-2">
-          <RenderPublicCourses courses={courses} start={0} end={3} />
+          <RenderPublicCourses courses={courses} start={0} end={3} viewType="COLLAB-COURSE" />
         </div>
         <Pagination
           currentPage={currentPage}

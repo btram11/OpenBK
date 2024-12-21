@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Course } from "@/domain/course.entity";
 import { PublicFootBar } from "./publicFootBar";
 import { EnrolledFootBar } from "./enrolledFootBar";
+import { CollabFootBar } from "./collabFootBar";
 
 export const CourseCard: React.FC<{ course: Course | null, type?: string }> = ({ course, type }) => {
   return (
@@ -50,6 +51,7 @@ export const CourseCard: React.FC<{ course: Course | null, type?: string }> = ({
 
           {type === "PREVIEW-COURSE" && <PublicFootBar price={course?.price ?? "0"} />}
           {type === "ENROLLED-COURSE" && <EnrolledFootBar />}
+          {type === "COLLAB-COURSE" && <CollabFootBar courseID={course?.courseID} price={course?.price ?? "0"} />}
         </div>
       </div>
     </Link>
